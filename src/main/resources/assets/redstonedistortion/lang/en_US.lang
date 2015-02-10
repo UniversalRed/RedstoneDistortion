@@ -1,0 +1,26 @@
+config.title=Redstone Distortion
+
+itemGroup.RDItemTab=Redstone Distortion Items
+itemGroup.RDBlockTab=Redstone Distortion Blocks
+
+tile.oreCopper.name=Copper Ore
+tile.oreTin.name=Tin Ore
+tile.oreSilver.name=Silver Ore
+tile.oreMagnesium.name=Magnesium Ore
+tile.oreLead.name=Lead Ore
+tile.oreBronze.name=Bronze Ore
+tile.orePlatinum.name=Platinum Ore
+
+item.ingotCopper.name=Copper Ingot
+item.ingotTin.name=Tin Ingot
+item.ingotSilver.name=Silver Ingot
+item.ingotLead.name=Lead Ingot
+item.ingotBronze.name=Bronze Ingot
+item.ingotPlatinum.name=Platinum Ingot
+
+item.dustCopper.name=Copper Dust
+item.dustTin.name=Tin Dust
+item.dustSilver.name=Silver Dust
+item.dustLead.name=Lead Dust
+item.dustBronze.name=Bronze Dust
+item.dustPlatinum.name=Platinum Dust
