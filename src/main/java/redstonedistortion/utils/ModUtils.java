@@ -1,10 +1,14 @@
 package redstonedistortion.utils;
 
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
 
+import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import buildcraft.api.transport.IPipeTile;
@@ -14,9 +18,49 @@ import net.minecraft.util.StatCollector;
 import redstonedistortion.utils.enums.EnumPriority;
 import redstonedistortion.utils.helpers.Location;
 import redstonedistortion.utils.helpers.SideConfiguration;
-
+/**
+ * Copyright (c) 2014, AEnterprise
+ * http://buildcraftadditions.wordpress.com/
+ * Buildcraft Additions is distributed under the terms of GNU GPL v3.0
+ * Please check the contents of the license located in
+ * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
+ */
 public class ModUtils
 {
+    public static ForgeDirection get2dOrientation(EntityLivingBase entityliving) {
+        ForgeDirection[] orientationTable = {ForgeDirection.SOUTH,
+                ForgeDirection.WEST, ForgeDirection.NORTH, ForgeDirection.EAST};
+        int orientationIndex = MathHelper.floor_double((entityliving.rotationYaw + 45.0) / 90.0) & 3;
+        return orientationTable[orientationIndex];
+    }
+
+    public static ForgeDirection get3dOrientation(EntityLivingBase entity) {
+        if (entity.rotationPitch < -45.5F)
+            return ForgeDirection.UP;
+        else if (entity.rotationPitch > 45.5F)
+            return ForgeDirection.DOWN;
+        return get2dOrientation(entity);
+    }
+
+    public static int[] createSlotArray(int first, int count) {
+        int[] slots = new int[count];
+        for (int k = first; k < first + count; k++) {
+            slots[k - first] = k;
+        }
+        return slots;
+    }
+
+    public static void dropItemstack(World world, int x, int y, int z, ItemStack stack) {
+        float f1 = 0.7F;
+        double d = (world.rand.nextFloat() * f1) + (1.0F - f1) * 0.5D;
+        double d1 = (world.rand.nextFloat() * f1) + (1.0F - f1) * 0.5D;
+        double d2 = (world.rand.nextFloat() * f1) + (1.0F - f1) * 0.5D;
+        EntityItem itemToDrop = new EntityItem(world, x + d, y + d1, z + d2, stack);
+        itemToDrop.delayBeforeCanPickup = 10;
+        if (!world.isRemote)
+            world.spawnEntityInWorld(itemToDrop);
+    }
+
     public static String localize(String msg) {
         return ("" + StatCollector.translateToLocal(msg)).trim();
     }
@@ -24,7 +68,6 @@ public class ModUtils
     public static ItemStack outputStack(Location from, ItemStack output, SideConfiguration configuration) {
         for (EnumPriority priority : EnumPriority.values()) {
 
-            //first try to put it intro a pipe
             for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
                 Location location = from.copy();
                 if (configuration.getPriority(direction) != priority)
@@ -43,7 +86,7 @@ public class ModUtils
                     }
                 }
             }
-            //try to put it intro an inventory
+
             for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
                 Location location = from.copy();
                 if (configuration.getPriority(direction) != priority)

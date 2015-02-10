@@ -5,7 +5,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import redstonedistortion.factory.blocks.*;
 import redstonedistortion.factory.tiles.*;
-import redstonedistortion.factory.base.*;
 
 public class ModFactory
 {
@@ -20,7 +19,7 @@ public class ModFactory
 
     public static void registry()
     {
-        //GameRegistry.registerBlock(mechanicalFurnace, "mechanicalFurnace");
-        //GameRegistry.registerTileEntity(TileMechanicalFurnace.class, "mechanicalFurnace");
+        GameRegistry.registerBlock(mechanicalFurnace, "mechanicalFurnace");
+        GameRegistry.registerTileEntity(TileMechanicalFurnace.class, "mechanicalFurnace");
     }
 }

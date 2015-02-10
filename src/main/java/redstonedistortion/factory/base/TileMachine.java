@@ -17,14 +17,14 @@ public class TileMachine extends TileEntity implements IEnergyReceiver {
 
     @Override
     public void readFromNBT(NBTTagCompound tag) {
-        readFromNBT(tag);
         energy = tag.getInteger("energy");
+        readFromNBT(tag);
     }
 
     @Override
     public void writeToNBT(NBTTagCompound tag) {
-        writeToNBT(tag);
         tag.setInteger("energy", energy);
+        writeToNBT(tag);
     }
 
     @Override

@@ -2,11 +2,13 @@ package redstonedistortion;
 
 import cpw.mods.fml.common.*;
 import cpw.mods.fml.common.event.*;
+import cpw.mods.fml.common.network.NetworkRegistry;
 import net.minecraftforge.common.config.Configuration;
 import redstonedistortion.block.*;
 import redstonedistortion.core.configurations.ConfigHandler;
 import redstonedistortion.core.initialization.ModOreDictionary;
 import redstonedistortion.factory.ModFactory;
+import redstonedistortion.factory.guis.GuiHandler;
 import redstonedistortion.integration.ModIntegration;
 import redstonedistortion.item.*;
 import redstonedistortion.libs.*;
@@ -57,6 +59,8 @@ public class ModRedstoneDistortion
         ModIntegration.integration();
 
         ConfigHandler.init(event.getSuggestedConfigurationFile());
+
+        NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
     }
 
     @Mod.EventHandler

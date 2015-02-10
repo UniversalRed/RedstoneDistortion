@@ -16,5 +16,8 @@ public class ModLibs
     public static final String serverSide = "redstonedistortion.proxies.CommonProxy";
 
     public static String texturesPath = "reddistortion" + ":";
+
+    //GUIIDS
+    public static final int guiMechanicalFurnace = 101;
 }
 
