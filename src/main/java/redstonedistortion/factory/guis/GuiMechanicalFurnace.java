@@ -13,7 +13,7 @@ import redstonedistortion.factory.tiles.*;
 @SideOnly(Side.CLIENT)
 public class GuiMechanicalFurnace extends GuiContainer
 {
-    private static final ResourceLocation textureBackground = new ResourceLocation("buildtech", "textures/guis/guiMechanicalFurnace.png");
+    private static final ResourceLocation textureBackground = new ResourceLocation("reddistortion", "textures/guis/guiMechanicalFurnace.png");
     private TileMechanicalFurnace te;
 
     public GuiMechanicalFurnace(InventoryPlayer invPlayer, TileMechanicalFurnace tile)

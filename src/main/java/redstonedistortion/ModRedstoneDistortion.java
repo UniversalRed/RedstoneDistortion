@@ -18,7 +18,7 @@ import redstonedistortion.utils.*;
 import java.io.File;
 
 /**
- * TODO: make the gui and container of the mechanical furnace
+ * TODO: create a working energy cell with features to extract, recieve energy from container items
  */
 @Mod(modid = ModLibs.modId, name = ModLibs.modName, version = ModLibs.modVersion, acceptedMinecraftVersions = ModLibs.aceptedMinecraftVersions, guiFactory = "redstonedistortion.core.configurations.GuiFactory")
 public class ModRedstoneDistortion

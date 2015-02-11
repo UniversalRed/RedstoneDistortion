@@ -31,7 +31,6 @@ public class TileMechanicalFurnace extends TileMachine implements ISidedInventor
 
     @Override
     public void readFromNBT(NBTTagCompound nbtTagCompound) {
-        super.readFromNBT(nbtTagCompound);
         inventory.readNBT(nbtTagCompound);
         progress = nbtTagCompound.getInteger("progress");
         isCooking = nbtTagCompound.getBoolean("isCooking");
@@ -39,7 +38,6 @@ public class TileMechanicalFurnace extends TileMachine implements ISidedInventor
 
     @Override
     public void writeToNBT(NBTTagCompound nbtTagCompound) {
-        super.writeToNBT(nbtTagCompound);
         inventory.writeNBT(nbtTagCompound);
         nbtTagCompound.setInteger("progress", progress);
         nbtTagCompound.setBoolean("isCooking", isCooking);
