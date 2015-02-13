@@ -24,20 +24,20 @@ public class ModItems
     public static void init()
     {
         //Ingots
-        ingotCopper = new ModIngots("ingotCopper").setTextureName(ModLibs.texturesPath + "ingotCopper");
-        ingotTin = new ModIngots("ingotTin").setTextureName(ModLibs.texturesPath + "ingotTin");
-        ingotSilver = new ModIngots("ingotSilver").setTextureName(ModLibs.texturesPath + "ingotSilver");
-        ingotLead = new ModIngots("ingotLead").setTextureName(ModLibs.texturesPath + "ingotLead");
-        ingotBronze = new ModIngots("ingotBronze").setTextureName(ModLibs.texturesPath + "ingotBronze");
-        ingotPlatinum = new ModIngots("ingotPlatinum").setTextureName(ModLibs.texturesPath + "ingotPlatinum");
+        ingotCopper = new ModIngots("ingotCopper").setTextureName("ingotCopper");
+        ingotTin = new ModIngots("ingotTin").setTextureName("ingotTin");
+        ingotSilver = new ModIngots("ingotSilver").setTextureName("ingotSilver");
+        ingotLead = new ModIngots("ingotLead").setTextureName("ingotLead");
+        ingotBronze = new ModIngots("ingotBronze").setTextureName("ingotBronze");
+        ingotPlatinum = new ModIngots("ingotPlatinum").setTextureName("ingotPlatinum");
 
         //Dusts
-        dustCopper = new ModIngots("dustCopper").setTextureName(ModLibs.texturesPath + "dustCopper");
-        dustTin = new ModIngots("dustTin").setTextureName(ModLibs.texturesPath + "dustTin");
-        dustSilver = new ModIngots("dustSilver").setTextureName(ModLibs.texturesPath + "dustSilver");
-        dustLead = new ModIngots("dustLead").setTextureName(ModLibs.texturesPath + "dustLead");
-        dustBronze = new ModIngots("dustBronze").setTextureName(ModLibs.texturesPath + "dustBronze");
-        dustPlatinum = new ModIngots("dustPlatinum").setTextureName(ModLibs.texturesPath + "dustPlatinum");
+        dustCopper = new ModIngots("dustCopper").setTextureName("dustCopper");
+        dustTin = new ModIngots("dustTin").setTextureName("dustTin");
+        dustSilver = new ModIngots("dustSilver").setTextureName("dustSilver");
+        dustLead = new ModIngots("dustLead").setTextureName("dustLead");
+        dustBronze = new ModIngots("dustBronze").setTextureName("dustBronze");
+        dustPlatinum = new ModIngots("dustPlatinum").setTextureName("dustPlatinum");
     }
 
     public static void registry()

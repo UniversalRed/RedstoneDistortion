@@ -1,5 +1,6 @@
 package redstonedistortion;
 
+import codechicken.lib.world.WorldExtensionManager;
 import cpw.mods.fml.common.*;
 import cpw.mods.fml.common.event.*;
 import cpw.mods.fml.common.network.NetworkRegistry;
@@ -7,6 +8,7 @@ import net.minecraftforge.common.config.Configuration;
 import redstonedistortion.block.*;
 import redstonedistortion.core.configurations.ConfigHandler;
 import redstonedistortion.core.initialization.ModOreDictionary;
+import redstonedistortion.core.worldgen.WorldManager;
 import redstonedistortion.factory.ModFactory;
 import redstonedistortion.factory.guis.GuiHandler;
 import redstonedistortion.integration.ModIntegration;
@@ -18,6 +20,7 @@ import redstonedistortion.utils.*;
 import java.io.File;
 
 /**
+ * TODO: create batteries for power tool as well as get started on modular upgrades
  * TODO: create a working energy cell with features to extract, recieve energy from container items
  */
 @Mod(modid = ModLibs.modId, name = ModLibs.modName, version = ModLibs.modVersion, acceptedMinecraftVersions = ModLibs.aceptedMinecraftVersions, guiFactory = "redstonedistortion.core.configurations.GuiFactory")
@@ -57,8 +60,6 @@ public class ModRedstoneDistortion
         ModOreDictionary.initOreDictionary();
 
         ModIntegration.integration();
-
-        ConfigHandler.init(event.getSuggestedConfigurationFile());
 
         NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
     }

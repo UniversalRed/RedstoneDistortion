@@ -2,14 +2,16 @@ package redstonedistortion.item.bases;
 
 import net.minecraft.item.Item;
 import redstonedistortion.core.creativetabs.CreativeTabRedstoneDistortion;
+import redstonedistortion.libs.ModLibs;
 
 public class ModDusts extends Item
 {
-    public ModDusts(String string)
+    public ModDusts(String name)
     {
         super();
         setMaxStackSize(64);
         setCreativeTab(CreativeTabRedstoneDistortion.RDItemTab);
-        setUnlocalizedName(string);
+        setUnlocalizedName(name);
+        setTextureName(ModLibs.texturesPath + name);
     }
 }

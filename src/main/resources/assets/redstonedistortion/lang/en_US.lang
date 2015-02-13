@@ -11,6 +11,8 @@ tile.oreLead.name=Lead Ore
 tile.oreBronze.name=Bronze Ore
 tile.orePlatinum.name=Platinum Ore
 
+tile.mechanicalFurnace.name=Mechanical Furnace
+
 item.ingotCopper.name=Copper Ingot
 item.ingotTin.name=Tin Ingot
 item.ingotSilver.name=Silver Ingot
@@ -24,3 +26,11 @@ item.dustSilver.name=Silver Dust
 item.dustLead.name=Lead Dust
 item.dustBronze.name=Bronze Dust
 item.dustPlatinum.name=Platinum Dust
+
+item.powerTool.name=Power Tool
+item.modulePickaxe.name=Pickaxe Module
+item.moduleAxe.name=Axe Module
+item.moduleSword.name=Sword Module
+item.moduleShovel.name=Shovel Module
+item.moduleHoe.name=Hoe Module
+item.moduleWrench.name=Wrench Module

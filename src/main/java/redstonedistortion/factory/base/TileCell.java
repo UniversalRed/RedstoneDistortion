@@ -1,12 +1,18 @@
 package redstonedistortion.factory.base;
 
+import cofh.api.block.IBlockInfo;
 import cofh.api.energy.EnergyStorage;
 import cofh.api.energy.IEnergyHandler;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.IChatComponent;
+import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class TileCell extends TileEntity implements IEnergyHandler
+import java.util.List;
+
+public class TileCell extends TileEntity implements IEnergyHandler, IBlockInfo
 {
     public static int capacity;
 
@@ -54,5 +60,11 @@ public class TileCell extends TileEntity implements IEnergyHandler
     @Override
     public boolean canConnectEnergy(ForgeDirection from) {
         return true;
+    }
+
+    //IBlockInfo
+    @Override
+    public void getBlockInfo(IBlockAccess world, int x, int y, int z, ForgeDirection side, EntityPlayer player, List<IChatComponent> info, boolean debug) {
+        getBlockInfo(world, x, y, z, side, player, info, true);
     }
 }

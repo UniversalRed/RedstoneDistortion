@@ -32,11 +32,11 @@ public class WorldManager implements IWorldGenerator
     private void generateSurface(World world, Random random, int x, int z)
     {
         this.addOreSpawn(ModBlocks.oreCopper, world, random, x, z, 16, 16, 4 + random.nextInt(1), 5, 15, 20);
-        this.addOreSpawn(ModBlocks.oreTin, world, random, x, z, 16, 16, 4 + random.nextInt(1), 5, 15, 16);
-        this.addOreSpawn(ModBlocks.oreBronze, world, random, x, z, 16, 16, 4 + random.nextInt(1), 5, 15, 16);
-        this.addOreSpawn(ModBlocks.oreLead, world, random, x, z, 16, 16, 4 + random.nextInt(1), 5, 15, 16);
-        this.addOreSpawn(ModBlocks.oreSilver, world, random, x, z, 16, 16, 4 + random.nextInt(1), 5, 15, 16);
-        this.addOreSpawn(ModBlocks.orePlatinum, world, random, x, z, 16, 16, 4 + random.nextInt(1), 5, 15, 16);
+        this.addOreSpawn(ModBlocks.oreTin, world, random, x, z, 16, 16, 4 + random.nextInt(1), 5, 15, 20);
+        this.addOreSpawn(ModBlocks.oreBronze, world, random, x, z, 16, 16, 4 + random.nextInt(1), 5, 15, 20);
+        this.addOreSpawn(ModBlocks.oreLead, world, random, x, z, 16, 16, 4 + random.nextInt(1), 5, 15, 20);
+        this.addOreSpawn(ModBlocks.oreSilver, world, random, x, z, 16, 16, 4 + random.nextInt(1), 5, 15, 20);
+        this.addOreSpawn(ModBlocks.orePlatinum, world, random, x, z, 16, 16, 4 + random.nextInt(1), 5, 15, 20);
 
     }
 
