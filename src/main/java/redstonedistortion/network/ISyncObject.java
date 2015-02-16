@@ -1,4 +1,4 @@
-package redstonedistortion.core.networking;
+package redstonedistortion.network;
 
 import io.netty.buffer.ByteBuf;
 /**

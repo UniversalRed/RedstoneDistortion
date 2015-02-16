@@ -1,21 +1,26 @@
 package redstonedistortion.factory.base;
 
 import cofh.api.block.IBlockInfo;
+import cpw.mods.fml.common.network.internal.FMLProxyPacket;
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.Unpooled;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
+import net.minecraft.network.Packet;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IChatComponent;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import cofh.api.energy.IEnergyReceiver;
+import redstonedistortion.libs.ModLibs;
 
 import java.util.List;
 
-public class TileMachine extends TileEntity implements IEnergyReceiver, ISidedInventory {
+public class TileMachine extends TileBase implements IEnergyReceiver, ISidedInventory {
     protected double rfStored = 0;
 
     public int energy;

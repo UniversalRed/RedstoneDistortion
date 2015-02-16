@@ -8,7 +8,7 @@ import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import io.netty.buffer.ByteBuf;
-import redstonedistortion.core.networking.ISyncObject;
+import redstonedistortion.network.ISyncObject;
 import redstonedistortion.utils.enums.*;
 
 /**

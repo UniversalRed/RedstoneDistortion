@@ -1,5 +1,6 @@
 package redstonedistortion.factory.tiles;
 
+import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
@@ -83,6 +84,7 @@ public class TileMechanicalFurnace extends TileMachine implements ISidedInventor
                 currentWorkTime = 0;
             }
         }
+        output();
     }
 
         /*

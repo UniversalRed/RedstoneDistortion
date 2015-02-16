@@ -3,6 +3,8 @@ package redstonedistortion;
 import cpw.mods.fml.common.*;
 import cpw.mods.fml.common.event.*;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
+import cpw.mods.fml.relauncher.Side;
 import net.minecraftforge.common.config.Configuration;
 import redstonedistortion.block.*;
 import redstonedistortion.core.configurations.ConfigHandler;
@@ -12,9 +14,11 @@ import redstonedistortion.factory.guis.GuiHandler;
 import redstonedistortion.integration.ModIntegration;
 import redstonedistortion.item.*;
 import redstonedistortion.libs.*;
+import redstonedistortion.network.NetWorkHandler;
 import redstonedistortion.proxies.*;
 import redstonedistortion.recipes.ModRecipes;
 import redstonedistortion.utils.*;
+import redstonedistortion.packets.*;
 
 import java.io.File;
 
@@ -57,6 +61,8 @@ public class ModRedstoneDistortion
         ModFactory.init();
         ModFactory.registry();
 
+        NetWorkHandler.init();
+
         ModRecipes.addRecipes();
 
         CommonProxy.renderObjects();
@@ -66,6 +72,7 @@ public class ModRedstoneDistortion
         ModIntegration.integration();
 
         NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
+
     }
 
     @Mod.EventHandler

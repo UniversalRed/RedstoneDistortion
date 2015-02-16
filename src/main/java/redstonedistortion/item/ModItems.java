@@ -3,6 +3,7 @@ package redstonedistortion.item;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.item.Item;
 import redstonedistortion.item.bases.ModIngots;
+import redstonedistortion.item.items.ItemWrench;
 import redstonedistortion.libs.ModLibs;
 
 public class ModItems
@@ -21,6 +22,8 @@ public class ModItems
     public static Item dustBronze;
     public static Item dustPlatinum;
 
+    public static Item itemWrench;
+
     public static void init()
     {
         //Ingots
@@ -38,6 +41,9 @@ public class ModItems
         dustLead = new ModIngots("dustLead").setTextureName("dustLead");
         dustBronze = new ModIngots("dustBronze").setTextureName("dustBronze");
         dustPlatinum = new ModIngots("dustPlatinum").setTextureName("dustPlatinum");
+
+        //Other
+        itemWrench = new ItemWrench("itemWrench");
     }
 
     public static void registry()
@@ -55,5 +61,7 @@ public class ModItems
         GameRegistry.registerItem(dustLead, "dustLead");
         GameRegistry.registerItem(dustBronze, "dustBronze");
         GameRegistry.registerItem(dustPlatinum, "dustPlatinum");
+
+        GameRegistry.registerItem(itemWrench, "itemWrench");
     }
 }
