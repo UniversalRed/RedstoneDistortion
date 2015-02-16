@@ -1,6 +1,5 @@
 package redstonedistortion;
 
-import codechicken.lib.world.WorldExtensionManager;
 import cpw.mods.fml.common.*;
 import cpw.mods.fml.common.event.*;
 import cpw.mods.fml.common.network.NetworkRegistry;
@@ -8,13 +7,13 @@ import net.minecraftforge.common.config.Configuration;
 import redstonedistortion.block.*;
 import redstonedistortion.core.configurations.ConfigHandler;
 import redstonedistortion.core.initialization.ModOreDictionary;
-import redstonedistortion.core.worldgen.WorldManager;
 import redstonedistortion.factory.ModFactory;
 import redstonedistortion.factory.guis.GuiHandler;
 import redstonedistortion.integration.ModIntegration;
 import redstonedistortion.item.*;
 import redstonedistortion.libs.*;
 import redstonedistortion.proxies.*;
+import redstonedistortion.recipes.ModRecipes;
 import redstonedistortion.utils.*;
 
 import java.io.File;
@@ -22,6 +21,7 @@ import java.io.File;
 /**
  * TODO: create batteries for power tool as well as get started on modular upgrades
  * TODO: create a working energy cell with features to extract, recieve energy from container items
+ * TODO: Fix updateEntity() for TileMechanicalFurnace
  */
 @Mod(modid = ModLibs.modId, name = ModLibs.modName, version = ModLibs.modVersion, acceptedMinecraftVersions = ModLibs.aceptedMinecraftVersions, guiFactory = "redstonedistortion.core.configurations.GuiFactory")
 public class ModRedstoneDistortion
@@ -41,10 +41,12 @@ public class ModRedstoneDistortion
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
+        logger.initialize();
+
         config = new Configuration(new File(event.getModConfigurationDirectory(), "RedstoneDistortion/RedstoneDistortion.cfg"));
         ConfigHandler.loadConfig(config);
 
-        logger.initialize();
+        ModLogger.initialize();
 
         ModBlocks.init();
         ModBlocks.registry();
@@ -55,7 +57,9 @@ public class ModRedstoneDistortion
         ModFactory.init();
         ModFactory.registry();
 
-        proxy.renderObjects();
+        ModRecipes.addRecipes();
+
+        CommonProxy.renderObjects();
 
         ModOreDictionary.initOreDictionary();
 

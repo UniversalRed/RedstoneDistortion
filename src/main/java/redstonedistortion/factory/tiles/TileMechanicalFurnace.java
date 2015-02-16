@@ -25,26 +25,67 @@ public class TileMechanicalFurnace extends TileMachine implements ISidedInventor
 
     public TileMechanicalFurnace(int maxEnergy) {
         super(32000);
-        progress = 0;
+        currentWorkTime = 0;
+        progress = this.currentWorkTime;
         isCooking = false;
     }
 
     @Override
-    public void readFromNBT(NBTTagCompound nbtTagCompound) {
-        inventory.readNBT(nbtTagCompound);
-        progress = nbtTagCompound.getInteger("progress");
-        isCooking = nbtTagCompound.getBoolean("isCooking");
+    public void readFromNBT(NBTTagCompound tag) {
+        inventory.readNBT(tag);
+        currentWorkTime = tag.getInteger("currentWorkTime");
+        progress = tag.getInteger("progress");
+        isCooking = tag.getBoolean("isCooking");
     }
 
     @Override
     public void writeToNBT(NBTTagCompound nbtTagCompound) {
         inventory.writeNBT(nbtTagCompound);
+        nbtTagCompound.setInteger("currentWorkTime", currentWorkTime);
         nbtTagCompound.setInteger("progress", progress);
         nbtTagCompound.setBoolean("isCooking", isCooking);
     }
 
     @Override
     public void updateEntity() {
+        super.updateEntity();
+        if (worldObj.isRemote)
+            return;
+
+        if (canCook()) {
+            if (!isCooking) ;
+
+            if (progress > 0)
+                isCooking = true;
+            if (progress >= 0)
+            {
+                if (rfStored > POWER_USAGE)
+                {
+                    rfStored -= POWER_USAGE;
+                } else {
+                    return;
+                }
+
+                if(currentWorkTime == MAX_WORK_TICKS)
+                {
+                    ItemStack inputStack = getStackInSlot(0);
+                    ItemStack result = FurnaceRecipes.smelting().getSmeltingResult(inputStack);
+                    if (getStackInSlot(1) == null) {
+                        setInventorySlotContents(1, result.copy());
+                    } else {
+                        getStackInSlot(1).stackSize += result.stackSize;
+                    }
+                    if (getStackInSlot(0).stackSize <= 1)
+                        setInventorySlotContents(0, null);
+                    else
+                        getStackInSlot(0).stackSize--;
+                }
+                currentWorkTime = 0;
+            }
+        }
+    }
+
+        /*
         super.updateEntity();
         if (worldObj.isRemote)
             return;
@@ -72,17 +113,17 @@ public class TileMechanicalFurnace extends TileMachine implements ISidedInventor
             stop();
         }
         output();
-    }
+        */
+
 
     public void stop() {
         isCooking = false;
         doBlockUpdate();
-        progress = 0;
+        currentWorkTime = 0;
     }
 
-    private void output() {
-        int slot;
-        ItemStack stack;
+    private void output()
+    {
         if (getStackInSlot(1) == null)
             return;
         setInventorySlotContents(1, ModUtils.outputStack(new Location(this), getStackInSlot(1), configuration));
@@ -92,7 +133,8 @@ public class TileMechanicalFurnace extends TileMachine implements ISidedInventor
         worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
     }
 
-    public boolean canCook() {
+    public boolean canCook()
+    {
         ItemStack stack0 = getStackInSlot(0);
         ItemStack stack1 = getStackInSlot(1);
         if (stack0 == null || getResult(stack0) == null)
@@ -165,10 +207,6 @@ public class TileMechanicalFurnace extends TileMachine implements ISidedInventor
         return getResult(stack) != null && slot == 0;
     }
 
-    public int getScaledProgress() {
-        return (progress * 23);
-    }
-
     @Override
     public int[] getAccessibleSlotsFromSide(int side) {
         return ModUtils.createSlotArray(0, 2);
@@ -184,27 +222,7 @@ public class TileMechanicalFurnace extends TileMachine implements ISidedInventor
         return slot == 1 && getStatus(ForgeDirection.getOrientation(side)).canSend();
     }
 
-    public SideConfiguration getSideConfiguration() {
-        return configuration;
-    }
-
-    public void setSideConfiguration(SideConfiguration configuration) {
-        this.configuration = configuration;
-    }
-
     public EnumSideStatus getStatus(ForgeDirection side) {
         return configuration.getStatus(side);
-    }
-
-    public void changeStatus(ForgeDirection side) {
-        configuration.changeStatus(side);
-    }
-
-    public EnumPriority getPriority(ForgeDirection side) {
-        return configuration.getPriority(side);
-    }
-
-    public void changePriority(ForgeDirection side) {
-        configuration.changePriority(side);
     }
 }

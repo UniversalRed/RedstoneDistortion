@@ -9,7 +9,7 @@
 package buildcraft.api.blueprints;
 
 import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;;
+import net.minecraft.entity.Entity;
 
 public interface ISchematicRegistry {
 	void registerSchematicBlock(Block block, Class<? extends Schematic> clazz, Object... params);

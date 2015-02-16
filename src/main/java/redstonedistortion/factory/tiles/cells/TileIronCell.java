@@ -1,5 +1,6 @@
 package redstonedistortion.factory.tiles.cells;
 
+import cofh.api.energy.IEnergyContainerItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -9,17 +10,41 @@ import redstonedistortion.libs.ModLibs;
 
 public class TileIronCell extends TileCell implements IInventory
 {
-    private final CustomInventory inventory = new CustomInventory("TileIronCell", 2, 64, this);
+    private final CustomInventory inventory = new CustomInventory("cellIron", 2, 64, this);
+    public int energy = 250;
 
-    public TileIronCell(int capacity) {
+    public TileIronCell(int capacity)
+    {
         super(ModLibs.cellIronCapacity);
     }
 
     @Override
     public void updateEntity()
     {
-
+        super.updateEntity();
+        int charge = 6000;
+        if (charge > energy)
+            charge = energy;
+        if (charge > 0) {
+            if (getRequiredEnergy() > 0) {
+                ItemStack stack = getStackInSlot(0);
+                IEnergyContainerItem containerItem = (IEnergyContainerItem) stack.getItem();
+                energy -= containerItem.receiveEnergy(stack, charge, false);
+                setInventorySlotContents(0, stack);
+            }
+        }
     }
+
+    public int getRequiredEnergy() {
+        ItemStack stack = getStackInSlot(0);
+        if (stack != null && stack.getItem() != null && stack.getItem() instanceof IEnergyContainerItem) {
+            IEnergyContainerItem containerItem = (IEnergyContainerItem) stack.getItem();
+            return containerItem.getMaxEnergyStored(stack) - containerItem.getEnergyStored(stack);
+        }
+
+        return 0;
+    }
+
 
     @Override
     public int getSizeInventory() {

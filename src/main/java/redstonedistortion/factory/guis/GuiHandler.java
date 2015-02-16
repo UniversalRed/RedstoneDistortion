@@ -6,8 +6,11 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import redstonedistortion.ModRedstoneDistortion;
+import redstonedistortion.factory.base.TileCell;
+import redstonedistortion.factory.containers.ContainerCell;
 import redstonedistortion.factory.containers.ContainerMechanicalFurnace;
 import redstonedistortion.factory.tiles.TileMechanicalFurnace;
+import redstonedistortion.factory.tiles.cells.TileIronCell;
 import redstonedistortion.libs.ModLibs;
 
 public class GuiHandler implements IGuiHandler
@@ -30,6 +33,10 @@ public class GuiHandler implements IGuiHandler
                 if (te instanceof TileMechanicalFurnace)
                     return new ContainerMechanicalFurnace(player.inventory, (TileMechanicalFurnace) te);
 
+            case ModLibs.guiCell:
+                if (te instanceof TileCell)
+                    return new ContainerCell(player.inventory, (TileCell) te);
+
         }
 
         return null;
@@ -47,9 +54,10 @@ public class GuiHandler implements IGuiHandler
                 if (te instanceof TileMechanicalFurnace)
                     return new GuiMechanicalFurnace(player.inventory, (TileMechanicalFurnace) te);
 
-
+            case ModLibs.guiCell:
+                if (te instanceof TileCell)
+                    return new GuiCell(player.inventory, (TileCell) te);
         }
         return null;
     }
-
 }

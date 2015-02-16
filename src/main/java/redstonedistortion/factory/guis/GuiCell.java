@@ -1,24 +1,25 @@
 package redstonedistortion.factory.guis;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
+import redstonedistortion.factory.base.TileCell;
+import redstonedistortion.factory.containers.ContainerCell;
 import redstonedistortion.factory.containers.ContainerMechanicalFurnace;
-import redstonedistortion.factory.tiles.*;
+import redstonedistortion.factory.tiles.TileMechanicalFurnace;
+import redstonedistortion.factory.tiles.cells.TileIronCell;
 
-@SideOnly(Side.CLIENT)
-public class GuiMechanicalFurnace extends GuiContainer
-{
-    private static final ResourceLocation textureBackground = new ResourceLocation("reddistortion", "textures/gui/guiMechanicalFurnace.png");
-    private TileMechanicalFurnace te;
+/**
+ * Created by UniversalRed on 15-02-15.
+ */
+public class GuiCell extends GuiContainer {
+    private static final ResourceLocation textureBackground = new ResourceLocation("reddistortion", "textures/guis/guiMechanicalFurnace.png");
+    private TileCell te;
 
-    public GuiMechanicalFurnace(InventoryPlayer invPlayer, TileMechanicalFurnace tile)
-    {
-        super(new ContainerMechanicalFurnace(invPlayer, tile));
+    public GuiCell(InventoryPlayer invPlayer, TileCell tile) {
+        super(new ContainerCell(invPlayer, tile));
 
         this.te = tile;
 
@@ -27,8 +28,7 @@ public class GuiMechanicalFurnace extends GuiContainer
     }
 
     @Override
-    protected void drawGuiContainerBackgroundLayer(float var1, int var2, int var3)
-    {
+    protected void drawGuiContainerBackgroundLayer(float var1, int var2, int var3) {
         GL11.glColor4f(1, 1, 1, 1);
 
         Minecraft.getMinecraft().renderEngine.bindTexture(textureBackground);
@@ -39,14 +39,13 @@ public class GuiMechanicalFurnace extends GuiContainer
         this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize);
         int i1;
 
-        i1 = this.te.getCookProgressScaled(24);
-        this.drawTexturedModalRect(k + 79, l + 34, 176, 14, i1 + 1, 16);
+        this.drawTexturedModalRect(k + 79, l + 34, 176, 14, 1, 16);
 
     }
 
     @Override
     protected void drawGuiContainerForegroundLayer(int x, int y) {
-        fontRendererObj.drawString("Mechanical Furnace", 8, 6, 0x404040);
+        fontRendererObj.drawString("Cell", 8, 6, 0x404040);
 
     }
 }

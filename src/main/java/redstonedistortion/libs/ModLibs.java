@@ -20,6 +20,8 @@ public class ModLibs
     //GUIIDS
     public static final int guiMechanicalFurnace = 101;
 
+    public static final int guiCell = 120;
+
     //Energy Cell/Capsule Storage
     public static final int cellIronCapacity = 40000;
     public static final int cellGoldCapacity = 80000;

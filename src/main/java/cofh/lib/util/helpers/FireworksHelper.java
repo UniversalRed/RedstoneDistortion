@@ -18,8 +18,8 @@ import net.minecraft.nbt.NBTTagList;
 public class FireworksHelper {
 
 	public static enum FireworkType {
-		BALL, LARGE_BALL, STAR, CREEPER, BURST;
-	}
+		BALL, LARGE_BALL, STAR, CREEPER, BURST
+    }
 
 	/**
 	 * Represents a single firework rocket and its properties.
