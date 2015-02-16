@@ -23,7 +23,7 @@ public class RDTileMessage implements IMessage
 
 
     public RDTileMessage() {
-        this.value = new Random().nextInt();
+        value = new Random().nextInt();
     }
 
     public RDTileMessage(TileEntity tile, int id, int value)
@@ -32,24 +32,24 @@ public class RDTileMessage implements IMessage
         this.y = tile.yCoord;
         this.z = tile.zCoord;
         this.id = id;
-        this.value = value;
+        RDTileMessage.value = value;
     }
 
     @Override
     public void fromBytes(ByteBuf buf)
     {
-        this.value = buf.readInt();
+        value = buf.readInt();
         this.x = buf.readInt();
         this.y = buf.readInt();
         this.z = buf.readInt();
         this.id = buf.readInt();
-        this.value = buf.readInt();
+        value = buf.readInt();
     }
 
     @Override
     public void toBytes(ByteBuf buf)
     {
-        buf.writeInt(this.value);
+        buf.writeInt(value);
         buf.writeInt(this.id);
         buf.writeInt(this.x);
         buf.writeInt(this.y);
@@ -64,7 +64,7 @@ public class RDTileMessage implements IMessage
 
             if(tile instanceof TileMachine)
             {
-                ((TileMachine) tile).updateEntity();
+                tile.updateEntity();
             }
             return null;
         }

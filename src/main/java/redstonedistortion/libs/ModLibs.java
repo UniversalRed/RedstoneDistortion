@@ -19,7 +19,7 @@ public class ModLibs
     public static final String texturesPath = "reddistortion" + ":";
 
     //Channel
-    public static final String CHANNEL = "RDMessage";
+    public static final String CHANNEL = modId;
 
     //GUIIDS
     public static final int guiMechanicalFurnace = 101;

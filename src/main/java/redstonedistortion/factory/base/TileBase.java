@@ -4,7 +4,8 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.tileentity.TileEntity;
 import redstonedistortion.network.ISynchronizedTile;
-import redstonedistortion.network.NetWorkHandler;
+import redstonedistortion.packets.MessageTileMachine;
+import redstonedistortion.packets.PacketHandler;
 import redstonedistortion.packets.RDMessageByteBuf;
 
 /**
@@ -13,7 +14,6 @@ import redstonedistortion.packets.RDMessageByteBuf;
 public class TileBase extends TileEntity implements ISynchronizedTile
 {
     public int timer;
-    public int networkRange = 15;
 
     @Override
     public void updateEntity() {
@@ -26,9 +26,11 @@ public class TileBase extends TileEntity implements ISynchronizedTile
 
     public void sync() {
         if (!worldObj.isRemote) {
-            NetWorkHandler.INSTANCE.sendToAllAround(new RDMessageByteBuf(this), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, getX(), getY(), getZ(), 20));
+            PacketHandler.INSTANCE.sendToAllAround(new MessageTileMachine(), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, getX(), getY(), getZ(), 20));
         }
     }
+
+
 
     @Override
     public ByteBuf writeToByteBuff(ByteBuf buf) {

@@ -13,22 +13,22 @@ import java.util.Random;
  */
 public class RDMessage implements IMessage
 {
-    private static int value;
+    public static int value;
 
     public RDMessage() {
-        this.value = new Random().nextInt();
+        value = new Random().nextInt();
     }
 
     @Override
     public void fromBytes(ByteBuf buf)
     {
-        this.value = buf.readInt();
+        value = buf.readInt();
     }
 
     @Override
     public void toBytes(ByteBuf buf)
     {
-        buf.writeInt(this.value);
+        buf.writeInt(value);
     }
 
     public static class Handler implements IMessageHandler<RDMessage, IMessage>
@@ -41,5 +41,4 @@ public class RDMessage implements IMessage
             return null;
         }
     }
-
 }

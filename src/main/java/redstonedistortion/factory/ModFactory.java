@@ -41,10 +41,10 @@ public class ModFactory
     public static void init()
     {
         //Machines
-        mechanicalFurnace = new BlockMechanicalFurnace(m.iron).setBlockName("mechanicalFurnace");
+        mechanicalFurnace = new BlockMechanicalFurnace(Material.iron).setBlockName("mechanicalFurnace");
 
         //Containers/capsules
-        cellIron = new BlockIronCell(m.iron).setBlockName("cellIron");
+        cellIron = new BlockIronCell(Material.iron).setBlockName("cellIron");
 
         //Other
         debuggerTester = new ItemDebugger("itemDebugger");

@@ -4,7 +4,6 @@ import cpw.mods.fml.common.*;
 import cpw.mods.fml.common.event.*;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
-import cpw.mods.fml.relauncher.Side;
 import net.minecraftforge.common.config.Configuration;
 import redstonedistortion.block.*;
 import redstonedistortion.core.configurations.ConfigHandler;
@@ -14,7 +13,6 @@ import redstonedistortion.factory.guis.GuiHandler;
 import redstonedistortion.integration.ModIntegration;
 import redstonedistortion.item.*;
 import redstonedistortion.libs.*;
-import redstonedistortion.network.NetWorkHandler;
 import redstonedistortion.proxies.*;
 import redstonedistortion.recipes.ModRecipes;
 import redstonedistortion.utils.*;
@@ -41,14 +39,19 @@ public class ModRedstoneDistortion
     ModLogger logger = new ModLogger();
     public static Configuration config;
 
+    public static SimpleNetworkWrapper INSTANCE = NetworkRegistry.INSTANCE.newSimpleChannel(ModLibs.CHANNEL);
+
     //Initializing loaders
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
-        logger.initialize();
+        ModLogger.initialize();
 
         config = new Configuration(new File(event.getModConfigurationDirectory(), "RedstoneDistortion/RedstoneDistortion.cfg"));
         ConfigHandler.loadConfig(config);
+
+        NetworkRegistry.INSTANCE.newSimpleChannel(ModLibs.CHANNEL);
+        PacketHandler.init();
 
         ModLogger.initialize();
 
@@ -60,8 +63,6 @@ public class ModRedstoneDistortion
 
         ModFactory.init();
         ModFactory.registry();
-
-        NetWorkHandler.init();
 
         ModRecipes.addRecipes();
 
@@ -78,12 +79,12 @@ public class ModRedstoneDistortion
     @Mod.EventHandler
     public void init(FMLInitializationEvent event)
     {
-        logger.initialize();
+        ModLogger.initialize();
     }
 
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event)
     {
-        logger.initialize();
+        ModLogger.initialize();
     }
 }

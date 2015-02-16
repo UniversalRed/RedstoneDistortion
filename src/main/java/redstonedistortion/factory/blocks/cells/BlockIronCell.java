@@ -80,7 +80,7 @@ public class BlockIronCell extends BlockCell
     @Override
     public void breakBlock(World world, int x, int y, int z, Block block, int meta)
     {
-        TileMechanicalFurnace furnace = (TileMechanicalFurnace) world.getTileEntity(x, y, z);
+        TileIronCell furnace = (TileIronCell) world.getTileEntity(x, y, z);
         furnace.openInventory();
         for (int t = 0; t < 2; t++){
             ItemStack stack = furnace.getStackInSlot(t);

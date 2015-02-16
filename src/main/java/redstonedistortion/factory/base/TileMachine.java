@@ -21,12 +21,12 @@ import redstonedistortion.libs.ModLibs;
 import java.util.List;
 
 public class TileMachine extends TileBase implements IEnergyReceiver, ISidedInventory {
-    protected double rfStored = 0;
 
-    public int energy;
+    public static int energy;
     public int maxEnergy;
+    public static int progress;
 
-    protected static int POWER_USAGE = 10;
+    protected static int POWER_USAGE = 200;
 
     protected int currentWorkTime;
     public static int MAX_WORK_TICKS = 15;
@@ -56,19 +56,19 @@ public class TileMachine extends TileBase implements IEnergyReceiver, ISidedInve
     }
 
     public void setMaxWorkTime(int maxWorkTime) {
-        this.MAX_WORK_TICKS = maxWorkTime;
+        MAX_WORK_TICKS = maxWorkTime;
     }
 
     @Override
     public void readFromNBT(NBTTagCompound tag) {
+        super.readFromNBT(tag);
         energy = tag.getInteger("energy");
-        readFromNBT(tag);
     }
 
     @Override
     public void writeToNBT(NBTTagCompound tag) {
+        super.writeToNBT(tag);
         tag.setInteger("energy", energy);
-        writeToNBT(tag);
     }
 
     @Override
@@ -172,5 +172,19 @@ public class TileMachine extends TileBase implements IEnergyReceiver, ISidedInve
     @Override
     public boolean isItemValidForSlot(int p_94041_1_, ItemStack p_94041_2_) {
         return false;
+    }
+
+    @Override
+    public ByteBuf writeToByteBuff(ByteBuf buf)
+    {
+        buf.writeInt(energy);
+        return buf;
+    }
+
+    @Override
+    public ByteBuf readFromByteBuff(ByteBuf buf)
+    {
+        energy = buf.readInt();
+        return buf;
     }
 }
