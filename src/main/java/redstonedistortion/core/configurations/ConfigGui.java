@@ -15,13 +15,13 @@ public class ConfigGui extends GuiConfig
 
     public ConfigGui(GuiScreen parentScreen)
     {
-        super(parentScreen, getList(), ModLibs.modId, false, false, ModUtils.localize("config.title"));
+        super(parentScreen, getList(), "reddistortion", false, false, ModUtils.localize("config.title"));
     }
 
     public static List<IConfigElement> getList()
     {
         List list = new ArrayList<IConfigElement>();
-        list.add(new ConfigElement(ConfigHandler.config.getCategory("Object IDS")));
+        list.add(new ConfigElement(ConfigHandler.config.getCategory("IDS' Section")));
         return list;
     }
 }

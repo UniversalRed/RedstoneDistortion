@@ -2,6 +2,7 @@ package redstonedistortion.item;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.item.Item;
+import redstonedistortion.item.bases.BaseItems;
 import redstonedistortion.item.bases.ModIngots;
 import redstonedistortion.item.items.ItemWrench;
 import redstonedistortion.libs.ModLibs;
@@ -21,6 +22,20 @@ public class ModItems
     public static Item dustLead;
     public static Item dustBronze;
     public static Item dustPlatinum;
+    public static Item dustIron;
+    public static Item dustGold;
+
+
+    public static Item plateCopper;
+    public static Item plateTin;
+    public static Item plateSilver;
+    public static Item plateLead;
+    public static Item plateBronze;
+    public static Item platePlatinum;
+    public static Item plateIron;
+    public static Item plateGold;
+
+
 
     public static Item itemWrench;
 
@@ -41,6 +56,17 @@ public class ModItems
         dustLead = new ModIngots("dustLead").setTextureName("dustLead");
         dustBronze = new ModIngots("dustBronze").setTextureName("dustBronze");
         dustPlatinum = new ModIngots("dustPlatinum").setTextureName("dustPlatinum");
+        dustIron = new ModIngots("dustIron").setTextureName("dustIron");
+        dustGold = new ModIngots("dustGold").setTextureName("dustGold");
+
+        plateCopper = new BaseItems("plateCopper").setTextureName("plateCopper");
+        plateTin = new BaseItems("plateTin").setTextureName("plateTin");
+        plateSilver = new BaseItems("plateSilver").setTextureName("plateSilver");
+        plateLead = new BaseItems("plateLead").setTextureName("plateLead");
+        plateBronze = new BaseItems("plateBronze").setTextureName("plateBronze");
+        platePlatinum = new BaseItems("platePlatinum").setTextureName("platePlatinum");
+        plateIron = new BaseItems("plateIron").setTextureName("plateIron");
+        plateGold = new BaseItems("plateGold").setTextureName("plateGold");
 
         //Other
         itemWrench = new ItemWrench("itemWrench");
@@ -61,6 +87,17 @@ public class ModItems
         GameRegistry.registerItem(dustLead, "dustLead");
         GameRegistry.registerItem(dustBronze, "dustBronze");
         GameRegistry.registerItem(dustPlatinum, "dustPlatinum");
+        GameRegistry.registerItem(dustIron, "dustIron");
+        GameRegistry.registerItem(dustGold, "dustGold");
+
+        GameRegistry.registerItem(plateCopper, "plateCopper");
+        GameRegistry.registerItem(plateTin, "plateTin");
+        GameRegistry.registerItem(plateSilver, "plateSilver");
+        GameRegistry.registerItem(plateLead, "plateLead");
+        GameRegistry.registerItem(plateBronze, "plateBronze");
+        GameRegistry.registerItem(platePlatinum, "platePlatinum");
+        GameRegistry.registerItem(plateIron, "plateIron");
+        GameRegistry.registerItem(plateGold, "plateGold");
 
         GameRegistry.registerItem(itemWrench, "itemWrench");
     }

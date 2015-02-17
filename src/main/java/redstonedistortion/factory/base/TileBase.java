@@ -2,6 +2,7 @@ package redstonedistortion.factory.base;
 
 import cpw.mods.fml.common.network.NetworkRegistry;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import redstonedistortion.network.ISynchronizedTile;
 import redstonedistortion.packets.MessageTileMachine;
@@ -30,7 +31,17 @@ public class TileBase extends TileEntity implements ISynchronizedTile
         }
     }
 
+    @Override
+    public void readFromNBT(NBTTagCompound tag)
+    {
 
+    }
+
+    @Override
+    public void writeToNBT(NBTTagCompound tag)
+    {
+
+    }
 
     @Override
     public ByteBuf writeToByteBuff(ByteBuf buf) {

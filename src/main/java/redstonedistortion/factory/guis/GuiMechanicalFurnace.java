@@ -41,7 +41,6 @@ public class GuiMechanicalFurnace extends GuiContainer
 
         i1 = this.te.getCookProgressScaled(24);
         this.drawTexturedModalRect(k + 79, l + 34, 176, 14, i1 + 1, 16);
-
     }
 
     @Override

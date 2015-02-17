@@ -41,7 +41,7 @@ public class ModFactory
     public static void init()
     {
         //Machines
-        mechanicalFurnace = new BlockMechanicalFurnace(Material.iron).setBlockName("mechanicalFurnace");
+        mechanicalFurnace = new BlockMechanicalFurnace(Material.iron, "mechanicalFurnace");
 
         //Containers/capsules
         cellIron = new BlockIronCell(Material.iron).setBlockName("cellIron");

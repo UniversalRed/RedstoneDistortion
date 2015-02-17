@@ -1,11 +1,7 @@
 package redstonedistortion.factory.containers;
 
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Slot;
 import redstonedistortion.factory.base.TileCell;
-import redstonedistortion.factory.tiles.TileMechanicalFurnace;
-import redstonedistortion.factory.tiles.cells.TileIronCell;
-import redstonedistortion.utils.helpers.SlotOutput;
 
 /**
  * Created by UniversalRed on 15-02-15.

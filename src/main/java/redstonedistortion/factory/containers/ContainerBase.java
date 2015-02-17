@@ -6,7 +6,7 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import redstonedistortion.utils.helpers.SlotPhantom;
+import redstonedistortion.bases.slots.SlotPhantom;
 
 /**
  * Copyright (c) 2014, AEnterprise

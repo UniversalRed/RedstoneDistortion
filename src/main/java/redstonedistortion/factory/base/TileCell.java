@@ -41,15 +41,15 @@ public class TileCell extends TileBase implements IEnergyHandler
     }
 
     public void sync() {
-        PacketHandler.INSTANCE.sendToAll(new MessageTileCell(xCoord, yCoord, zCoord, this.energy)); // this sends the message to all the clients around that tile which will casue it to sync.
+        PacketHandler.INSTANCE.sendToAll(new MessageTileCell(xCoord, yCoord, zCoord, energy)); // this sends the message to all the clients around that tile which will casue it to sync.
     }
 
     public TileCell(int capacity)
     {
-        this.capacity = capacity;
-        this.energy = storage.energy;
-        this.maxReceive = storage.maxReceive;
-        this.maxExtract = storage.maxExtract;
+        TileCell.capacity = capacity;
+        energy = EnergyStorage.energy;
+        maxReceive = EnergyStorage.maxReceive;
+        maxExtract = EnergyStorage.maxExtract;
 
     }
 

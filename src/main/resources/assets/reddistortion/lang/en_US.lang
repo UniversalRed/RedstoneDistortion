@@ -26,6 +26,17 @@ item.dustSilver.name=Silver Dust
 item.dustLead.name=Lead Dust
 item.dustBronze.name=Bronze Dust
 item.dustPlatinum.name=Platinum Dust
+item.dustIron=Iron Dust
+item.dustdustGold.name=Gold Dust
+
+item.plateCopper.name=Copper Plate
+item.plateTin.name=Tin Plate
+item.plateSilver.name=Silver Plate
+item.plateLead.name=Lead Plate
+item.plateBronze.name=Bronze Plate
+item.platePlatinum.name=Platinum Plate
+item.plateIron.name=Iron Plate
+item.plateGold.name=Gold Plate
 
 item.powerTool.name=Power Tool
 item.modulePickaxe.name=Pickaxe Module
@@ -34,3 +45,7 @@ item.moduleSword.name=Sword Module
 item.moduleShovel.name=Shovel Module
 item.moduleHoe.name=Hoe Module
 item.moduleWrench.name=Wrench Module
+
+item.itemDebugger.name=Debugger
+
+item.itemWrench.name=Mechanic Wrench

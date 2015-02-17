@@ -3,7 +3,7 @@ package redstonedistortion.factory.containers;
 import net.minecraft.entity.player.InventoryPlayer;
 import redstonedistortion.api.redstonedistortion.slots.SlotValid;
 import redstonedistortion.factory.tiles.*;
-import redstonedistortion.utils.helpers.SlotOutput;
+import redstonedistortion.bases.slots.SlotOutput;
 
 public class ContainerMechanicalFurnace extends ContainerBase<TileMechanicalFurnace>
 {

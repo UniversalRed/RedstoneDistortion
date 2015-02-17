@@ -64,7 +64,7 @@ public class MessageTileCell implements IMessage, IMessageHandler<MessageTileCel
         if (FMLClientHandler.instance().getClient().theWorld != null) { //get the client world and check if not null
             TileEntity entity = FMLClientHandler.instance().getClient().theWorld.getTileEntity(message.x, message.y, message.z); //get the tile entity from the world, use the message.x values and not the ones from this class itself as those will not be the same as the recieved ones from the method params.
             if (entity instanceof TileCell) //check if the tile you got is an instanceof the tile you wanted.
-                ((TileCell) entity).energy = message.energy; // set the energy of the tile the recieved value at the client side.
+                TileCell.energy = message.energy; // set the energy of the tile the recieved value at the client side.
         }
         return null; //just return null, this is not important (in this case).
     }

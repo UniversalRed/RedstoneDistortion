@@ -43,31 +43,13 @@ public class TileMachine extends TileBase implements IEnergyReceiver, ISidedInve
         return totaal;
     }
 
-    public int getCurrentWorkTime() {
-        return currentWorkTime;
-    }
-
-    public int getMaxWorkTime() {
-        return MAX_WORK_TICKS;
-    }
-
-    public void setCurrentWorkTime(int currentWorkTime) {
-        this.currentWorkTime = currentWorkTime;
-    }
-
-    public void setMaxWorkTime(int maxWorkTime) {
-        MAX_WORK_TICKS = maxWorkTime;
-    }
-
     @Override
     public void readFromNBT(NBTTagCompound tag) {
-        super.readFromNBT(tag);
         energy = tag.getInteger("energy");
     }
 
     @Override
     public void writeToNBT(NBTTagCompound tag) {
-        super.writeToNBT(tag);
         tag.setInteger("energy", energy);
     }
 

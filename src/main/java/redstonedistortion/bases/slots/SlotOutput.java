@@ -1,4 +1,4 @@
-package redstonedistortion.utils.helpers;
+package redstonedistortion.bases.slots;
 
 
 import net.minecraft.inventory.IInventory;

@@ -23,7 +23,7 @@ import java.io.File;
 /**
  * TODO: create batteries for power tool as well as get started on modular upgrades
  * TODO: create a working energy cell with features to extract, recieve energy from container items
- * TODO: Fix updateEntity() for TileMechanicalFurnace
+ * TODO: Fix itemstacks from disappearing within the furnace gui
  */
 @Mod(modid = ModLibs.modId, name = ModLibs.modName, version = ModLibs.modVersion, acceptedMinecraftVersions = ModLibs.aceptedMinecraftVersions, guiFactory = "redstonedistortion.core.configurations.GuiFactory")
 public class ModRedstoneDistortion
@@ -39,13 +39,11 @@ public class ModRedstoneDistortion
     ModLogger logger = new ModLogger();
     public static Configuration config;
 
-    public static SimpleNetworkWrapper INSTANCE = NetworkRegistry.INSTANCE.newSimpleChannel(ModLibs.CHANNEL);
-
     //Initializing loaders
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
-        ModLogger.initialize();
+        logger.initialize();
 
         config = new Configuration(new File(event.getModConfigurationDirectory(), "RedstoneDistortion/RedstoneDistortion.cfg"));
         ConfigHandler.loadConfig(config);
@@ -66,7 +64,7 @@ public class ModRedstoneDistortion
 
         ModRecipes.addRecipes();
 
-        CommonProxy.renderObjects();
+        proxy.renderObjects();
 
         ModOreDictionary.initOreDictionary();
 
@@ -79,12 +77,12 @@ public class ModRedstoneDistortion
     @Mod.EventHandler
     public void init(FMLInitializationEvent event)
     {
-        ModLogger.initialize();
+        logger.initialize();
     }
 
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event)
     {
-        ModLogger.initialize();
+        logger.initialize();
     }
 }
