@@ -4,7 +4,6 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
-import redstonedistortion.factory.base.TileCell;
 import redstonedistortion.factory.blocks.*;
 import redstonedistortion.factory.blocks.cells.BlockIronCell;
 import redstonedistortion.factory.items.ItemDebugger;

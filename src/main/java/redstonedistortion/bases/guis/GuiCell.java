@@ -1,15 +1,12 @@
-package redstonedistortion.factory.guis;
+package redstonedistortion.bases.guis;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
-import redstonedistortion.factory.base.TileCell;
-import redstonedistortion.factory.containers.ContainerCell;
-import redstonedistortion.factory.containers.ContainerMechanicalFurnace;
-import redstonedistortion.factory.tiles.TileMechanicalFurnace;
-import redstonedistortion.factory.tiles.cells.TileIronCell;
+import redstonedistortion.bases.tiles.TileCell;
+import redstonedistortion.bases.containers.ContainerCell;
 
 /**
  * Created by UniversalRed on 15-02-15.

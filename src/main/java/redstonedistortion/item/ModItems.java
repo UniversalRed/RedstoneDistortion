@@ -2,10 +2,9 @@ package redstonedistortion.item;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.item.Item;
-import redstonedistortion.item.bases.BaseItems;
-import redstonedistortion.item.bases.ModIngots;
+import redstonedistortion.bases.items.BaseItems;
+import redstonedistortion.bases.items.ModIngots;
 import redstonedistortion.item.items.ItemWrench;
-import redstonedistortion.libs.ModLibs;
 
 public class ModItems
 {

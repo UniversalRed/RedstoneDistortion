@@ -2,6 +2,7 @@ package redstonedistortion.factory.containers;
 
 import net.minecraft.entity.player.InventoryPlayer;
 import redstonedistortion.api.redstonedistortion.slots.SlotValid;
+import redstonedistortion.bases.containers.ContainerBase;
 import redstonedistortion.factory.tiles.*;
 import redstonedistortion.bases.slots.SlotOutput;
 

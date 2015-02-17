@@ -6,11 +6,11 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import redstonedistortion.ModRedstoneDistortion;
-import redstonedistortion.factory.base.TileCell;
-import redstonedistortion.factory.containers.ContainerCell;
+import redstonedistortion.bases.guis.GuiCell;
+import redstonedistortion.bases.tiles.TileCell;
+import redstonedistortion.bases.containers.ContainerCell;
 import redstonedistortion.factory.containers.ContainerMechanicalFurnace;
 import redstonedistortion.factory.tiles.TileMechanicalFurnace;
-import redstonedistortion.factory.tiles.cells.TileIronCell;
 import redstonedistortion.libs.ModLibs;
 
 public class GuiHandler implements IGuiHandler

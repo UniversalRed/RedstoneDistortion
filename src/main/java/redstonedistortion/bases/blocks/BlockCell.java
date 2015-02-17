@@ -1,4 +1,4 @@
-package redstonedistortion.factory.base;
+package redstonedistortion.bases.blocks;
 
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;

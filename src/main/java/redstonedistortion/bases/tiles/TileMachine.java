@@ -1,24 +1,15 @@
-package redstonedistortion.factory.base;
+package redstonedistortion.bases.tiles;
 
-import cofh.api.block.IBlockInfo;
-import cpw.mods.fml.common.network.internal.FMLProxyPacket;
 import io.netty.buffer.ByteBuf;
-import io.netty.buffer.Unpooled;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
-import net.minecraft.network.Packet;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.IChatComponent;
-import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import cofh.api.energy.IEnergyReceiver;
-import redstonedistortion.libs.ModLibs;
-
-import java.util.List;
+import redstonedistortion.bases.tiles.TileBase;
 
 public class TileMachine extends TileBase implements IEnergyReceiver, ISidedInventory {
 
@@ -31,9 +22,14 @@ public class TileMachine extends TileBase implements IEnergyReceiver, ISidedInve
     protected int currentWorkTime;
     public static int MAX_WORK_TICKS = 15;
 
-    protected TileMachine(int maxEnergy) {
+    public TileMachine()
+    {
+
+    }
+
+    public TileMachine(int maxEnergy)
+    {
         this.maxEnergy = maxEnergy;
-        currentWorkTime = 0;
     }
 
     public int getCookProgressScaled(int i) {
@@ -45,11 +41,13 @@ public class TileMachine extends TileBase implements IEnergyReceiver, ISidedInve
 
     @Override
     public void readFromNBT(NBTTagCompound tag) {
+        super.readFromNBT(tag);
         energy = tag.getInteger("energy");
     }
 
     @Override
     public void writeToNBT(NBTTagCompound tag) {
+        super.writeToNBT(tag);
         tag.setInteger("energy", energy);
     }
 

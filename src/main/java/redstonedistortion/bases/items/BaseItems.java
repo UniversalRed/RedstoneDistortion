@@ -1,4 +1,4 @@
-package redstonedistortion.item.bases;
+package redstonedistortion.bases.items;
 
 import net.minecraft.item.Item;
 import redstonedistortion.core.creativetabs.CreativeTabRedstoneDistortion;

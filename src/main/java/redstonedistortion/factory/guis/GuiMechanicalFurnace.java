@@ -45,7 +45,6 @@ public class GuiMechanicalFurnace extends GuiContainer
 
     @Override
     protected void drawGuiContainerForegroundLayer(int x, int y) {
-        fontRendererObj.drawString("Mechanical Furnace", 8, 6, 0x404040);
-
+        fontRendererObj.drawString("Mechanical Furnace", 8, 6,  0x404040 );
     }
 }

@@ -1,4 +1,4 @@
-package redstonedistortion.factory.containers;
+package redstonedistortion.bases.containers;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;

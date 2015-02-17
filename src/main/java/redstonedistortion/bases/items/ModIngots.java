@@ -1,12 +1,14 @@
-package redstonedistortion.item.bases;
+package redstonedistortion.bases.items;
 
 import net.minecraft.item.Item;
 import redstonedistortion.core.creativetabs.CreativeTabRedstoneDistortion;
 import redstonedistortion.libs.ModLibs;
 
-public class ModDusts extends Item
+import java.util.List;
+
+public class ModIngots extends Item
 {
-    public ModDusts(String name)
+    public ModIngots(String name)
     {
         super();
         setMaxStackSize(64);

@@ -1,4 +1,4 @@
-package redstonedistortion.factory.base;
+package redstonedistortion.bases.tiles;
 
 import cpw.mods.fml.common.network.NetworkRegistry;
 import io.netty.buffer.ByteBuf;
@@ -15,6 +15,7 @@ import redstonedistortion.packets.RDMessageByteBuf;
 public class TileBase extends TileEntity implements ISynchronizedTile
 {
     public int timer;
+    public int x, y, z;
 
     @Override
     public void updateEntity() {
@@ -34,13 +35,13 @@ public class TileBase extends TileEntity implements ISynchronizedTile
     @Override
     public void readFromNBT(NBTTagCompound tag)
     {
-
+        super.readFromNBT(tag);
     }
 
     @Override
     public void writeToNBT(NBTTagCompound tag)
     {
-
+        super.writeToNBT(tag);
     }
 
     @Override

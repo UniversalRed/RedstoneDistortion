@@ -1,4 +1,4 @@
-package redstonedistortion.factory.base;
+package redstonedistortion.bases.items;
 
 import cofh.api.energy.ItemEnergyContainer;
 import cpw.mods.fml.relauncher.Side;

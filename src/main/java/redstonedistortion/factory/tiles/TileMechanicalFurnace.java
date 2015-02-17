@@ -8,10 +8,9 @@ import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.ForgeDirection;
 import redstonedistortion.core.inventories.CustomInventory;
-import redstonedistortion.factory.base.TileMachine;
+import redstonedistortion.bases.tiles.TileMachine;
 import redstonedistortion.utils.ModUtils;
 import redstonedistortion.utils.enums.EnumSideStatus;
-import redstonedistortion.utils.helpers.Location;
 import redstonedistortion.utils.helpers.SideConfiguration;
 
 public class TileMechanicalFurnace extends TileMachine implements ISidedInventory
@@ -22,6 +21,11 @@ public class TileMechanicalFurnace extends TileMachine implements ISidedInventor
     public boolean isCooking;
     private SideConfiguration configuration = new SideConfiguration();
 
+    public TileMechanicalFurnace()
+    {
+
+    }
+
     public TileMechanicalFurnace(int maxEnergy) {
         super(32000);
         progress = 0;
@@ -29,7 +33,8 @@ public class TileMechanicalFurnace extends TileMachine implements ISidedInventor
     }
 
     @Override
-    public void readFromNBT(NBTTagCompound tag) {
+    public void readFromNBT(NBTTagCompound tag)
+    {
         super.readFromNBT(tag);
         inventory.readNBT(tag);
         progress = tag.getInteger("progress");
@@ -37,7 +42,8 @@ public class TileMechanicalFurnace extends TileMachine implements ISidedInventor
     }
 
     @Override
-    public void writeToNBT(NBTTagCompound tag) {
+    public void writeToNBT(NBTTagCompound tag)
+    {
         super.writeToNBT(tag);
         inventory.writeNBT(tag);
         tag.setInteger("progress", progress);
@@ -83,20 +89,12 @@ public class TileMechanicalFurnace extends TileMachine implements ISidedInventor
         } else {
             stop();
         }
-            output();
     }
 
     public void stop() {
         isCooking = false;
         doBlockUpdate();
         progress = 0;
-    }
-
-    private void output()
-    {
-        if (getStackInSlot(1) == null)
-            return;
-        setInventorySlotContents(1, ModUtils.outputStack(new Location(this), getStackInSlot(1), configuration));
     }
 
     public void doBlockUpdate() {
@@ -184,12 +182,12 @@ public class TileMechanicalFurnace extends TileMachine implements ISidedInventor
 
     @Override
     public boolean canInsertItem(int slot, ItemStack stack, int side) {
-        return slot == 0 /*&& getStatus(ForgeDirection.getOrientation(side)).canReceive()*/;
+        return slot == 0 && getStatus(ForgeDirection.getOrientation(side)).canReceive();
     }
 
     @Override
     public boolean canExtractItem(int slot, ItemStack stack, int side) {
-        return slot == 1 /*&& getStatus(ForgeDirection.getOrientation(side)).canSend()*/;
+        return slot == 1 && getStatus(ForgeDirection.getOrientation(side)).canSend();
     }
 
     public EnumSideStatus getStatus(ForgeDirection side) {

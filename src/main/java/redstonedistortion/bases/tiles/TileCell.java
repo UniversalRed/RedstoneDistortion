@@ -1,21 +1,11 @@
-package redstonedistortion.factory.base;
+package redstonedistortion.bases.tiles;
 
-import cofh.api.block.IBlockInfo;
 import cofh.api.energy.EnergyStorage;
-import cofh.api.energy.IEnergyContainerItem;
 import cofh.api.energy.IEnergyHandler;
-import cpw.mods.fml.common.network.NetworkRegistry;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.IChatComponent;
-import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.common.util.ForgeDirection;
 import redstonedistortion.packets.MessageTileCell;
 import redstonedistortion.packets.PacketHandler;
-
-import java.util.List;
 
 public class TileCell extends TileBase implements IEnergyHandler
 {

@@ -1,7 +1,8 @@
-package redstonedistortion.factory.containers;
+package redstonedistortion.bases.containers;
 
 import net.minecraft.entity.player.InventoryPlayer;
-import redstonedistortion.factory.base.TileCell;
+import redstonedistortion.bases.containers.ContainerBase;
+import redstonedistortion.bases.tiles.TileCell;
 
 /**
  * Created by UniversalRed on 15-02-15.

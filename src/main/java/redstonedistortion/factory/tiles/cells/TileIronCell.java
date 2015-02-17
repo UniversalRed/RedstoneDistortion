@@ -5,7 +5,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import redstonedistortion.core.inventories.CustomInventory;
-import redstonedistortion.factory.base.TileCell;
+import redstonedistortion.bases.tiles.TileCell;
 import redstonedistortion.libs.ModLibs;
 
 public class TileIronCell extends TileCell implements IInventory
