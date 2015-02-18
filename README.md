@@ -7,7 +7,7 @@ Redstone Distortion is a new way of refreshing the BuildTech's late consistencie
 # 2. Could I, a contributor help?
 Of course! All help for development on this mod is needed, it's not like it can run with one individual (well it could, just a pain) ;). You can help by downloading the mod on github, making the modifications that you want to make and just make a PR, I'll just check over the changes and after that, your changes just contributed to the mod :)
 
-# 3. What Mod License will they mod use in the future?
+# 3. What Mod License will the mod use in the future?
 I will be using the MMPLv2 license in the near future when it is finalized, but for now, I will be using the MMPLv1 license while I still can. More information about the license can be found here: http://www.mod-buildcraft.com/MMPL-1.0.txt
 
 # 4. Will you be updating this mod every now and then?
