@@ -21,9 +21,7 @@ import redstonedistortion.packets.*;
 import java.io.File;
 
 /**
- * TODO: create batteries for power tool as well as get started on modular upgrades
- * TODO: create a working energy cell with features to extract, recieve energy from container items
- * TODO: Fix itemstacks from disappearing within the furnace gui
+ * TODO: create a working energy cell with features to extract, recieve energy
  */
 @Mod(modid = ModLibs.modId, name = ModLibs.modName, version = ModLibs.modVersion, acceptedMinecraftVersions = ModLibs.aceptedMinecraftVersions, guiFactory = "redstonedistortion.core.configurations.GuiFactory")
 public class ModRedstoneDistortion
@@ -43,7 +41,7 @@ public class ModRedstoneDistortion
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
-        logger.initialize();
+        ModLogger.initialize();
 
         config = new Configuration(new File(event.getModConfigurationDirectory(), "RedstoneDistortion/RedstoneDistortion.cfg"));
         ConfigHandler.loadConfig(config);
@@ -64,7 +62,7 @@ public class ModRedstoneDistortion
 
         ModRecipes.addRecipes();
 
-        proxy.renderObjects();
+        CommonProxy.renderObjects();
 
         ModOreDictionary.initOreDictionary();
 
@@ -77,12 +75,12 @@ public class ModRedstoneDistortion
     @Mod.EventHandler
     public void init(FMLInitializationEvent event)
     {
-        logger.initialize();
+        ModLogger.initialize();
     }
 
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event)
     {
-        logger.initialize();
+        ModLogger.initialize();
     }
 }

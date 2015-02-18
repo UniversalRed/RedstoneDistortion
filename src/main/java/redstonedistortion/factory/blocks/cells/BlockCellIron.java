@@ -1,9 +1,9 @@
-package redstonedistortion.factory.blocks;
+package redstonedistortion.factory.blocks.cells;
 
-import cpw.mods.fml.common.network.internal.FMLNetworkHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
@@ -16,10 +16,14 @@ import net.minecraftforge.common.util.ForgeDirection;
 import redstonedistortion.ModRedstoneDistortion;
 import redstonedistortion.core.creativetabs.CreativeTabRedstoneDistortion;
 import redstonedistortion.factory.tiles.TileMechanicalFurnace;
+import redstonedistortion.factory.tiles.cells.TileCellIron;
 import redstonedistortion.libs.ModLibs;
 import redstonedistortion.utils.ModUtils;
 
-public class BlockMechanicalFurnace extends BlockContainer
+/**
+ * Created by UniversalRed on 15-02-17.
+ */
+public class BlockCellIron extends BlockContainer
 {
     IIcon textureFront;
     IIcon textureTop;
@@ -27,7 +31,7 @@ public class BlockMechanicalFurnace extends BlockContainer
     IIcon textureBack;
     IIcon textureBottom;
 
-    public BlockMechanicalFurnace(Material m, String name)
+    public BlockCellIron(Material m, String name)
     {
         super(Material.iron);
         setCreativeTab(CreativeTabRedstoneDistortion.RDBlockTab);
@@ -39,25 +43,25 @@ public class BlockMechanicalFurnace extends BlockContainer
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityplayer, int par6, float par7, float par8, float par9) {
         if (!world.isRemote)
-            entityplayer.openGui(ModRedstoneDistortion.instance, ModLibs.guiMechanicalFurnace, world, x, y, z);
+            entityplayer.openGui(ModRedstoneDistortion.instance, ModLibs.guiCell, world, x, y, z);
         return true;
     }
 
     @Override
     public void onNeighborBlockChange(World world, int x, int y, int z, Block block) {
         TileEntity tile = world.getTileEntity(x, y, z);
-        if (tile instanceof TileMechanicalFurnace) {
-            TileMechanicalFurnace furnace = (TileMechanicalFurnace) tile;
-            furnace.updateEntity();
+        if (tile instanceof TileCellIron) {
+            TileCellIron cell = (TileCellIron) tile;
+            cell.updateEntity();
         }
     }
 
     @Override
     public void onPostBlockPlaced(World world, int x, int y, int z, int meta) {
         TileEntity tile = world.getTileEntity(x, y, z);
-        if (tile instanceof TileMechanicalFurnace) {
-            TileMechanicalFurnace furnace = (TileMechanicalFurnace) tile;
-            furnace.updateEntity();
+        if (tile instanceof TileCellIron) {
+            TileCellIron cell = (TileCellIron) tile;
+            cell.updateEntity();
         }
     }
 
@@ -72,11 +76,11 @@ public class BlockMechanicalFurnace extends BlockContainer
 
     @Override
     public void breakBlock(World world, int x, int y, int z, Block block, int meta) {
-        TileMechanicalFurnace furnace = (TileMechanicalFurnace) world.getTileEntity(x, y, z);
+        TileCellIron cell = (TileCellIron) world.getTileEntity(x, y, z);
         for (int t = 0; t < 2; t++) {
-            ItemStack stack = furnace.getStackInSlot(t);
+            ItemStack stack = cell.getStackInSlot(t);
             if (stack != null) {
-                furnace.setInventorySlotContents(t, null);
+                cell.setInventorySlotContents(t, null);
                 ModUtils.dropItemstack(world, x, y, z, stack);
             }
         }
@@ -106,16 +110,16 @@ public class BlockMechanicalFurnace extends BlockContainer
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister par1IconRegister)
     {
-        textureFront = par1IconRegister.registerIcon(ModLibs.texturesPath + "mechanicalFurnace");
-        textureSide = par1IconRegister.registerIcon(ModLibs.texturesPath+"gearmachine_sides");
-        textureTop = par1IconRegister.registerIcon(ModLibs.texturesPath+"gearmachine_bottom");
-        textureBack = par1IconRegister.registerIcon(ModLibs.texturesPath+"gearmachine_back");
-        textureBottom = par1IconRegister.registerIcon(ModLibs.texturesPath+"gearmachine_bottom");
+        textureFront = par1IconRegister.registerIcon(ModLibs.texturesPath + "cellIron");
+        textureSide = par1IconRegister.registerIcon(ModLibs.texturesPath+"cellIron");
+        textureTop = par1IconRegister.registerIcon(ModLibs.texturesPath+"cellIron");
+        textureBack = par1IconRegister.registerIcon(ModLibs.texturesPath+"cellIron");
+        textureBottom = par1IconRegister.registerIcon(ModLibs.texturesPath+"cellIron");
     }
 
     @Override
     public TileEntity createNewTileEntity(World var1, int var2)
     {
-        return new TileMechanicalFurnace(32000);
+        return new TileCellIron(ModLibs.cellIronCapacity);
     }
 }

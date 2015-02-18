@@ -5,10 +5,10 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
 import redstonedistortion.factory.blocks.*;
-import redstonedistortion.factory.blocks.cells.BlockIronCell;
+import redstonedistortion.factory.blocks.cells.BlockCellIron;
 import redstonedistortion.factory.items.ItemDebugger;
 import redstonedistortion.factory.tiles.*;
-import redstonedistortion.factory.tiles.cells.TileIronCell;
+import redstonedistortion.factory.tiles.cells.TileCellIron;
 
 public class ModFactory
 {
@@ -43,7 +43,7 @@ public class ModFactory
         mechanicalFurnace = new BlockMechanicalFurnace(Material.iron, "mechanicalFurnace");
 
         //Containers/capsules
-        cellIron = new BlockIronCell(Material.iron).setBlockName("cellIron");
+        cellIron = new BlockCellIron(Material.iron, "cellIron");
 
         //Other
         debuggerTester = new ItemDebugger("itemDebugger");
@@ -55,7 +55,7 @@ public class ModFactory
         GameRegistry.registerTileEntity(TileMechanicalFurnace.class, "mechanicalFurnace");
 
         GameRegistry.registerBlock(cellIron, "cellIron");
-        GameRegistry.registerTileEntity(TileIronCell.class, "cellIron");
+        GameRegistry.registerTileEntity(TileCellIron.class, "cellIron");
 
         //Other
         GameRegistry.registerItem(debuggerTester, "itemDebugger");

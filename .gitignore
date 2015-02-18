@@ -8,3 +8,8 @@
 !/README.md
 !/COPYING.lesser
 !build.gradle
+
+# Package Files #
+*.war
+*.ear
+#.DS_Store

@@ -12,7 +12,7 @@ import redstonedistortion.bases.containers.ContainerCell;
  * Created by UniversalRed on 15-02-15.
  */
 public class GuiCell extends GuiContainer {
-    private static final ResourceLocation textureBackground = new ResourceLocation("reddistortion", "textures/guis/guiMechanicalFurnace.png");
+    private static final ResourceLocation textureBackground = new ResourceLocation("reddistortion", "textures/gui/guiMechanicalFurnace.png");
     private TileCell te;
 
     public GuiCell(InventoryPlayer invPlayer, TileCell tile) {

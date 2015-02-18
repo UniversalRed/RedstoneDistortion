@@ -1,8 +1,8 @@
 package redstonedistortion.bases.tiles;
 
+import net.minecraft.nbt.NBTTagCompound;
 import cofh.api.energy.EnergyStorage;
 import cofh.api.energy.IEnergyHandler;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.ForgeDirection;
 import redstonedistortion.packets.MessageTileCell;
 import redstonedistortion.packets.PacketHandler;
@@ -17,7 +17,7 @@ public class TileCell extends TileBase implements IEnergyHandler
     protected EnergyStorage storage = new EnergyStorage(capacity);
 
     //a simple ticker we will use.
-            int ticker;
+    int ticker;
 
     public TileCell() { //simple constructor that should be always be called just add it here and don't worry about it.
         super();
@@ -81,6 +81,4 @@ public class TileCell extends TileBase implements IEnergyHandler
     public boolean canConnectEnergy(ForgeDirection from) {
         return true;
     }
-
-
 }

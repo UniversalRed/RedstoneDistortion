@@ -13,6 +13,8 @@ tile.orePlatinum.name=Platinum Ore
 
 tile.mechanicalFurnace.name=Mechanical Furnace
 
+tile.cellIron.name=Iron Energy Cell
+
 item.ingotCopper.name=Copper Ingot
 item.ingotTin.name=Tin Ingot
 item.ingotSilver.name=Silver Ingot

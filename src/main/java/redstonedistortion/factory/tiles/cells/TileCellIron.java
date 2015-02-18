@@ -1,19 +1,26 @@
 package redstonedistortion.factory.tiles.cells;
 
+
 import cofh.api.energy.IEnergyContainerItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import redstonedistortion.core.inventories.CustomInventory;
 import redstonedistortion.bases.tiles.TileCell;
 import redstonedistortion.libs.ModLibs;
+import redstonedistortion.utils.ModUtils;
 
-public class TileIronCell extends TileCell implements IInventory
+/**
+ * Created by UniversalRed on 15-02-17.
+ */
+public class TileCellIron extends TileCell implements ISidedInventory
 {
     private final CustomInventory inventory = new CustomInventory("cellIron", 2, 64, this);
     public int energy = 250;
 
-    public TileIronCell(int capacity)
+
+
+    public TileCellIron(int capacity)
     {
         super(ModLibs.cellIronCapacity);
     }
@@ -100,5 +107,20 @@ public class TileIronCell extends TileCell implements IInventory
     @Override
     public boolean isItemValidForSlot(int p_94041_1_, ItemStack p_94041_2_) {
         return inventory.isItemValidForSlot(p_94041_1_, p_94041_2_);
+    }
+
+    @Override
+    public int[] getAccessibleSlotsFromSide(int p_94128_1_) {
+        return ModUtils.createSlotArray(0, 2);
+    }
+
+    @Override
+    public boolean canInsertItem(int slot, ItemStack p_102007_2_, int p_102007_3_) {
+        return slot == 0;
+    }
+
+    @Override
+    public boolean canExtractItem(int slot, ItemStack p_102008_2_, int p_102008_3_) {
+        return slot == 1;
     }
 }
