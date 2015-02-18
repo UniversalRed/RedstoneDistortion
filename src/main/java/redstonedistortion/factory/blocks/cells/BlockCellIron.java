@@ -15,7 +15,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import redstonedistortion.ModRedstoneDistortion;
 import redstonedistortion.core.creativetabs.CreativeTabRedstoneDistortion;
-import redstonedistortion.factory.tiles.TileMechanicalFurnace;
 import redstonedistortion.factory.tiles.cells.TileCellIron;
 import redstonedistortion.libs.ModLibs;
 import redstonedistortion.utils.ModUtils;

@@ -5,10 +5,10 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
 import redstonedistortion.factory.blocks.*;
-import redstonedistortion.factory.blocks.cells.BlockCellIron;
+import redstonedistortion.factory.blocks.cells.*;
 import redstonedistortion.factory.items.ItemDebugger;
 import redstonedistortion.factory.tiles.*;
-import redstonedistortion.factory.tiles.cells.TileCellIron;
+import redstonedistortion.factory.tiles.cells.*;
 
 public class ModFactory
 {

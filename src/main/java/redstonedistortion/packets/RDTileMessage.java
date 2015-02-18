@@ -5,6 +5,7 @@ import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.tileentity.TileEntity;
+import redstonedistortion.bases.tiles.TileBase;
 import redstonedistortion.bases.tiles.TileMachine;
 
 import java.util.Random;
@@ -61,9 +62,9 @@ public class RDTileMessage implements IMessage
         {
             TileEntity tile = ctx.getServerHandler().playerEntity.worldObj.getTileEntity(message.x, message.y, message.z);
 
-            if(tile instanceof TileMachine)
+            if(tile instanceof TileBase)
             {
-                tile.updateEntity();
+                ((TileBase) tile).sync();
             }
             return null;
         }

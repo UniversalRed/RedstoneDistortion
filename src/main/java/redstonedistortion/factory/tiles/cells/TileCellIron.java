@@ -1,6 +1,7 @@
 package redstonedistortion.factory.tiles.cells;
 
 
+import cofh.api.energy.EnergyStorage;
 import cofh.api.energy.IEnergyContainerItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
@@ -18,11 +19,15 @@ public class TileCellIron extends TileCell implements ISidedInventory
     private final CustomInventory inventory = new CustomInventory("cellIron", 2, 64, this);
     public int energy = 250;
 
+    public TileCellIron()
+    {
 
+    }
 
     public TileCellIron(int capacity)
     {
         super(ModLibs.cellIronCapacity);
+        this.energy = EnergyStorage.energy;
     }
 
     @Override

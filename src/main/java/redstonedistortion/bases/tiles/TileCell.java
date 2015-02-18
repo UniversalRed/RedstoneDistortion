@@ -1,5 +1,6 @@
 package redstonedistortion.bases.tiles;
 
+import cpw.mods.fml.common.network.NetworkRegistry;
 import net.minecraft.nbt.NBTTagCompound;
 import cofh.api.energy.EnergyStorage;
 import cofh.api.energy.IEnergyHandler;
@@ -16,22 +17,12 @@ public class TileCell extends TileBase implements IEnergyHandler
 
     protected EnergyStorage storage = new EnergyStorage(capacity);
 
-    //a simple ticker we will use.
     int ticker;
 
-    public TileCell() { //simple constructor that should be always be called just add it here and don't worry about it.
+    public TileCell()
+    {
         super();
-        ticker = 0; //sets the ticker to 0 every time the world get's loaded or when the tile is placed donw
-    }
-    @Override
-
-    public void updateEntity() {
-        if (ticker % 20 == 0) //sync every second.
-            sync();
-    }
-
-    public void sync() {
-        PacketHandler.INSTANCE.sendToAll(new MessageTileCell(xCoord, yCoord, zCoord, energy)); // this sends the message to all the clients around that tile which will casue it to sync.
+        ticker = 0;
     }
 
     public TileCell(int capacity)
@@ -41,6 +32,16 @@ public class TileCell extends TileBase implements IEnergyHandler
         maxReceive = EnergyStorage.maxReceive;
         maxExtract = EnergyStorage.maxExtract;
 
+    }
+
+    @Override
+    public void updateEntity() {
+        if (ticker % 20 == 0)
+            sync();
+    }
+
+    public void sync() {
+        PacketHandler.INSTANCE.sendToAllAround(new MessageTileCell(xCoord, yCoord, zCoord, energy), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, getX(), getY(), getZ(), 20));
     }
 
     @Override

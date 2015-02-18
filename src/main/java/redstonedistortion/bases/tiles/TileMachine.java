@@ -9,7 +9,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import cofh.api.energy.IEnergyReceiver;
-import redstonedistortion.bases.tiles.TileBase;
 
 public class TileMachine extends TileBase implements IEnergyReceiver, ISidedInventory {
 

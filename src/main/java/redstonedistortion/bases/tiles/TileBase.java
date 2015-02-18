@@ -5,9 +5,9 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import redstonedistortion.network.ISynchronizedTile;
+import redstonedistortion.packets.MessageTileCell;
 import redstonedistortion.packets.MessageTileMachine;
 import redstonedistortion.packets.PacketHandler;
-import redstonedistortion.packets.RDMessageByteBuf;
 
 /**
  * Created by UniversalRed on 15-02-16.
@@ -29,6 +29,7 @@ public class TileBase extends TileEntity implements ISynchronizedTile
     public void sync() {
         if (!worldObj.isRemote) {
             PacketHandler.INSTANCE.sendToAllAround(new MessageTileMachine(), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, getX(), getY(), getZ(), 20));
+            PacketHandler.INSTANCE.sendToAllAround(new MessageTileCell(), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, getX(), getY(), getZ(), 20));
         }
     }
 
