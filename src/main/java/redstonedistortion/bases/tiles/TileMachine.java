@@ -1,6 +1,6 @@
 package redstonedistortion.bases.tiles;
 
-import cpw.mods.fml.common.network.NetworkRegistry;
+import cofh.api.energy.IEnergyProvider;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
@@ -10,16 +10,21 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import cofh.api.energy.IEnergyReceiver;
-import redstonedistortion.packets.MessageTileMachine;
-import redstonedistortion.packets.PacketHandler;
+import redstonedistortion.utils.enums.EnumSideStatus;
+import redstonedistortion.utils.helpers.SideConfiguration;
 
-public class TileMachine extends TileBase implements IEnergyReceiver, ISidedInventory {
+public class TileMachine extends TileBase implements IEnergyProvider, IEnergyReceiver, ISidedInventory {
 
-    public static int energy;
-    public int maxEnergy;
+    private SideConfiguration configuration = new SideConfiguration();
+
+    // Basic Machine Requirements
+    public int capacity;
+    public int energy;
+    public int maxReceive;
+    public int maxExtract;
     public static int progress;
 
-    protected static int POWER_USAGE = 200;
+    protected static int POWER_USAGE = 20;
 
     protected int currentWorkTime;
     public static int MAX_WORK_TICKS = 15;
@@ -29,9 +34,11 @@ public class TileMachine extends TileBase implements IEnergyReceiver, ISidedInve
         super();
     }
 
-    public TileMachine(int maxEnergy)
+    public TileMachine(int capacity, int maxExtract, int maxReceive)
     {
-        this.maxEnergy = maxEnergy;
+        this.capacity = capacity;
+        this.maxExtract = maxExtract;
+        this.maxReceive = maxReceive;
     }
 
     public int getCookProgressScaled(int i) {
@@ -42,29 +49,38 @@ public class TileMachine extends TileBase implements IEnergyReceiver, ISidedInve
     }
 
     @Override
-    public void readFromNBT(NBTTagCompound tag) {
-        super.readFromNBT(tag);
-        energy = tag.getInteger("energy");
-    }
-
-    @Override
-    public void writeToNBT(NBTTagCompound tag) {
-        super.writeToNBT(tag);
-        tag.setInteger("energy", energy);
-    }
-
-    @Override
     public int receiveEnergy(ForgeDirection from, int maxReceive, boolean simulate) {
-        if (energy >= maxEnergy)
+        this.maxReceive = maxReceive;
+
+        if (!configuration.canReceive(from))
             return 0;
-        int energyRecieved = maxReceive;
-        if (energyRecieved > maxEnergy - energy)
-            energyRecieved = maxEnergy - energy;
-        if (!simulate)
-            energy += energyRecieved;
-        return energyRecieved;
+        int recieved = maxReceive;
+        if (recieved > capacity - energy)
+            recieved = capacity - energy;
+        if (recieved > maxReceive)
+            recieved = maxReceive;
+        if (!simulate) {
+            energy += recieved;
+        }
+        return recieved;
     }
 
+    @Override
+    public int extractEnergy(ForgeDirection from, int maxExtract, boolean simulate) {
+        this.maxExtract = maxExtract;
+
+        if (!configuration.canSend(from))
+            return 0;
+        int extracted = maxExtract;
+        if (extracted > energy)
+            extracted = energy;
+        if (extracted > maxExtract)
+            extracted = maxExtract;
+        if (!simulate) {
+            energy += extracted;
+        }
+        return extracted;
+    }
 
     @Override
     public int getEnergyStored(ForgeDirection from) {
@@ -73,14 +89,34 @@ public class TileMachine extends TileBase implements IEnergyReceiver, ISidedInve
 
     @Override
     public int getMaxEnergyStored(ForgeDirection from) {
-        return maxEnergy;
+        return capacity;
     }
+
+    @Override
+    public void readFromNBT(NBTTagCompound tag) {
+        super.readFromNBT(tag);
+        energy = tag.getInteger("energy");
+        capacity = tag.getInteger("capacity");
+        maxReceive = tag.getInteger("maxReceive");
+        maxExtract = tag.getInteger("maxExtract");
+        configuration.readFromNBT(tag);
+    }
+
+    @Override
+    public void writeToNBT(NBTTagCompound tag) {
+        super.writeToNBT(tag);
+        tag.setInteger("energy", energy);
+        tag.setInteger("capacity", capacity);
+        tag.setInteger("maxReceive", maxReceive);
+        tag.setInteger("maxExtract", maxExtract);
+        configuration.writeToNBT(tag);
+    }
+
 
     @Override
     public boolean canConnectEnergy(ForgeDirection from) {
         return true;
     }
-
     @Override
     public int[] getAccessibleSlotsFromSide(int p_94128_1_) {
         return new int[0];
@@ -154,6 +190,10 @@ public class TileMachine extends TileBase implements IEnergyReceiver, ISidedInve
     @Override
     public boolean isItemValidForSlot(int p_94041_1_, ItemStack p_94041_2_) {
         return false;
+    }
+
+    public EnumSideStatus getStatus(ForgeDirection side) {
+        return configuration.getStatus(side);
     }
 
     @Override

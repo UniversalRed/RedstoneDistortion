@@ -2,7 +2,6 @@ package redstonedistortion.factory.tiles.cells;
 
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -29,7 +28,7 @@ public class TileCellIron extends TileCell implements ISidedInventory {
 
     public TileCellIron(int capacity, int maxReceive, int maxExtract)
     {
-        super(ModLibs.cellIronCapacity, 1000, 1000);
+        super(capacity, maxReceive, maxExtract);
         this.capacity = capacity;
         this.maxExtract = maxExtract;
         this.maxReceive = maxReceive;

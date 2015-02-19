@@ -31,5 +31,9 @@ public class ModLibs
     public static final int cellGoldCapacity = 80000;
     public static final int cellDiamondCapacity = 640000;
     public static final int cellEmeraldCapacity = 1280000;
+
+    public static final int machineCapacity = 32000;
+    public static final int machineExtract = 1000;
+    public static final int machineRecieve = 1000;
 }
 

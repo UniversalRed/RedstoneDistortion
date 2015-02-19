@@ -112,6 +112,6 @@ public class BlockMechanicalFurnace extends BlockContainer {
 
     @Override
     public TileEntity createNewTileEntity(World var1, int var2) {
-        return new TileMechanicalFurnace(32000);
+        return new TileMechanicalFurnace(ModLibs.machineCapacity, ModLibs.machineExtract, ModLibs.machineRecieve);
     }
 }

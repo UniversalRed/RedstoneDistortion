@@ -9,8 +9,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.ForgeDirection;
 import redstonedistortion.bases.tiles.TileMachine;
 import redstonedistortion.core.inventories.CustomInventory;
+import redstonedistortion.libs.ModLibs;
 import redstonedistortion.utils.ModUtils;
-import redstonedistortion.utils.enums.EnumSideStatus;
 import redstonedistortion.utils.helpers.SideConfiguration;
 
 public class TileMechanicalFurnace extends TileMachine implements ISidedInventory {
@@ -18,15 +18,17 @@ public class TileMechanicalFurnace extends TileMachine implements ISidedInventor
 
     public int progress;
     public boolean isCooking;
-    private SideConfiguration configuration = new SideConfiguration();
-    public static int machineCapacity = 32000;
+    public SideConfiguration configuration = new SideConfiguration();
+    public int maxExtract = ModLibs.machineExtract;
+    public int maxReceive = ModLibs.machineRecieve;
+
 
     public TileMechanicalFurnace() {
 
     }
 
-    public TileMechanicalFurnace(int maxEnergy) {
-        super(machineCapacity);
+    public TileMechanicalFurnace(int capacity, int maxExtract, int maxReceive) {
+        super(ModLibs.machineCapacity, ModLibs.machineExtract, ModLibs.machineRecieve);
         progress = 0;
         isCooking = false;
     }
@@ -183,10 +185,6 @@ public class TileMechanicalFurnace extends TileMachine implements ISidedInventor
     @Override
     public boolean canExtractItem(int slot, ItemStack stack, int side) {
         return slot == 1 && getStatus(ForgeDirection.getOrientation(side)).canSend();
-    }
-
-    public EnumSideStatus getStatus(ForgeDirection side) {
-        return configuration.getStatus(side);
     }
 
     @Override

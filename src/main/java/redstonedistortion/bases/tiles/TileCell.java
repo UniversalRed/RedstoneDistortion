@@ -28,6 +28,7 @@ public class TileCell extends TileBase implements IEnergyHandler, IEnergyStorage
         this.maxExtract = maxExtract;
     }
 
+
     @Override
     public int receiveEnergy(int maxReceive, boolean simulate) {
         this.maxReceive = maxReceive;
