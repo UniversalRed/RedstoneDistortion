@@ -51,7 +51,7 @@ public class MessageTileCell implements IMessage, IMessageHandler<MessageTileCel
         if (FMLClientHandler.instance().getClient().theWorld != null) {
             TileEntity entity = FMLClientHandler.instance().getClient().theWorld.getTileEntity(message.x, message.y, message.z);
             if (entity instanceof TileCell)
-                TileCell.energy = message.energy;
+                this.energy = message.energy;
         }
         return null;
     }

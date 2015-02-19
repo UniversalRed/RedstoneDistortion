@@ -7,34 +7,32 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.ForgeDirection;
-import redstonedistortion.core.inventories.CustomInventory;
 import redstonedistortion.bases.tiles.TileMachine;
+import redstonedistortion.core.inventories.CustomInventory;
 import redstonedistortion.utils.ModUtils;
 import redstonedistortion.utils.enums.EnumSideStatus;
 import redstonedistortion.utils.helpers.SideConfiguration;
 
-public class TileMechanicalFurnace extends TileMachine implements ISidedInventory
-{
+public class TileMechanicalFurnace extends TileMachine implements ISidedInventory {
     private final CustomInventory inventory = new CustomInventory("MechanicalFurnace", 2, 64, this);
 
     public int progress;
     public boolean isCooking;
     private SideConfiguration configuration = new SideConfiguration();
+    public static int machineCapacity = 32000;
 
-    public TileMechanicalFurnace()
-    {
+    public TileMechanicalFurnace() {
 
     }
 
     public TileMechanicalFurnace(int maxEnergy) {
-        super(32000);
+        super(machineCapacity);
         progress = 0;
         isCooking = false;
     }
 
     @Override
-    public void readFromNBT(NBTTagCompound tag)
-    {
+    public void readFromNBT(NBTTagCompound tag) {
         super.readFromNBT(tag);
         inventory.readNBT(tag);
         progress = tag.getInteger("progress");
@@ -42,8 +40,7 @@ public class TileMechanicalFurnace extends TileMachine implements ISidedInventor
     }
 
     @Override
-    public void writeToNBT(NBTTagCompound tag)
-    {
+    public void writeToNBT(NBTTagCompound tag) {
         super.writeToNBT(tag);
         inventory.writeNBT(tag);
         tag.setInteger("progress", progress);
@@ -61,8 +58,7 @@ public class TileMechanicalFurnace extends TileMachine implements ISidedInventor
 
             }
 
-            if (energy > POWER_USAGE)
-            {
+            if (energy > POWER_USAGE) {
                 energy -= POWER_USAGE;
             } else {
                 return;
@@ -85,7 +81,7 @@ public class TileMechanicalFurnace extends TileMachine implements ISidedInventor
                     progress = 0;
                 }
             }
-                progress++;
+            progress++;
         } else {
             stop();
         }
@@ -101,8 +97,7 @@ public class TileMechanicalFurnace extends TileMachine implements ISidedInventor
         worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
     }
 
-    public boolean canCook()
-    {
+    public boolean canCook() {
         ItemStack stack0 = getStackInSlot(0);
         ItemStack stack1 = getStackInSlot(1);
         if (stack0 == null || getResult(stack0) == null)

@@ -22,16 +22,14 @@ import redstonedistortion.utils.ModUtils;
 /**
  * Created by UniversalRed on 15-02-17.
  */
-public class BlockCellIron extends BlockContainer
-{
+public class BlockCellIron extends BlockContainer {
     IIcon textureFront;
     IIcon textureTop;
     IIcon textureSide;
     IIcon textureBack;
     IIcon textureBottom;
 
-    public BlockCellIron(Material m, String name)
-    {
+    public BlockCellIron(Material m, String name) {
         super(Material.iron);
         setCreativeTab(CreativeTabRedstoneDistortion.RDBlockTab);
         setHardness(3.0F);
@@ -88,8 +86,7 @@ public class BlockCellIron extends BlockContainer
     }
 
     @Override
-    public IIcon getIcon(int i, int j)
-    {
+    public IIcon getIcon(int i, int j) {
         if (j == 0 && i == 3)
             return textureFront;
 
@@ -105,20 +102,19 @@ public class BlockCellIron extends BlockContainer
                 return textureSide;
         }
     }
+
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerBlockIcons(IIconRegister par1IconRegister)
-    {
+    public void registerBlockIcons(IIconRegister par1IconRegister) {
         textureFront = par1IconRegister.registerIcon(ModLibs.texturesPath + "cellIron");
-        textureSide = par1IconRegister.registerIcon(ModLibs.texturesPath+"cellIron");
-        textureTop = par1IconRegister.registerIcon(ModLibs.texturesPath+"cellIron");
-        textureBack = par1IconRegister.registerIcon(ModLibs.texturesPath+"cellIron");
-        textureBottom = par1IconRegister.registerIcon(ModLibs.texturesPath+"cellIron");
+        textureSide = par1IconRegister.registerIcon(ModLibs.texturesPath + "cellIron");
+        textureTop = par1IconRegister.registerIcon(ModLibs.texturesPath + "cellIron");
+        textureBack = par1IconRegister.registerIcon(ModLibs.texturesPath + "cellIron");
+        textureBottom = par1IconRegister.registerIcon(ModLibs.texturesPath + "cellIron");
     }
 
     @Override
-    public TileEntity createNewTileEntity(World var1, int var2)
-    {
-        return new TileCellIron(ModLibs.cellIronCapacity);
+    public TileEntity createNewTileEntity(World var1, int var2) {
+        return new TileCellIron(ModLibs.cellIronCapacity, 1000, 1000);
     }
 }

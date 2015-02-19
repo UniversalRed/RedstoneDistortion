@@ -29,7 +29,7 @@ public class ModLibs
     //Energy Cell/Capsule Storage
     public static final int cellIronCapacity = 40000;
     public static final int cellGoldCapacity = 80000;
-    public static final int cellDiamondCapacity = 160000;
-    public static final int cellEmeraldCapacity = 320000;
+    public static final int cellDiamondCapacity = 640000;
+    public static final int cellEmeraldCapacity = 1280000;
 }
 

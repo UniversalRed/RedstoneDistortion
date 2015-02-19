@@ -7,11 +7,9 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.common.util.ForgeDirection;
 import redstonedistortion.core.creativetabs.CreativeTabRedstoneDistortion;
 
-public class ItemDebugger extends Item implements IBlockDebug
-{
+public class ItemDebugger extends Item implements IBlockDebug {
 
-    public ItemDebugger(String string)
-    {
+    public ItemDebugger(String string) {
         super();
         setMaxStackSize(64);
         setCreativeTab(CreativeTabRedstoneDistortion.RDItemTab);

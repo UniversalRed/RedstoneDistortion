@@ -1,5 +1,6 @@
 package redstonedistortion.bases.tiles;
 
+import cpw.mods.fml.common.network.NetworkRegistry;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
@@ -9,6 +10,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import cofh.api.energy.IEnergyReceiver;
+import redstonedistortion.packets.MessageTileMachine;
+import redstonedistortion.packets.PacketHandler;
 
 public class TileMachine extends TileBase implements IEnergyReceiver, ISidedInventory {
 
@@ -23,7 +26,7 @@ public class TileMachine extends TileBase implements IEnergyReceiver, ISidedInve
 
     public TileMachine()
     {
-
+        super();
     }
 
     public TileMachine(int maxEnergy)

@@ -1,9 +1,9 @@
 package redstonedistortion.factory.blocks;
 
-import cpw.mods.fml.common.network.internal.FMLNetworkHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
@@ -19,16 +19,14 @@ import redstonedistortion.factory.tiles.TileMechanicalFurnace;
 import redstonedistortion.libs.ModLibs;
 import redstonedistortion.utils.ModUtils;
 
-public class BlockMechanicalFurnace extends BlockContainer
-{
+public class BlockMechanicalFurnace extends BlockContainer {
     IIcon textureFront;
     IIcon textureTop;
     IIcon textureSide;
     IIcon textureBack;
     IIcon textureBottom;
 
-    public BlockMechanicalFurnace(Material m, String name)
-    {
+    public BlockMechanicalFurnace(Material m, String name) {
         super(Material.iron);
         setCreativeTab(CreativeTabRedstoneDistortion.RDBlockTab);
         setHardness(3.0F);
@@ -85,8 +83,7 @@ public class BlockMechanicalFurnace extends BlockContainer
     }
 
     @Override
-    public IIcon getIcon(int i, int j)
-    {
+    public IIcon getIcon(int i, int j) {
         if (j == 0 && i == 3)
             return textureFront;
 
@@ -102,20 +99,19 @@ public class BlockMechanicalFurnace extends BlockContainer
                 return textureSide;
         }
     }
+
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerBlockIcons(IIconRegister par1IconRegister)
-    {
+    public void registerBlockIcons(IIconRegister par1IconRegister) {
         textureFront = par1IconRegister.registerIcon(ModLibs.texturesPath + "mechanicalFurnace");
-        textureSide = par1IconRegister.registerIcon(ModLibs.texturesPath+"gearmachine_sides");
-        textureTop = par1IconRegister.registerIcon(ModLibs.texturesPath+"gearmachine_bottom");
-        textureBack = par1IconRegister.registerIcon(ModLibs.texturesPath+"gearmachine_back");
-        textureBottom = par1IconRegister.registerIcon(ModLibs.texturesPath+"gearmachine_bottom");
+        textureSide = par1IconRegister.registerIcon(ModLibs.texturesPath + "gearmachine_sides");
+        textureTop = par1IconRegister.registerIcon(ModLibs.texturesPath + "gearmachine_bottom");
+        textureBack = par1IconRegister.registerIcon(ModLibs.texturesPath + "gearmachine_back");
+        textureBottom = par1IconRegister.registerIcon(ModLibs.texturesPath + "gearmachine_bottom");
     }
 
     @Override
-    public TileEntity createNewTileEntity(World var1, int var2)
-    {
+    public TileEntity createNewTileEntity(World var1, int var2) {
         return new TileMechanicalFurnace(32000);
     }
 }
