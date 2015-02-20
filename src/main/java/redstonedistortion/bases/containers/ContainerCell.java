@@ -1,6 +1,7 @@
 package redstonedistortion.bases.containers;
 
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.Slot;
 import redstonedistortion.bases.containers.ContainerBase;
 import redstonedistortion.bases.tiles.TileCell;
 
@@ -9,7 +10,6 @@ import redstonedistortion.bases.tiles.TileCell;
  */
 public class ContainerCell extends ContainerBase
 {
-
     public ContainerCell(InventoryPlayer inventoryPlayer, TileCell tile)
     {
         super(inventoryPlayer, tile);

@@ -4,10 +4,12 @@ import cofh.api.energy.*;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.ForgeDirection;
+import redstonedistortion.network.IConfigurableOutput;
+import redstonedistortion.utils.enums.EnumPriority;
 import redstonedistortion.utils.enums.EnumSideStatus;
 import redstonedistortion.utils.helpers.SideConfiguration;
 
-public class TileCell extends TileBase implements IEnergyHandler, IEnergyStorage
+public class TileCell extends TileBase implements IEnergyProvider, IEnergyReceiver, IEnergyStorage, IEnergyHandler, IConfigurableOutput
 {
     public SideConfiguration configuration = new SideConfiguration();
 
@@ -28,6 +30,13 @@ public class TileCell extends TileBase implements IEnergyHandler, IEnergyStorage
         this.maxExtract = maxExtract;
     }
 
+    @Override
+    public void updateEntity()
+    {
+        super.updateEntity();
+        if(!worldObj.isRemote)
+            return;
+    }
 
     @Override
     public int receiveEnergy(int maxReceive, boolean simulate) {
@@ -98,6 +107,7 @@ public class TileCell extends TileBase implements IEnergyHandler, IEnergyStorage
         return extracted;
     }
 
+
     @Override
     public int getEnergyStored(ForgeDirection from) {
         return energy;
@@ -131,7 +141,7 @@ public class TileCell extends TileBase implements IEnergyHandler, IEnergyStorage
 
     @Override
     public boolean canConnectEnergy(ForgeDirection from) {
-        return true;
+        return configuration.canReceive(from) || configuration.canSend(from);
     }
 
 
@@ -139,6 +149,10 @@ public class TileCell extends TileBase implements IEnergyHandler, IEnergyStorage
     public ByteBuf writeToByteBuff(ByteBuf buf)
     {
         buf.writeInt(energy);
+        buf.writeInt(capacity);
+        buf.writeInt(maxReceive);
+        buf.writeInt(maxExtract);
+
         return buf;
     }
 
@@ -146,10 +160,55 @@ public class TileCell extends TileBase implements IEnergyHandler, IEnergyStorage
     public ByteBuf readFromByteBuff(ByteBuf buf)
     {
         energy = buf.readInt();
+        capacity = buf.readInt();
+        maxReceive = buf.readInt();
+        maxExtract = buf.readInt();
+
         return buf;
     }
 
+    @Override
     public EnumSideStatus getStatus(ForgeDirection side) {
         return configuration.getStatus(side);
+    }
+
+    @Override
+    public void changeStatus(ForgeDirection side) {
+        configuration.changeStatus(side);
+    }
+
+    @Override
+    public void setSideConfiguration(SideConfiguration configuration) {
+        this.configuration.load(configuration);
+    }
+
+    @Override
+    public int getX() {
+        return xCoord;
+    }
+
+    @Override
+    public int getY() {
+        return yCoord;
+    }
+
+    @Override
+    public int getZ() {
+        return zCoord;
+    }
+
+    @Override
+    public EnumPriority getPriority(ForgeDirection side) {
+        return configuration.getPriority(side);
+    }
+
+    @Override
+    public void changePriority(ForgeDirection side) {
+        configuration.changePriority(side);
+    }
+
+    @Override
+    public SideConfiguration getSideConfiguration() {
+        return configuration;
     }
 }

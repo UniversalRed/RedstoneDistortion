@@ -7,6 +7,7 @@ import net.minecraft.tileentity.TileEntity;
 import redstonedistortion.network.ISynchronizedTile;
 import redstonedistortion.packets.MessageTileCell;
 import redstonedistortion.packets.MessageTileMachine;
+import redstonedistortion.packets.MessageTileSolar;
 import redstonedistortion.packets.PacketHandler;
 
 /**
@@ -30,6 +31,7 @@ public class TileBase extends TileEntity implements ISynchronizedTile
         if (!worldObj.isRemote) {
             PacketHandler.INSTANCE.sendToAllAround(new MessageTileMachine(), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, getX(), getY(), getZ(), 20));
             PacketHandler.INSTANCE.sendToAllAround(new MessageTileCell(), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, getX(), getY(), getZ(), 20));
+            PacketHandler.INSTANCE.sendToAllAround(new MessageTileSolar(), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, getX(), getY(), getZ(), 20));
         }
     }
 

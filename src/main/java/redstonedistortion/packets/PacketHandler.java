@@ -17,5 +17,8 @@ public class PacketHandler
         //Handler class		Message class	      ID   Target side
         INSTANCE.registerMessage(MessageTileCell.class, MessageTileCell.class, 0, Side.CLIENT);
         INSTANCE.registerMessage(MessageTileMachine.class, MessageTileMachine.class, 1, Side.CLIENT);
+        INSTANCE.registerMessage(MessageConfiguration.class, MessageConfiguration.class, 2, Side.SERVER);
+        INSTANCE.registerMessage(MessageByteBuff.class, MessageByteBuff.class, 3, Side.CLIENT);
+        INSTANCE.registerMessage(MessageTileSolar.class, MessageTileSolar.class, 4, Side.CLIENT);
     }
 }

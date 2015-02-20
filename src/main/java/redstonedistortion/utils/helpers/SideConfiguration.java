@@ -8,6 +8,7 @@ import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import io.netty.buffer.ByteBuf;
+import redstonedistortion.network.IConfigurableOutput;
 import redstonedistortion.network.ISyncObject;
 import redstonedistortion.utils.enums.*;
 
@@ -62,6 +63,13 @@ public class SideConfiguration implements ISyncObject {
             tag.setInteger("priority" + direction.ordinal(), priorities[direction.ordinal()].ordinal());
         }
         return tag;
+    }
+
+    public void load(IConfigurableOutput configurableOutput) {
+        for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
+            configurations[direction.ordinal()] = configurableOutput.getStatus(direction);
+            priorities[direction.ordinal()] = configurableOutput.getPriority(direction);
+        }
     }
 
     public void load(SideConfiguration configuration) {

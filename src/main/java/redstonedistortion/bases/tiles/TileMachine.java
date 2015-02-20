@@ -2,18 +2,20 @@ package redstonedistortion.bases.tiles;
 
 import cofh.api.energy.IEnergyProvider;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.ISidedInventory;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
 import net.minecraftforge.common.util.ForgeDirection;
 
 import cofh.api.energy.IEnergyReceiver;
+import redstonedistortion.network.IConfigurableOutput;
+import redstonedistortion.packets.MessageConfiguration;
+import redstonedistortion.packets.PacketHandler;
+import redstonedistortion.utils.enums.EnumPriority;
 import redstonedistortion.utils.enums.EnumSideStatus;
 import redstonedistortion.utils.helpers.SideConfiguration;
 
-public class TileMachine extends TileBase implements IEnergyProvider, IEnergyReceiver, ISidedInventory {
+public class TileMachine extends TileBase implements IEnergyProvider, IEnergyReceiver, IConfigurableOutput
+{
 
     private SideConfiguration configuration = new SideConfiguration();
 
@@ -93,6 +95,15 @@ public class TileMachine extends TileBase implements IEnergyProvider, IEnergyRec
     }
 
     @Override
+    public boolean canConnectEnergy(ForgeDirection from) {
+        return configuration.canReceive(from) || configuration.canSend(from);
+    }
+
+    public void sendConfigurationToSever() {
+        PacketHandler.INSTANCE.sendToServer(new MessageConfiguration(this));
+    }
+
+    @Override
     public void readFromNBT(NBTTagCompound tag) {
         super.readFromNBT(tag);
         energy = tag.getInteger("energy");
@@ -114,86 +125,48 @@ public class TileMachine extends TileBase implements IEnergyProvider, IEnergyRec
 
 
     @Override
-    public boolean canConnectEnergy(ForgeDirection from) {
-        return true;
-    }
-    @Override
-    public int[] getAccessibleSlotsFromSide(int p_94128_1_) {
-        return new int[0];
-    }
-
-    @Override
-    public boolean canInsertItem(int p_102007_1_, ItemStack p_102007_2_, int p_102007_3_) {
-        return false;
-    }
-
-    @Override
-    public boolean canExtractItem(int p_102008_1_, ItemStack p_102008_2_, int p_102008_3_) {
-        return false;
-    }
-
-    @Override
-    public int getSizeInventory() {
-        return 0;
-    }
-
-    @Override
-    public ItemStack getStackInSlot(int p_70301_1_) {
-        return null;
-    }
-
-    @Override
-    public ItemStack decrStackSize(int p_70298_1_, int p_70298_2_) {
-        return null;
-    }
-
-    @Override
-    public ItemStack getStackInSlotOnClosing(int p_70304_1_) {
-        return null;
-    }
-
-    @Override
-    public void setInventorySlotContents(int p_70299_1_, ItemStack p_70299_2_) {
-
-    }
-
-    @Override
-    public String getInventoryName() {
-        return null;
-    }
-
-    @Override
-    public boolean hasCustomInventoryName() {
-        return false;
-    }
-
-    @Override
-    public int getInventoryStackLimit() {
-        return 0;
-    }
-
-    @Override
-    public boolean isUseableByPlayer(EntityPlayer p_70300_1_) {
-        return false;
-    }
-
-    @Override
-    public void openInventory() {
-
-    }
-
-    @Override
-    public void closeInventory() {
-
-    }
-
-    @Override
-    public boolean isItemValidForSlot(int p_94041_1_, ItemStack p_94041_2_) {
-        return false;
-    }
-
     public EnumSideStatus getStatus(ForgeDirection side) {
         return configuration.getStatus(side);
+    }
+
+    @Override
+    public void changeStatus(ForgeDirection side) {
+        configuration.changeStatus(side);
+    }
+
+    @Override
+    public void setSideConfiguration(SideConfiguration configuration) {
+        this.configuration.load(configuration);
+    }
+
+    @Override
+    public int getX() {
+        return xCoord;
+    }
+
+    @Override
+    public int getY() {
+        return yCoord;
+    }
+
+    @Override
+    public int getZ() {
+        return zCoord;
+    }
+
+    @Override
+    public EnumPriority getPriority(ForgeDirection side) {
+        return configuration.getPriority(side);
+    }
+
+    @Override
+    public void changePriority(ForgeDirection side) {
+        configuration.changePriority(side);
+    }
+
+    @Override
+    public SideConfiguration getSideConfiguration() {
+        return configuration;
     }
 
     @Override
