@@ -6,6 +6,7 @@ import buildcraftAdditions.api.configurableOutput.IConfigurableOutput;
 import buildcraftAdditions.api.networking.ISyncronizedTile;
 import cofh.api.energy.IEnergyProvider;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;

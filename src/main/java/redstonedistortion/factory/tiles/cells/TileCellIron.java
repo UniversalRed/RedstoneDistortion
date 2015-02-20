@@ -71,34 +71,6 @@ public class TileCellIron extends TileCell implements ISidedInventory {
     }
 
     @Override
-    public void sendEnergy() {
-        for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
-            for (EnumPriority priority : EnumPriority.values()) {
-                if (configuration.getPriority(direction) != priority)
-                    continue;
-                if (!configuration.canSend(direction))
-                    continue;
-                Location location = new Location(worldObj, xCoord, yCoord, zCoord);
-                location.move(direction);
-                IEnergyReceiver energyHandler = null;
-                if (location.getTileEntity() != null && location.getTileEntity() instanceof IEnergyReceiver)
-                    energyHandler = (IEnergyReceiver) location.getTileEntity();
-                if (energyHandler != null) {
-                    int sendEnergy = maxExtract;
-                    if (sendEnergy < 0)
-                        sendEnergy = 0;
-                    if (sendEnergy > maxExtract)
-                        sendEnergy = maxExtract;
-
-                    int output = energyHandler.receiveEnergy(direction.getOpposite(), sendEnergy, false);
-                        energy -= output;
-
-                }
-            }
-        }
-    }
-
-    @Override
     public int[] getAccessibleSlotsFromSide(int p_94128_1_) {
         return ModUtils.createSlotArray(0, 2);
     }
