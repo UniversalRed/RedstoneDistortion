@@ -1,5 +1,6 @@
 package redstonedistortion.packets;
 
+import buildcraftAdditions.api.networking.MessageByteBuff;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.relauncher.Side;

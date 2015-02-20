@@ -115,6 +115,6 @@ public class BlockCellIron extends BlockContainer {
 
     @Override
     public TileEntity createNewTileEntity(World var1, int var2) {
-        return new TileCellIron(ModLibs.cellIronCapacity, 1000, 1000);
+        return new TileCellIron(ModLibs.cellIronCapacity, ModLibs.machineRecieve, ModLibs.machineExtract);
     }
 }

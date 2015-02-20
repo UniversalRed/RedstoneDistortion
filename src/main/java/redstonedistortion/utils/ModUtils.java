@@ -1,5 +1,6 @@
 package redstonedistortion.utils;
 
+import buildcraftAdditions.api.configurableOutput.EnumPriority;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.inventory.IInventory;
@@ -13,9 +14,6 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import buildcraft.api.transport.IPipeTile;
 
-
-import net.minecraft.util.StatCollector;
-import redstonedistortion.utils.enums.EnumPriority;
 import redstonedistortion.utils.helpers.Location;
 import redstonedistortion.utils.helpers.SideConfiguration;
 /**

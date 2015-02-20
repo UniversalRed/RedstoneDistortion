@@ -1,10 +1,10 @@
 package redstonedistortion.bases.tiles;
 
+import buildcraftAdditions.api.networking.ISyncronizedTile;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import redstonedistortion.network.ISynchronizedTile;
 import redstonedistortion.packets.MessageTileCell;
 import redstonedistortion.packets.MessageTileMachine;
 import redstonedistortion.packets.MessageTileSolar;
@@ -13,7 +13,7 @@ import redstonedistortion.packets.PacketHandler;
 /**
  * Created by UniversalRed on 15-02-16.
  */
-public class TileBase extends TileEntity implements ISynchronizedTile
+public class TileBase extends TileEntity implements ISyncronizedTile
 {
     public int timer;
     public int x, y, z;

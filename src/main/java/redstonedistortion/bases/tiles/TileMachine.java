@@ -1,5 +1,8 @@
 package redstonedistortion.bases.tiles;
 
+import buildcraftAdditions.api.configurableOutput.EnumPriority;
+import buildcraftAdditions.api.configurableOutput.EnumSideStatus;
+import buildcraftAdditions.api.configurableOutput.IConfigurableOutput;
 import cofh.api.energy.IEnergyProvider;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.nbt.NBTTagCompound;
@@ -7,11 +10,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import cofh.api.energy.IEnergyReceiver;
-import redstonedistortion.network.IConfigurableOutput;
-import redstonedistortion.packets.MessageConfiguration;
-import redstonedistortion.packets.PacketHandler;
-import redstonedistortion.utils.enums.EnumPriority;
-import redstonedistortion.utils.enums.EnumSideStatus;
 import redstonedistortion.utils.helpers.SideConfiguration;
 
 public class TileMachine extends TileBase implements IEnergyProvider, IEnergyReceiver, IConfigurableOutput
@@ -97,10 +95,6 @@ public class TileMachine extends TileBase implements IEnergyProvider, IEnergyRec
     @Override
     public boolean canConnectEnergy(ForgeDirection from) {
         return configuration.canReceive(from) || configuration.canSend(from);
-    }
-
-    public void sendConfigurationToSever() {
-        PacketHandler.INSTANCE.sendToServer(new MessageConfiguration(this));
     }
 
     @Override

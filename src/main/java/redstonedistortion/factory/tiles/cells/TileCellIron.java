@@ -1,6 +1,8 @@
 package redstonedistortion.factory.tiles.cells;
 
 
+import buildcraftAdditions.api.configurableOutput.EnumPriority;
+import cofh.api.energy.IEnergyReceiver;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
@@ -10,6 +12,7 @@ import redstonedistortion.bases.tiles.TileCell;
 import redstonedistortion.core.inventories.CustomInventory;
 import redstonedistortion.libs.ModLibs;
 import redstonedistortion.utils.ModUtils;
+import redstonedistortion.utils.helpers.Location;
 
 /**
  * Created by UniversalRed on 15-02-17.
@@ -37,9 +40,37 @@ public class TileCellIron extends TileCell implements ISidedInventory {
     @Override
     public void updateEntity()
     {
-        super.updateEntity();
-        if(!worldObj.isRemote) {
+        if (!worldObj.isRemote)
             return;
+
+        super.updateEntity();
+        if (capacity == 0)
+            return;
+    }
+
+    @Override
+    public void sendEnergy() {
+        for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
+            for (EnumPriority priority : EnumPriority.values()) {
+                if (configuration.getPriority(direction) != priority)
+                    continue;
+                if (!configuration.canSend(direction))
+                    continue;
+                Location location = new Location(worldObj, xCoord, yCoord, zCoord);
+                location.move(direction);
+                IEnergyReceiver energyHandler = null;
+                if (location.getTileEntity() != null && location.getTileEntity() instanceof IEnergyReceiver)
+                    energyHandler = (IEnergyReceiver) location.getTileEntity();
+                if (energyHandler != null) {
+                    int sendEnergy = energy;
+                    if (sendEnergy < 0)
+                        sendEnergy = 0;
+                    if (sendEnergy > maxExtract)
+                        sendEnergy = maxExtract;
+
+                        sendEnergy();
+                }
+            }
         }
     }
 

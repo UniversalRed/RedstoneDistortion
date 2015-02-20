@@ -2,15 +2,16 @@ package redstonedistortion.utils.helpers;
 
 import java.util.Arrays;
 
+import buildcraftAdditions.api.configurableOutput.EnumPriority;
+import buildcraftAdditions.api.configurableOutput.EnumSideStatus;
+import buildcraftAdditions.api.configurableOutput.IConfigurableOutput;
+import buildcraftAdditions.api.networking.ISyncObject;
 import net.minecraft.nbt.NBTTagCompound;
 
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import io.netty.buffer.ByteBuf;
-import redstonedistortion.network.IConfigurableOutput;
-import redstonedistortion.network.ISyncObject;
-import redstonedistortion.utils.enums.*;
 
 /**
  * Copyright (c) 2014, AEnterprise

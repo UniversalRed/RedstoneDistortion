@@ -1,15 +1,16 @@
 package redstonedistortion.bases.tiles;
 
+import buildcraftAdditions.api.configurableOutput.EnumPriority;
+import buildcraftAdditions.api.configurableOutput.EnumSideStatus;
+import buildcraftAdditions.api.configurableOutput.IConfigurableOutput;
+import buildcraftAdditions.api.networking.ISyncronizedTile;
 import cofh.api.energy.*;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.ForgeDirection;
-import redstonedistortion.network.IConfigurableOutput;
-import redstonedistortion.utils.enums.EnumPriority;
-import redstonedistortion.utils.enums.EnumSideStatus;
 import redstonedistortion.utils.helpers.SideConfiguration;
 
-public class TileCell extends TileBase implements IEnergyProvider, IEnergyReceiver, IEnergyStorage, IEnergyHandler, IConfigurableOutput
+public abstract class TileCell extends TileBase implements IEnergyReceiver, IEnergyProvider, IEnergyStorage, IEnergyHandler, ISyncronizedTile, IConfigurableOutput
 {
     public SideConfiguration configuration = new SideConfiguration();
 
@@ -18,9 +19,12 @@ public class TileCell extends TileBase implements IEnergyProvider, IEnergyReceiv
     public int maxReceive;
     public int maxExtract;
 
+    public boolean survival;
+
     public TileCell()
     {
         super();
+        survival = true;
     }
 
     public TileCell(int capacity, int maxReceive, int maxExtract) {
@@ -34,9 +38,10 @@ public class TileCell extends TileBase implements IEnergyProvider, IEnergyReceiv
     public void updateEntity()
     {
         super.updateEntity();
-        if(!worldObj.isRemote)
-            return;
+        sendEnergy();
     }
+
+    public abstract void sendEnergy();
 
     @Override
     public int receiveEnergy(int maxReceive, boolean simulate) {
@@ -152,7 +157,7 @@ public class TileCell extends TileBase implements IEnergyProvider, IEnergyReceiv
         buf.writeInt(capacity);
         buf.writeInt(maxReceive);
         buf.writeInt(maxExtract);
-
+        configuration.writeToByteBuff(buf);
         return buf;
     }
 
@@ -163,7 +168,7 @@ public class TileCell extends TileBase implements IEnergyProvider, IEnergyReceiv
         capacity = buf.readInt();
         maxReceive = buf.readInt();
         maxExtract = buf.readInt();
-
+        configuration.readFromByteBuff(buf);
         return buf;
     }
 

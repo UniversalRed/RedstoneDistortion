@@ -1,21 +1,21 @@
 package redstonedistortion.bases.tiles;
 
+import buildcraftAdditions.api.configurableOutput.EnumPriority;
+import buildcraftAdditions.api.configurableOutput.EnumSideStatus;
+import buildcraftAdditions.api.configurableOutput.IConfigurableOutput;
+import buildcraftAdditions.api.networking.ISyncronizedTile;
 import cofh.api.energy.IEnergyProvider;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
-import redstonedistortion.network.IConfigurableOutput;
-import redstonedistortion.network.ISynchronizedTile;
-import redstonedistortion.utils.enums.EnumPriority;
-import redstonedistortion.utils.enums.EnumSideStatus;
 import redstonedistortion.utils.helpers.SideConfiguration;
 
 /**
  * Created by UniversalRed on 15-02-19.
  * TODO: create the class itself
  */
-public class TileSolarPanel extends TileBase implements IEnergyProvider, ISynchronizedTile, IConfigurableOutput
+public class TileSolarPanel extends TileBase implements IEnergyProvider, ISyncronizedTile, IConfigurableOutput
 {
     public SideConfiguration configuration = new SideConfiguration();
     public World world;

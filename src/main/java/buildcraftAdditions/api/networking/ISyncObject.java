@@ -1,4 +1,4 @@
-package redstonedistortion.network;
+package buildcraftAdditions.api.networking;
 
 import io.netty.buffer.ByteBuf;
 /**
@@ -10,7 +10,7 @@ import io.netty.buffer.ByteBuf;
  */
 public interface ISyncObject {
 
-    public ByteBuf writeToByteBuff(ByteBuf buf);
+	public ByteBuf writeToByteBuff(ByteBuf buf);
 
-    public ByteBuf readFromByteBuff(ByteBuf buf);
+	public ByteBuf readFromByteBuff(ByteBuf buf);
 }
