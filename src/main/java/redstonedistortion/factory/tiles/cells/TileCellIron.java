@@ -9,7 +9,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.ForgeDirection;
 import redstonedistortion.bases.tiles.TileCell;
+
 import redstonedistortion.core.inventories.CustomInventory;
+import redstonedistortion.factory.ModFactory;
 import redstonedistortion.libs.ModLibs;
 import redstonedistortion.utils.ModUtils;
 import redstonedistortion.utils.helpers.Location;
@@ -18,11 +20,14 @@ import redstonedistortion.utils.helpers.Location;
  * Created by UniversalRed on 15-02-17.
  */
 public class TileCellIron extends TileCell implements ISidedInventory {
-    private final CustomInventory inventory = new CustomInventory("cellIron", 2, 64, this);
+    private final CustomInventory inventory = new CustomInventory("Iron Cell", 2, 64, this);
+    public int energyState, lastEnergyState;
 
     public int capacity = ModLibs.cellIronCapacity;
+    public int energy;
+    public int maxRecieve = 1000;
     public int maxExtract = 1000;
-    public int maxReceive = 1000;
+
 
     public TileCellIron()
     {
@@ -34,18 +39,35 @@ public class TileCellIron extends TileCell implements ISidedInventory {
         super(capacity, maxReceive, maxExtract);
         this.capacity = capacity;
         this.maxExtract = maxExtract;
-        this.maxReceive = maxReceive;
+        this.maxRecieve = maxReceive;
     }
 
     @Override
-    public void updateEntity()
-    {
-        if (!worldObj.isRemote)
-            return;
+    public void updateEntity() {
 
         super.updateEntity();
+
+        if(!worldObj.isRemote)
+        {
+            return;
+        }
+
         if (capacity == 0)
             return;
+        energyState = (energy * 8) / capacity;
+        if (lastEnergyState != energyState && worldObj.getBlock(xCoord, yCoord, zCoord) == ModFactory.cellIron)
+            worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, energyState, 2);
+        lastEnergyState = energyState;
+    }
+
+    @Override
+    public void readFromNBT(NBTTagCompound tag) {
+        super.readFromNBT(tag);
+    }
+
+    @Override
+    public void writeToNBT(NBTTagCompound tag) {
+        super.writeToNBT(tag);
     }
 
     @Override
@@ -62,86 +84,18 @@ public class TileCellIron extends TileCell implements ISidedInventory {
                 if (location.getTileEntity() != null && location.getTileEntity() instanceof IEnergyReceiver)
                     energyHandler = (IEnergyReceiver) location.getTileEntity();
                 if (energyHandler != null) {
-                    int sendEnergy = energy;
+                    int sendEnergy = maxExtract;
                     if (sendEnergy < 0)
                         sendEnergy = 0;
                     if (sendEnergy > maxExtract)
                         sendEnergy = maxExtract;
 
-                        sendEnergy();
+                    int output = energyHandler.receiveEnergy(direction.getOpposite(), sendEnergy, false);
+                        energy -= output;
+
                 }
             }
         }
-    }
-
-    @Override
-    public void readFromNBT(NBTTagCompound nbt) {
-        super.readFromNBT(nbt);
-        inventory.readNBT(nbt);
-    }
-
-    @Override
-    public void writeToNBT(NBTTagCompound nbt) {
-        super.writeToNBT(nbt);
-        inventory.writeNBT(nbt);
-    }
-
-    @Override
-    public int getSizeInventory() {
-        return inventory.getSizeInventory();
-    }
-
-    @Override
-    public ItemStack getStackInSlot(int p_70301_1_) {
-        return inventory.getStackInSlot(p_70301_1_);
-    }
-
-    @Override
-    public ItemStack decrStackSize(int p_70298_1_, int p_70298_2_) {
-        return inventory.decrStackSize(p_70298_1_, p_70298_2_);
-    }
-
-    @Override
-    public ItemStack getStackInSlotOnClosing(int p_70304_1_) {
-        return inventory.getStackInSlot(p_70304_1_);
-    }
-
-    @Override
-    public void setInventorySlotContents(int p_70299_1_, ItemStack p_70299_2_) {
-        inventory.setInventorySlotContents(p_70299_1_, p_70299_2_);
-    }
-
-    @Override
-    public String getInventoryName() {
-        return inventory.getInventoryName();
-    }
-
-    @Override
-    public boolean hasCustomInventoryName() {
-        return inventory.hasCustomInventoryName();
-    }
-
-    @Override
-    public int getInventoryStackLimit() {
-        return 0;
-    }
-
-    @Override
-    public boolean isUseableByPlayer(EntityPlayer p_70300_1_) {
-        return worldObj.getTileEntity(xCoord, yCoord, zCoord) == this && p_70300_1_.getDistanceSq(xCoord + 0.5D, yCoord + 0.5D, zCoord + 0.5D) <= 64.0D;
-    }
-
-    @Override
-    public void openInventory() {
-    }
-
-    @Override
-    public void closeInventory() {
-    }
-
-    @Override
-    public boolean isItemValidForSlot(int p_94041_1_, ItemStack p_94041_2_) {
-        return inventory.isItemValidForSlot(p_94041_1_, p_94041_2_);
     }
 
     @Override
@@ -158,4 +112,65 @@ public class TileCellIron extends TileCell implements ISidedInventory {
     public boolean canExtractItem(int slot, ItemStack stack, int side) {
         return slot == 1 && getStatus(ForgeDirection.getOrientation(side)).canSend();
     }
+
+    @Override
+    public int getSizeInventory() {
+        return inventory.getSizeInventory();
+    }
+
+    @Override
+    public ItemStack getStackInSlot(int slot) {
+        return inventory.getStackInSlot(slot);
+    }
+
+    @Override
+    public ItemStack decrStackSize(int slot, int amount) {
+        return inventory.decrStackSize(slot, amount);
+    }
+
+    @Override
+    public ItemStack getStackInSlotOnClosing(int slot) {
+        return inventory.getStackInSlot(slot);
+    }
+
+    @Override
+    public void setInventorySlotContents(int slot, ItemStack stack) {
+        inventory.setInventorySlotContents(slot, stack);
+    }
+
+    @Override
+    public String getInventoryName() {
+        return inventory.getInventoryName();
+    }
+
+    @Override
+    public boolean hasCustomInventoryName() {
+        return inventory.hasCustomInventoryName();
+    }
+
+    @Override
+    public int getInventoryStackLimit() {
+        return inventory.getInventoryStackLimit();
+    }
+
+    @Override
+    public boolean isUseableByPlayer(EntityPlayer player) {
+        return worldObj.getTileEntity(xCoord, yCoord, zCoord) == this && player.getDistanceSq(xCoord + 0.5D, yCoord + 0.5D, zCoord + 0.5D) <= 64.0D;
+    }
+
+    @Override
+    public void openInventory() {
+
+    }
+
+    @Override
+    public void closeInventory() {
+
+    }
+
+    @Override
+    public boolean isItemValidForSlot(int slot, ItemStack stack) {
+        return slot == 0;
+    }
+
 }

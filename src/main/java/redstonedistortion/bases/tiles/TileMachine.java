@@ -3,7 +3,6 @@ package redstonedistortion.bases.tiles;
 import buildcraftAdditions.api.configurableOutput.EnumPriority;
 import buildcraftAdditions.api.configurableOutput.EnumSideStatus;
 import buildcraftAdditions.api.configurableOutput.IConfigurableOutput;
-import cofh.api.energy.IEnergyProvider;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.nbt.NBTTagCompound;
 
@@ -12,7 +11,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 import cofh.api.energy.IEnergyReceiver;
 import redstonedistortion.utils.helpers.SideConfiguration;
 
-public class TileMachine extends TileBase implements IEnergyProvider, IEnergyReceiver, IConfigurableOutput
+public class TileMachine extends TileBase implements IEnergyReceiver, IConfigurableOutput
 {
 
     private SideConfiguration configuration = new SideConfiguration();
@@ -63,23 +62,6 @@ public class TileMachine extends TileBase implements IEnergyProvider, IEnergyRec
             energy += recieved;
         }
         return recieved;
-    }
-
-    @Override
-    public int extractEnergy(ForgeDirection from, int maxExtract, boolean simulate) {
-        this.maxExtract = maxExtract;
-
-        if (!configuration.canSend(from))
-            return 0;
-        int extracted = maxExtract;
-        if (extracted > energy)
-            extracted = energy;
-        if (extracted > maxExtract)
-            extracted = maxExtract;
-        if (!simulate) {
-            energy += extracted;
-        }
-        return extracted;
     }
 
     @Override

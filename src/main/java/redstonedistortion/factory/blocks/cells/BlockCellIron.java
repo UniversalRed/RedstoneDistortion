@@ -23,6 +23,7 @@ import redstonedistortion.utils.ModUtils;
  * Created by UniversalRed on 15-02-17.
  */
 public class BlockCellIron extends BlockContainer {
+
     IIcon textureFront;
     IIcon textureTop;
     IIcon textureSide;
