@@ -2,6 +2,7 @@ package redstonedistortion.bases.blocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import redstonedistortion.core.creativetabs.CreativeTabRedstoneDistortion;
 import redstonedistortion.libs.ModLibs;
 
 /**
@@ -13,5 +14,6 @@ public class BaseBlock extends Block
         super(material);
         setBlockTextureName(ModLibs.texturesPath + name);
         setBlockName(name);
+        setCreativeTab(CreativeTabRedstoneDistortion.RDBlockTab);
     }
 }

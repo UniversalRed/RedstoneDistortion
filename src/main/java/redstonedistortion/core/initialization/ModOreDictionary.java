@@ -16,6 +16,13 @@ public class ModOreDictionary
         OreDictionary.registerOre("oreBronze", ModBlocks.oreBronze);
         OreDictionary.registerOre("orePlatinum", ModBlocks.orePlatinum);
 
+        OreDictionary.registerOre("blockCopper", ModBlocks.blockCopper);
+        OreDictionary.registerOre("blockTin", ModBlocks.blockTin);
+        OreDictionary.registerOre("blockSilver", ModBlocks.blockSilver);
+        OreDictionary.registerOre("blockLead", ModBlocks.blockLead);
+        OreDictionary.registerOre("blockBronze", ModBlocks.blockBronze);
+        OreDictionary.registerOre("blockPlatinum", ModBlocks.blockPlatinum);
+
         //Ingots
         OreDictionary.registerOre("ingotCopper", ModItems.ingotCopper);
         OreDictionary.registerOre("ingotTin", ModItems.ingotTin);

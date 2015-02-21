@@ -31,13 +31,14 @@ public class WorldManager implements IWorldGenerator
 
     private void generateSurface(World world, Random random, int x, int z)
     {
-        this.addOreSpawn(ModBlocks.oreCopper, world, random, x, z, 16, 16, 4 + random.nextInt(1), 5, 15, 20);
-        this.addOreSpawn(ModBlocks.oreTin, world, random, x, z, 16, 16, 4 + random.nextInt(1), 5, 15, 20);
-        this.addOreSpawn(ModBlocks.oreBronze, world, random, x, z, 16, 16, 4 + random.nextInt(1), 5, 15, 20);
-        this.addOreSpawn(ModBlocks.oreLead, world, random, x, z, 16, 16, 4 + random.nextInt(1), 5, 15, 20);
-        this.addOreSpawn(ModBlocks.oreSilver, world, random, x, z, 16, 16, 4 + random.nextInt(1), 5, 15, 20);
-        this.addOreSpawn(ModBlocks.orePlatinum, world, random, x, z, 16, 16, 4 + random.nextInt(1), 5, 15, 20);
+        int height = 60;
 
+        this.addOreSpawn(ModBlocks.oreCopper, world, random, x, z, 16, 16, 4 + random.nextInt(5), 7, 5, height);
+        this.addOreSpawn(ModBlocks.oreTin, world, random, x, z, 16, 16, 4 + random.nextInt(5), 7, 5, height);
+        this.addOreSpawn(ModBlocks.oreBronze, world, random, x, z, 16, 16, 4 + random.nextInt(5), 7, 5, height);
+        this.addOreSpawn(ModBlocks.oreLead, world, random, x, z, 16, 16, 4 + random.nextInt(5), 7, 5, height);
+        this.addOreSpawn(ModBlocks.oreSilver, world, random, x, z, 16, 16, 4 + random.nextInt(5), 7, 5, height);
+        this.addOreSpawn(ModBlocks.orePlatinum, world, random, x, z, 16, 16, 4 + random.nextInt(5), 7, 5, height);
     }
 
     private void generateNether(World world, Random random, int x, int z)
@@ -50,6 +51,7 @@ public class WorldManager implements IWorldGenerator
 
     public void addOreSpawn(Block block, World world, Random random, int blockXPos, int blockZPos, int maxX, int maxZ, int maxVeinSize, int chancesToSpawn, int minY, int maxY)
     {
+
         assert maxY > minY : "The maximum Y must be greater than the Minimum Y";
         assert maxX > 0 && maxX <= 16 : "addOreSpawn: The Maximum X must be greater than 0 and less than 16";
         assert minY > 0 : "addOreSpawn: The Minimum Y must be greater than 0";

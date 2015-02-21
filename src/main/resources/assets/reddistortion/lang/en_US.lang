@@ -6,10 +6,16 @@ itemGroup.RDBlockTab=Redstone Distortion Blocks
 tile.oreCopper.name=Copper Ore
 tile.oreTin.name=Tin Ore
 tile.oreSilver.name=Silver Ore
-tile.oreMagnesium.name=Magnesium Ore
 tile.oreLead.name=Lead Ore
 tile.oreBronze.name=Bronze Ore
 tile.orePlatinum.name=Platinum Ore
+
+tile.blockCopper.name=Copper Block
+tile.blockTin.name=Tin Block
+tile.blockSilver.name=Silver Block
+tile.blockLead.name=Lead Block
+tile.blockBronze.name=Bronze Block
+tile.blockPlatinum.name=Platinum Block
 
 tile.mechanicalFurnace.name=Mechanical Furnace
 tile.mechanicalTransfuser.name=Mechanical Transfuser
