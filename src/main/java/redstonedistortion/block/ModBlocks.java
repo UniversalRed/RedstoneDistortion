@@ -15,6 +15,12 @@ public class ModBlocks
     public static Block oreBronze;
     public static Block orePlatinum;
 
+    public static Block blockCopper;
+    public static Block blockTin;
+    public static Block blockSilver;
+    public static Block blockLead;
+    public static Block blockBronze;
+    public static Block blockPlatinum;
     public static Material m;
 
     public static void init()

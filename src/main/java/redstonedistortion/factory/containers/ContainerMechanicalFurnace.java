@@ -4,7 +4,8 @@ import net.minecraft.entity.player.InventoryPlayer;
 import redstonedistortion.api.redstonedistortion.slots.SlotValid;
 import redstonedistortion.bases.containers.ContainerBase;
 import redstonedistortion.bases.slots.SlotOutput;
-import redstonedistortion.factory.tiles.TileMechanicalFurnace;
+import redstonedistortion.factory.tiles.machines.TileMechanicalFurnace;
+import redstonedistortion.factory.tiles.machines.TileMechanicalTransfuser;
 
 public class ContainerMechanicalFurnace extends ContainerBase<TileMechanicalFurnace> {
 

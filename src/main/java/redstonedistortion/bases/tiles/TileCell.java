@@ -11,7 +11,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 import redstonedistortion.utils.helpers.SideConfiguration;
 
-public class TileCell extends TileBase implements IEnergyStorage, IEnergyHandler, IEnergyReceiver, IEnergyProvider, ISyncronizedTile, IConfigurableOutput
+public class TileCell extends TileBase implements IEnergyStorage, IEnergyHandler, ISyncronizedTile, IConfigurableOutput
 {
     public SideConfiguration configuration = new SideConfiguration();
 
@@ -41,12 +41,12 @@ public class TileCell extends TileBase implements IEnergyStorage, IEnergyHandler
         if (!configuration.canReceive(from))
             return 0;
         int recieved = maxReceive;
-        if (recieved > capacity - energy)
-            recieved = capacity - energy;
+        if (recieved > this.capacity - this.energy)
+            recieved = this.capacity - this.energy;
         if (recieved > maxReceive)
             recieved = maxReceive;
         if (!simulate) {
-            energy += recieved;
+            this.energy += recieved;
             blocked[from.ordinal()] = true;
         }
         return recieved;
@@ -59,12 +59,12 @@ public class TileCell extends TileBase implements IEnergyStorage, IEnergyHandler
         if (!configuration.canSend(from))
             return 0;
         int extracted = maxExtract;
-        if (extracted > energy)
-            extracted = energy;
+        if (extracted > this.energy)
+            extracted = this.energy;
         if (extracted > maxExtract)
             extracted = maxExtract;
         if (!simulate)
-            energy -= extracted;
+            this.energy -= extracted;
         return extracted;
     }
 
@@ -101,10 +101,12 @@ public class TileCell extends TileBase implements IEnergyStorage, IEnergyHandler
     @Override
     public void updateEntity()
     {
-        super.updateEntity();
+        if(!worldObj.isRemote)
+        {
+            return;
+        }
 
-        if (energy < 0)
-            energy = 0;
+        super.updateEntity();
         sendEnergy();
     }
 
@@ -112,11 +114,11 @@ public class TileCell extends TileBase implements IEnergyStorage, IEnergyHandler
     {
         for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS)
         {
-            TileEntity tile = worldObj.getTileEntity(xCoord + direction.offsetX, yCoord + direction.offsetY, zCoord + direction.offsetZ);
-            if (tile instanceof IEnergyReceiver)
+            TileEntity tile = worldObj.getTileEntity(xCoord + direction.getOpposite().offsetX, yCoord + direction.getOpposite().offsetY, zCoord + direction.getOpposite().offsetZ);
+            if (tile instanceof TileBase)
             {
                 IEnergyReceiver target = (IEnergyReceiver) tile;
-                this.extractEnergy(target.receiveEnergy(direction, this.extractEnergy(maxExtract, true), false), false);
+                this.extractEnergy(target.receiveEnergy(direction.getOpposite(), this.extractEnergy(maxExtract, true), false), false);
             }
         }
     }

@@ -13,7 +13,6 @@ public class BlockContainerBase extends BlockContainer
 {
     public BlockContainerBase(Material material, String name) {
         super(material);
-        setBlockTextureName(ModLibs.texturesPath + name);
         setBlockName(name);
     }
 

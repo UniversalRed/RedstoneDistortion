@@ -10,7 +10,9 @@ import redstonedistortion.bases.containers.ContainerCell;
 import redstonedistortion.bases.guis.GuiCell;
 import redstonedistortion.bases.tiles.TileCell;
 import redstonedistortion.factory.containers.ContainerMechanicalFurnace;
-import redstonedistortion.factory.tiles.TileMechanicalFurnace;
+import redstonedistortion.factory.containers.ContainerMechanicalTransfuser;
+import redstonedistortion.factory.tiles.machines.TileMechanicalFurnace;
+import redstonedistortion.factory.tiles.machines.TileMechanicalTransfuser;
 import redstonedistortion.libs.ModLibs;
 
 public class GuiHandler implements IGuiHandler {
@@ -33,6 +35,9 @@ public class GuiHandler implements IGuiHandler {
                 if (te instanceof TileCell)
                     return new ContainerCell(player.inventory, (TileCell) te);
 
+            case ModLibs.guiMechanicalTransfuser:
+                if (te instanceof TileMechanicalTransfuser)
+                    return new ContainerMechanicalTransfuser(player.inventory, (TileMechanicalTransfuser) te);
         }
 
         return null;
@@ -51,6 +56,10 @@ public class GuiHandler implements IGuiHandler {
             case ModLibs.guiCell:
                 if (te instanceof TileCell)
                     return new GuiCell(player.inventory, (TileCell) te);
+
+            case ModLibs.guiMechanicalTransfuser:
+                if (te instanceof TileMechanicalTransfuser)
+                    return new GuiMechanicalTransfuser(player.inventory, (TileMechanicalTransfuser) te);
         }
         return null;
     }

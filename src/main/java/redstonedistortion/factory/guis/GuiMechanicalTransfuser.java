@@ -7,16 +7,19 @@ import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
-import redstonedistortion.factory.containers.ContainerMechanicalFurnace;
-import redstonedistortion.factory.tiles.machines.TileMechanicalFurnace;
+import redstonedistortion.factory.containers.ContainerMechanicalTransfuser;
+import redstonedistortion.factory.tiles.machines.TileMechanicalTransfuser;
 
+/**
+ * Created by UniversalRed on 15-02-20.
+ */
 @SideOnly(Side.CLIENT)
-public class GuiMechanicalFurnace extends GuiContainer {
-    private static final ResourceLocation textureBackground = new ResourceLocation("reddistortion", "textures/gui/guiMechanicalFurnace.png");
-    private TileMechanicalFurnace te;
+public class GuiMechanicalTransfuser extends GuiContainer {
+    private static final ResourceLocation textureBackground = new ResourceLocation("reddistortion", "textures/gui/guiMechanicalTransfuser.png");
+    private TileMechanicalTransfuser te;
 
-    public GuiMechanicalFurnace(InventoryPlayer invPlayer, TileMechanicalFurnace tile) {
-        super(new ContainerMechanicalFurnace(invPlayer, tile));
+    public GuiMechanicalTransfuser(InventoryPlayer invPlayer, TileMechanicalTransfuser tile) {
+        super(new ContainerMechanicalTransfuser(invPlayer, tile));
 
         this.te = tile;
 
@@ -36,8 +39,7 @@ public class GuiMechanicalFurnace extends GuiContainer {
         this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize);
         int i1;
 
-        i1 = this.te.getCookProgressScaled(24);
-        this.drawTexturedModalRect(k + 79, l + 34, 176, 14, i1 + 1, 16);
+        this.drawTexturedModalRect(k + 79, l + 34, 176, 14, 1, 16);
     }
 
     @Override

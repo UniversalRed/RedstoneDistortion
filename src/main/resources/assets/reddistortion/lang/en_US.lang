@@ -12,6 +12,7 @@ tile.oreBronze.name=Bronze Ore
 tile.orePlatinum.name=Platinum Ore
 
 tile.mechanicalFurnace.name=Mechanical Furnace
+tile.mechanicalTransfuser.name=Mechanical Transfuser
 
 tile.cellIron.name=Iron Energy Cell
 
@@ -29,7 +30,7 @@ item.dustLead.name=Lead Dust
 item.dustBronze.name=Bronze Dust
 item.dustPlatinum.name=Platinum Dust
 item.dustIron=Iron Dust
-item.dustdustGold.name=Gold Dust
+item.dustGold.name=Gold Dust
 
 item.plateCopper.name=Copper Plate
 item.plateTin.name=Tin Plate

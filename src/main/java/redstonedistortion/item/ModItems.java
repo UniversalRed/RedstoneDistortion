@@ -1,10 +1,10 @@
 package redstonedistortion.item;
 
 import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.item.Item;
-import redstonedistortion.bases.items.BaseItems;
-import redstonedistortion.bases.items.ModIngots;
-import redstonedistortion.item.items.ItemWrench;
+import net.minecraft.item.*;
+import net.minecraftforge.common.util.EnumHelper;
+import redstonedistortion.bases.items.*;
+import redstonedistortion.item.items.*;
 
 public class ModItems
 {
@@ -34,9 +34,22 @@ public class ModItems
     public static Item plateIron;
     public static Item plateGold;
 
-
-
     public static Item itemWrench;
+
+    public static Item RDHelmet;
+    public static Item RDChestplate;
+    public static Item RDLeggings;
+    public static Item RDBoots;
+
+    public static Item powerPickaxe;
+    public static Item powerAxe;
+    public static Item powerShovel;
+    public static Item powerSword;
+    public static Item powerWrench;
+
+    public static final Item.ToolMaterial TOOL_RD_MATERIAL = EnumHelper.addToolMaterial("RD_Tool", 3, 100, 8.0F, 0, 25);
+    public static final ItemArmor.ArmorMaterial ARMOUR_RD_MATERIAL = EnumHelper.addArmorMaterial("RD_Armour", 10, new int[] { 3, 8, 6, 3 }, 20);
+    public static final String[] TEXTURES_ARMOUR = { "redstonearsenal:textures/armor/" + "Flux_1.png", "redstonearsenal:textures/armor/" + "Flux_2.png" };
 
     public static void init()
     {
@@ -66,6 +79,8 @@ public class ModItems
         platePlatinum = new BaseItems("platePlatinum").setTextureName("platePlatinum");
         plateIron = new BaseItems("plateIron").setTextureName("plateIron");
         plateGold = new BaseItems("plateGold").setTextureName("plateGold");
+
+        //Armour
 
         //Other
         itemWrench = new ItemWrench("itemWrench");

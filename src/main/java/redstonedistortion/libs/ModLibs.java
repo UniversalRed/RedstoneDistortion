@@ -23,6 +23,7 @@ public class ModLibs
 
     //GUIIDS
     public static final int guiMechanicalFurnace = 101;
+    public static final int guiMechanicalTransfuser = 102;
 
     public static final int guiCell = 120;
 

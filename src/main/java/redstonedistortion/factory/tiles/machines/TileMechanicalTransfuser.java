@@ -1,10 +1,10 @@
-package redstonedistortion.factory.tiles;
+package redstonedistortion.factory.tiles.machines;
 
+import cofh.api.energy.IEnergyContainerItem;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.ForgeDirection;
 import redstonedistortion.bases.tiles.TileMachine;
@@ -13,103 +13,83 @@ import redstonedistortion.libs.ModLibs;
 import redstonedistortion.utils.ModUtils;
 import redstonedistortion.utils.helpers.SideConfiguration;
 
-public class TileMechanicalFurnace extends TileMachine implements ISidedInventory {
-    private final CustomInventory inventory = new CustomInventory("MechanicalFurnace", 2, 64, this);
-
-    public int progress;
-    public boolean isCooking;
+/**
+ * Created by UniversalRed on 15-02-20.
+ */
+public class TileMechanicalTransfuser extends TileMachine implements ISidedInventory
+{
     public SideConfiguration configuration = new SideConfiguration();
-    public int maxExtract = ModLibs.machineExtract;
-    public int maxReceive = ModLibs.machineRecieve;
+    private final CustomInventory inventory = new CustomInventory("mechanicalTransfuser", 2, 64, this);
 
+    public int capacity, maxExtract, maxReceive;
 
-    public TileMechanicalFurnace() {
+    public TileMechanicalTransfuser(int capacity, int maxExtract, int maxReceive) {
+        super(ModLibs.machineCapacity, ModLibs.machineExtract, ModLibs.machineRecieve);
+        this.capacity = capacity;
+        this.maxReceive = maxReceive;
+        this.maxExtract = maxExtract;
+    }
+
+    public TileMechanicalTransfuser()
+    {
 
     }
 
-    public TileMechanicalFurnace(int capacity, int maxExtract, int maxReceive) {
-        super(ModLibs.machineCapacity, ModLibs.machineExtract, ModLibs.machineRecieve);
-        progress = 0;
-        isCooking = false;
+    @Override
+    public void updateEntity() {
+        super.updateEntity();
+        if(!worldObj.isRemote)
+        {
+            return;
+        }
+
+        int charge = 5000;
+
+        if(charge > energy)
+        {
+            charge = energy;
+        }
+
+        if(charge > 0)
+        {
+            if(requiredEnergy() > 0)
+            {
+                ItemStack stack = getStackInSlot(0);
+                IEnergyContainerItem containerItem = (IEnergyContainerItem) stack.getItem();
+                energy -= containerItem.receiveEnergy(stack, charge, true);
+            }
+        } else if(charge < 0) {
+            if(requiredEnergy() < 0)
+            {
+                ItemStack stack = getStackInSlot(1);
+                IEnergyContainerItem containerItem = (IEnergyContainerItem) stack.getItem();
+                energy += containerItem.extractEnergy(stack, charge, true);
+            }
+        }
+
+    }
+
+    public int requiredEnergy()
+    {
+        ItemStack container = getStackInSlot(0);
+        if(container.getItem() instanceof IEnergyContainerItem)
+        {
+            IEnergyContainerItem containerItem = (IEnergyContainerItem) container.getItem();
+            return containerItem.getMaxEnergyStored(container) - containerItem.getEnergyStored(container);
+        }
+        return 0;
     }
 
     @Override
     public void readFromNBT(NBTTagCompound tag) {
         super.readFromNBT(tag);
         inventory.readNBT(tag);
-        progress = tag.getInteger("progress");
-        isCooking = tag.getBoolean("isCooking");
     }
 
     @Override
     public void writeToNBT(NBTTagCompound tag) {
         super.writeToNBT(tag);
         inventory.writeNBT(tag);
-        tag.setInteger("progress", progress);
-        tag.setBoolean("isCooking", isCooking);
-    }
-
-    @Override
-    public void updateEntity() {
-        super.updateEntity();
-        if (worldObj.isRemote)
-            return;
-
-        if (canCook()) {
-            if (!isCooking) {
-
-            }
-
-            if (energy > POWER_USAGE) {
-                energy -= POWER_USAGE;
-            } else {
-                return;
-            }
-
-            if (progress > 0) {
-                isCooking = true;
-                if (progress == MAX_WORK_TICKS) {
-                    ItemStack inputStack = getStackInSlot(0);
-                    ItemStack result = FurnaceRecipes.smelting().getSmeltingResult(inputStack);
-                    if (getStackInSlot(1) == null) {
-                        setInventorySlotContents(1, result.copy());
-                    } else {
-                        getStackInSlot(1).stackSize += result.stackSize;
-                    }
-                    if (getStackInSlot(0).stackSize <= 1)
-                        setInventorySlotContents(0, null);
-                    else
-                        getStackInSlot(0).stackSize--;
-                    progress = 0;
-                }
-            }
-            progress++;
-        } else {
-            stop();
-        }
-    }
-
-    public void stop() {
-        isCooking = false;
-        doBlockUpdate();
-        progress = 0;
-    }
-
-    public void doBlockUpdate() {
-        worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-    }
-
-    public boolean canCook() {
-        ItemStack stack0 = getStackInSlot(0);
-        ItemStack stack1 = getStackInSlot(1);
-        if (stack0 == null || getResult(stack0) == null)
-            return false;
-        ItemStack result = getResult(stack0);
-        return stack1 == null || (result.getItem() == stack1.getItem() && result.stackSize + stack1.stackSize <= result.getMaxStackSize());
-    }
-
-    public ItemStack getResult(ItemStack iStack) {
-        return FurnaceRecipes.smelting().getSmeltingResult(iStack);
     }
 
     @Override
@@ -169,7 +149,7 @@ public class TileMechanicalFurnace extends TileMachine implements ISidedInventor
 
     @Override
     public boolean isItemValidForSlot(int slot, ItemStack stack) {
-        return getResult(stack) != null && slot == 0;
+        return slot == 0;
     }
 
     @Override
@@ -189,14 +169,12 @@ public class TileMechanicalFurnace extends TileMachine implements ISidedInventor
 
     @Override
     public ByteBuf writeToByteBuff(ByteBuf buf) {
-        buf.writeInt(progress);
         buf = configuration.writeToByteBuff(buf);
         return buf;
     }
 
     @Override
     public ByteBuf readFromByteBuff(ByteBuf buf) {
-        progress = buf.readInt();
         buf = configuration.readFromByteBuff(buf);
         return buf;
     }
