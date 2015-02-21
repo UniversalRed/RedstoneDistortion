@@ -1,5 +1,6 @@
 # RedstoneDistortion
 Welcome to Redstone Distortions Github page!
+If you want to see the official post for Redstone Distortion, visit this link: http://mod-buildcraft.com/forums/index.php?topic=3517.0
 
 # 1. Why make Redstone Distortion?
 Redstone Distortion is a new way of refreshing the BuildTech's late consistencies with updates, ultimately, this is an entirely new setup for BuildTech, this mod will now focus on the entirity of energy apis instead of focusing on primarily one, the reason for that is simple, as Buildcraft switched on from its Energy API, known as MJ to RF by the CofH Team, there was no mod to support the MJ API any longer, which broke many features in BuildTech since BuildTech's machines relied heavily on the MJ Api, ultimately, I made the decision to remake BuildTech entirely from scratch, whilst giving it it's own and unique name, and not making it dependent on any mod except for the libs that are needed to run it.
