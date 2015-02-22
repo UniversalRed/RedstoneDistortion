@@ -4,11 +4,15 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import redstonedistortion.bases.blocks.BaseBlock;
+import redstonedistortion.block.blocks.BlockSolarPanelTier1;
+import redstonedistortion.block.blocks.TileSolarPanelTier1;
 import redstonedistortion.block.ores.*;
 import redstonedistortion.libs.ModLibs;
 
 public class ModBlocks
 {
+    public static Block solarPanelTier1;
+
     public static Block oreCopper;
     public static Block oreTin;
     public static Block oreSilver;
@@ -40,6 +44,10 @@ public class ModBlocks
         blockLead = new BaseBlock(m.rock, "blockLead");
         blockBronze = new BaseBlock(m.rock, "blockBronze");
         blockPlatinum = new BaseBlock(m.rock, "blockPlatinum");
+
+        //Other
+        //solarPanelTier1 = new BlockSolarPanelTier1(m.rock, "solarPanelTier1").setBlockName("solarPanelTier1").setBlockTextureName("solarPanelTier1");
+
     }
 
     public static void registry()
@@ -57,5 +65,8 @@ public class ModBlocks
         GameRegistry.registerBlock(blockLead, "blockLead");
         GameRegistry.registerBlock(blockBronze, "blockBronze");
         GameRegistry.registerBlock(blockPlatinum, "blockPlatinum");
+
+        //GameRegistry.registerBlock(solarPanelTier1, "solarPanelTier1");
+        //GameRegistry.registerTileEntity(TileSolarPanelTier1.class, "solarPanelTier1");
     }
 }

@@ -9,8 +9,10 @@ import redstonedistortion.ModRedstoneDistortion;
 import redstonedistortion.bases.containers.ContainerCell;
 import redstonedistortion.bases.guis.GuiCell;
 import redstonedistortion.bases.tiles.TileCell;
+import redstonedistortion.factory.containers.ContainerMechanicalDesolator;
 import redstonedistortion.factory.containers.ContainerMechanicalFurnace;
 import redstonedistortion.factory.containers.ContainerMechanicalTransfuser;
+import redstonedistortion.factory.tiles.machines.TileMechanicalDesolator;
 import redstonedistortion.factory.tiles.machines.TileMechanicalFurnace;
 import redstonedistortion.factory.tiles.machines.TileMechanicalTransfuser;
 import redstonedistortion.libs.ModLibs;
@@ -38,6 +40,10 @@ public class GuiHandler implements IGuiHandler {
             case ModLibs.guiMechanicalTransfuser:
                 if (te instanceof TileMechanicalTransfuser)
                     return new ContainerMechanicalTransfuser(player.inventory, (TileMechanicalTransfuser) te);
+
+            case ModLibs.guiMechanicalDesolator:
+                if (te instanceof TileMechanicalDesolator)
+                    return new ContainerMechanicalDesolator(player.inventory, (TileMechanicalDesolator) te);
         }
 
         return null;
@@ -60,6 +66,10 @@ public class GuiHandler implements IGuiHandler {
             case ModLibs.guiMechanicalTransfuser:
                 if (te instanceof TileMechanicalTransfuser)
                     return new GuiMechanicalTransfuser(player.inventory, (TileMechanicalTransfuser) te);
+
+            case ModLibs.guiMechanicalDesolator:
+                if (te instanceof TileMechanicalDesolator)
+                    return new GuiMechanicalDesolator(player.inventory, (TileMechanicalDesolator) te);
         }
         return null;
     }

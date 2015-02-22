@@ -44,7 +44,7 @@ public class ModRedstoneDistortion
     {
         ModLogger.initialize();
 
-        config = new Configuration(new File(event.getModConfigurationDirectory(), "RedstoneDistortion/RedstoneDistortion.cfg"));
+        config = new Configuration(new File(event.getModConfigurationDirectory(), "RedstoneDistortion.cfg"));
         ConfigHandler.loadConfig(config);
 
         NetworkRegistry.INSTANCE.newSimpleChannel(ModLibs.CHANNEL);

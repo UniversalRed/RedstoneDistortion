@@ -19,6 +19,7 @@ tile.blockPlatinum.name=Platinum Block
 
 tile.mechanicalFurnace.name=Mechanical Furnace
 tile.mechanicalTransfuser.name=Mechanical Transfuser
+tile.mechanicalDesolator.name=Mechanical Desolator
 
 tile.cellIron.name=Iron Energy Cell
 
@@ -35,7 +36,7 @@ item.dustSilver.name=Silver Dust
 item.dustLead.name=Lead Dust
 item.dustBronze.name=Bronze Dust
 item.dustPlatinum.name=Platinum Dust
-item.dustIron=Iron Dust
+item.dustIron.name=Iron Dust
 item.dustGold.name=Gold Dust
 
 item.plateCopper.name=Copper Plate

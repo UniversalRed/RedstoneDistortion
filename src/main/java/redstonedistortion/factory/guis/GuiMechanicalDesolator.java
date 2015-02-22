@@ -1,4 +1,4 @@
-package redstonedistortion.bases.guis;
+package redstonedistortion.factory.guis;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -7,19 +7,22 @@ import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
-import redstonedistortion.bases.tiles.TileCell;
-import redstonedistortion.bases.containers.ContainerCell;
+import redstonedistortion.factory.containers.ContainerMechanicalDesolator;
+import redstonedistortion.factory.containers.ContainerMechanicalFurnace;
+import redstonedistortion.factory.tiles.machines.TileMechanicalDesolator;
+import redstonedistortion.factory.tiles.machines.TileMechanicalFurnace;
 
 /**
- * Created by UniversalRed on 15-02-15.
+ * Created by UniversalRed on 15-02-21.
  */
 @SideOnly(Side.CLIENT)
-public class GuiCell extends GuiContainer {
+public class GuiMechanicalDesolator extends GuiContainer
+{
     private static final ResourceLocation textureBackground = new ResourceLocation("reddistortion", "textures/gui/guiMechanicalFurnace.png");
-    private TileCell te;
+    private TileMechanicalDesolator te;
 
-    public GuiCell(InventoryPlayer invPlayer, TileCell tile) {
-        super(new ContainerCell(invPlayer, tile));
+    public GuiMechanicalDesolator(InventoryPlayer invPlayer, TileMechanicalDesolator tile) {
+        super(new ContainerMechanicalDesolator(invPlayer, tile));
 
         this.te = tile;
 
@@ -39,13 +42,12 @@ public class GuiCell extends GuiContainer {
         this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize);
         int i1;
 
-        this.drawTexturedModalRect(k + 79, l + 34, 176, 14, 1, 16);
-
+        i1 = this.te.getCookProgressScaled(24);
+        this.drawTexturedModalRect(k + 79, l + 34, 176, 14, i1 + 1, 16);
     }
 
     @Override
     protected void drawGuiContainerForegroundLayer(int x, int y) {
-        fontRendererObj.drawString("Cell", 8, 6, 0x404040);
-
+        fontRendererObj.drawString("Mechanical Desolator", 8, 6, 0x404040);
     }
 }

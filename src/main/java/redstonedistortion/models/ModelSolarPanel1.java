@@ -35,6 +35,11 @@ public class ModelSolarPanel1 extends ModelBase
     model.rotateAngleY = y;
     model.rotateAngleZ = z;
   }
+
+    public void renderModel(float f)
+    {
+        Shape1.render(f);
+    }
   
   public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
   {

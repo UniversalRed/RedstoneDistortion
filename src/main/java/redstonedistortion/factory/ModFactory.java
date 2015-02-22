@@ -4,10 +4,12 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
+import redstonedistortion.factory.blocks.machines.BlockMechanicalDesolator;
 import redstonedistortion.factory.blocks.machines.BlockMechanicalFurnace;
 import redstonedistortion.factory.blocks.cells.BlockCellIron;
 import redstonedistortion.factory.blocks.machines.BlockMechanicalTransfuser;
 import redstonedistortion.factory.items.ItemDebugger;
+import redstonedistortion.factory.tiles.machines.TileMechanicalDesolator;
 import redstonedistortion.factory.tiles.machines.TileMechanicalFurnace;
 import redstonedistortion.factory.tiles.cells.TileCellIron;
 import redstonedistortion.factory.tiles.machines.TileMechanicalTransfuser;
@@ -15,7 +17,7 @@ import redstonedistortion.factory.tiles.machines.TileMechanicalTransfuser;
 public class ModFactory {
     //Machines
     public static Block mechanicalFurnace;
-    public static Block mineralCompressor;
+    public static Block mechanicalDesolator;
     public static Block mechanicalTransfuser;
 
     //Energy Cells/Capsules
@@ -26,9 +28,6 @@ public class ModFactory {
     public static Block cellCreative;
 
     //Mechanical Tools
-
-    //Debug Tool
-    public static Item debuggerTester;
 
     //Modules
 
@@ -42,9 +41,10 @@ public class ModFactory {
         //Machines
         mechanicalFurnace = new BlockMechanicalFurnace(Material.iron, "mechanicalFurnace");
         mechanicalTransfuser = new BlockMechanicalTransfuser(Material.iron, "mechanicalTransfuser");
+        mechanicalDesolator = new BlockMechanicalDesolator(Material.iron, "mechanicalDesolator");
 
         //Containers/capsules
-        cellIron = new BlockCellIron(Material.iron, "cellIron");
+        //cellIron = new BlockCellIron(Material.iron, "cellIron");
 
         //Other
     }
@@ -54,9 +54,11 @@ public class ModFactory {
         GameRegistry.registerTileEntity(TileMechanicalFurnace.class, "mechanicalFurnace");
         GameRegistry.registerBlock(mechanicalTransfuser, "mechanicalTransfuser");
         GameRegistry.registerTileEntity(TileMechanicalTransfuser.class, "mechanicalTransfuser");
+        GameRegistry.registerBlock(mechanicalDesolator, "mechanicalDesolator");
+        GameRegistry.registerTileEntity(TileMechanicalDesolator.class, "mechanicalDesolator");
 
-        GameRegistry.registerBlock(cellIron, "cellIron");
-        GameRegistry.registerTileEntity(TileCellIron.class, "cellIron");
+        //GameRegistry.registerBlock(cellIron, "cellIron");
+        //GameRegistry.registerTileEntity(TileCellIron.class, "cellIron");
 
         //Other
     }

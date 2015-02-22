@@ -24,6 +24,7 @@ public class ModLibs
     //GUIIDS
     public static final int guiMechanicalFurnace = 101;
     public static final int guiMechanicalTransfuser = 102;
+    public static final int guiMechanicalDesolator = 103;
 
     public static final int guiCell = 120;
 
@@ -36,5 +37,10 @@ public class ModLibs
     public static final int machineCapacity = 32000;
     public static final int machineExtract = 1000;
     public static final int machineRecieve = 1000;
+
+    //Solar Panels
+    public static final int tier1SolarPanelCapacity = 30000;
+    public static final int tier2SolarPanelCapacity = 60000;
+
 }
 

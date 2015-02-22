@@ -32,11 +32,29 @@ archivesBaseName = "redstonedistortion"
 minecraft {
     version = "${config.version.forge}"
     runDir = "idea"
-    replace "@MODVERSION@", config.version.mod
+    replace "@VERSION@", config.version.mod
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        name = "chickenbones"
+        url = "http://chickenbones.net/maven"
+    }
+
+    maven {
+        name = "buildcraft"
+        url = "http://mod-buildcraft.com"
+    }
 }
 
 dependencies {
+    compile "com.mod-buildcraft:buildcraft:${config.version.buildcraft}:dev"
+
     compile "codechicken:CodeChickenLib:${config.version.minecraft}-${config.version.ccl}:dev"
+    compile "codechicken:CodeChickenCore:${config.version.minecraft}-${config.version.ccc}:dev"
+    compile "codechicken:NotEnoughItems:${config.version.minecraft}-${config.version.nei}:dev"
+
 }
 
 processResources

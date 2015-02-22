@@ -2,7 +2,7 @@ package redstonedistortion.proxies;
 
 public class ClientProxy extends CommonProxy
 {
-    public static void renderbjects()
+    public static void renderObjects()
     {
 
     }

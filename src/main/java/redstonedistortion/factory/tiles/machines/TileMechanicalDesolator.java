@@ -4,50 +4,40 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.ForgeDirection;
 import redstonedistortion.bases.tiles.TileMachine;
 import redstonedistortion.core.inventories.CustomInventory;
 import redstonedistortion.libs.ModLibs;
+import redstonedistortion.recipes.factory.DesolatorRecipes;
 import redstonedistortion.utils.ModUtils;
 import redstonedistortion.utils.helpers.Location;
 import redstonedistortion.utils.helpers.SideConfiguration;
 
-public class TileMechanicalFurnace extends TileMachine implements ISidedInventory {
-    private final CustomInventory inventory = new CustomInventory("MechanicalFurnace", 2, 64, this);
+/**
+ * Created by UniversalRed on 15-02-21.
+ */
+public class TileMechanicalDesolator extends TileMachine implements ISidedInventory
+{
+    public SideConfiguration configuration = new SideConfiguration();
+    private final CustomInventory inventory = new CustomInventory("mechanicalDesolator", 2, 64, this);
 
     public int progress;
     public boolean isCooking;
-    public SideConfiguration configuration = new SideConfiguration();
-    public int maxExtract = ModLibs.machineExtract;
-    public int maxReceive = ModLibs.machineRecieve;
+    public int capacity, maxExtract, maxReceive;
 
-
-    public TileMechanicalFurnace() {
+    public TileMechanicalDesolator()
+    {
 
     }
 
-    public TileMechanicalFurnace(int capacity, int maxExtract, int maxReceive) {
+    public TileMechanicalDesolator(int capacity, int maxExtract, int maxReceive) {
         super(ModLibs.machineCapacity, ModLibs.machineExtract, ModLibs.machineRecieve);
+        this.capacity = capacity;
+        this.maxReceive = maxReceive;
+        this.maxExtract = maxExtract;
         progress = 0;
         isCooking = false;
-    }
-
-    @Override
-    public void readFromNBT(NBTTagCompound tag) {
-        super.readFromNBT(tag);
-        inventory.readNBT(tag);
-        progress = tag.getInteger("progress");
-        isCooking = tag.getBoolean("isCooking");
-    }
-
-    @Override
-    public void writeToNBT(NBTTagCompound tag) {
-        super.writeToNBT(tag);
-        inventory.writeNBT(tag);
-        tag.setInteger("progress", progress);
-        tag.setBoolean("isCooking", isCooking);
     }
 
     @Override
@@ -71,7 +61,7 @@ public class TileMechanicalFurnace extends TileMachine implements ISidedInventor
                 isCooking = true;
                 if (progress == MAX_WORK_TICKS) {
                     ItemStack inputStack = getStackInSlot(0);
-                    ItemStack result = FurnaceRecipes.smelting().getSmeltingResult(inputStack);
+                    ItemStack result = DesolatorRecipes.desolating().getResult(inputStack);
                     if (getStackInSlot(1) == null) {
                         setInventorySlotContents(1, result.copy());
                     } else {
@@ -91,6 +81,19 @@ public class TileMechanicalFurnace extends TileMachine implements ISidedInventor
         output();
     }
 
+    public boolean canCook() {
+        ItemStack stack0 = getStackInSlot(0);
+        ItemStack stack1 = getStackInSlot(1);
+        if (stack0 == null || getResult(stack0) == null)
+            return false;
+        ItemStack result = getResult(stack0);
+        return stack1 == null || (result.getItem() == stack1.getItem() && result.stackSize + stack1.stackSize <= result.getMaxStackSize());
+    }
+
+    public ItemStack getResult(ItemStack iStack) {
+        return DesolatorRecipes.desolating().getResult(iStack);
+    }
+
     public void stop() {
         isCooking = false;
         doBlockUpdate();
@@ -107,17 +110,21 @@ public class TileMechanicalFurnace extends TileMachine implements ISidedInventor
         worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
     }
 
-    public boolean canCook() {
-        ItemStack stack0 = getStackInSlot(0);
-        ItemStack stack1 = getStackInSlot(1);
-        if (stack0 == null || getResult(stack0) == null)
-            return false;
-        ItemStack result = getResult(stack0);
-        return stack1 == null || (result.getItem() == stack1.getItem() && result.stackSize + stack1.stackSize <= result.getMaxStackSize());
+
+    @Override
+    public void readFromNBT(NBTTagCompound tag) {
+        super.readFromNBT(tag);
+        inventory.readNBT(tag);
+        progress = tag.getInteger("progress");
+        isCooking = tag.getBoolean("isCooking");
     }
 
-    public ItemStack getResult(ItemStack iStack) {
-        return FurnaceRecipes.smelting().getSmeltingResult(iStack);
+    @Override
+    public void writeToNBT(NBTTagCompound tag) {
+        super.writeToNBT(tag);
+        inventory.writeNBT(tag);
+        tag.setInteger("progress", progress);
+        tag.setBoolean("isCooking", isCooking);
     }
 
     @Override
@@ -197,14 +204,12 @@ public class TileMechanicalFurnace extends TileMachine implements ISidedInventor
 
     @Override
     public ByteBuf writeToByteBuff(ByteBuf buf) {
-        buf.writeInt(progress);
         buf = configuration.writeToByteBuff(buf);
         return buf;
     }
 
     @Override
     public ByteBuf readFromByteBuff(ByteBuf buf) {
-        progress = buf.readInt();
         buf = configuration.readFromByteBuff(buf);
         return buf;
     }

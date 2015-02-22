@@ -7,6 +7,7 @@ import net.minecraft.item.ItemStack;
 import redstonedistortion.block.ModBlocks;
 import redstonedistortion.factory.ModFactory;
 import redstonedistortion.item.ModItems;
+import redstonedistortion.recipes.factory.DesolatorRecipes;
 
 public class ModRecipes
 {
@@ -71,7 +72,8 @@ public class ModRecipes
                 'S', Items.gold_ingot);
 
         //Machines
-        GameRegistry.addRecipe(new ItemStack(ModFactory.mechanicalFurnace, 1), "CRC",
+        GameRegistry.addRecipe(new ItemStack(ModFactory.mechanicalFurnace, 1),
+                "CRC",
                 "PFP",
                 "PPP",
                 'P', ModItems.plateIron,'C', ModItems.plateCopper,'R', Blocks.iron_block,'R', Blocks.furnace);
@@ -81,5 +83,56 @@ public class ModRecipes
                 "SSX",
                 "XXX",
                 'S', ModItems.ingotCopper,'I', ModItems.ingotTin);
+
+        //Blocks
+        GameRegistry.addRecipe(new ItemStack(ModBlocks.blockCopper, 1),
+                "XXX",
+                "XXX",
+                "XXX",
+                'X', ModItems.ingotCopper);
+
+        GameRegistry.addRecipe(new ItemStack(ModBlocks.blockTin, 1),
+                "XXX",
+                "XXX",
+                "XXX",
+                'X', ModItems.ingotTin);
+
+        GameRegistry.addRecipe(new ItemStack(ModBlocks.blockBronze, 1),
+                "XXX",
+                "XXX",
+                "XXX",
+                'X', ModItems.ingotBronze);
+
+        GameRegistry.addRecipe(new ItemStack(ModBlocks.blockLead, 1),
+                "XXX",
+                "XXX",
+                "XXX",
+                'X', ModItems.ingotLead);
+
+        GameRegistry.addRecipe(new ItemStack(ModBlocks.blockSilver, 1),
+                "XXX",
+                "XXX",
+                "XXX",
+                'X', ModItems.ingotSilver);
+
+        GameRegistry.addRecipe(new ItemStack(ModBlocks.blockPlatinum, 1),
+                "XXX",
+                "XXX",
+                "XXX",
+                'X', ModItems.ingotPlatinum);
+
+        DesolatorRecipes.desolating().recipe(Blocks.iron_ore, new ItemStack(ModItems.dustIron, 2));
+        DesolatorRecipes.desolating().recipe(Blocks.gold_ore, new ItemStack(ModItems.dustGold, 2));
+        DesolatorRecipes.desolating().recipe(ModBlocks.oreCopper, new ItemStack(ModItems.dustCopper, 2));
+        DesolatorRecipes.desolating().recipe(ModBlocks.oreTin, new ItemStack(ModItems.dustTin, 2));
+        DesolatorRecipes.desolating().recipe(ModBlocks.oreBronze, new ItemStack(ModItems.dustBronze, 2));
+        DesolatorRecipes.desolating().recipe(ModBlocks.orePlatinum, new ItemStack(ModItems.dustPlatinum, 2));
+        DesolatorRecipes.desolating().recipe(ModBlocks.oreLead, new ItemStack(ModItems.dustLead, 2));
+        DesolatorRecipes.desolating().recipe(ModBlocks.oreSilver, new ItemStack(ModItems.dustSilver, 2));
+
+        DesolatorRecipes.desolating().recipe(Blocks.coal_ore, new ItemStack(Items.coal, 2));
+        DesolatorRecipes.desolating().recipe(Blocks.redstone_ore, new ItemStack(Items.redstone, 6));
+        DesolatorRecipes.desolating().recipe(Blocks.lapis_ore, new ItemStack(Items.dye, 1, 6));
+        DesolatorRecipes.desolating().recipe(Blocks.quartz_ore, new ItemStack(Items.quartz, 4));
     }
 }
