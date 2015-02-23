@@ -106,11 +106,11 @@ public class BlockMechanicalDesolator extends BlockContainerBase
     @Override
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister par1IconRegister) {
-        textureFront = par1IconRegister.registerIcon(ModLibs.texturesPath + "");
-        textureSide = par1IconRegister.registerIcon(ModLibs.texturesPath + "");
-        textureTop = par1IconRegister.registerIcon(ModLibs.texturesPath + "");
-        textureBack = par1IconRegister.registerIcon(ModLibs.texturesPath + "");
-        textureBottom = par1IconRegister.registerIcon(ModLibs.texturesPath + "");
+        textureFront = par1IconRegister.registerIcon(ModLibs.texturesPath + "macerator_front");
+        textureSide = par1IconRegister.registerIcon(ModLibs.texturesPath + "gearmachine_sides");
+        textureTop = par1IconRegister.registerIcon(ModLibs.texturesPath + "gearmachine_bottom");
+        textureBack = par1IconRegister.registerIcon(ModLibs.texturesPath + "gearmachine_back");
+        textureBottom = par1IconRegister.registerIcon(ModLibs.texturesPath + "gearmachine_bottom");
     }
 
     @Override

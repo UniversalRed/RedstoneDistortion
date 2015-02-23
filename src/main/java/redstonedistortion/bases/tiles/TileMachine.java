@@ -23,7 +23,7 @@ public class TileMachine extends TileBase implements IEnergyReceiver, IConfigura
     public int maxExtract;
     public static int progress;
 
-    protected static int POWER_USAGE = 20;
+    protected static int POWER_USAGE = 30; //Make this a power configurator option
 
     protected int currentWorkTime;
     public static int MAX_WORK_TICKS = 15;

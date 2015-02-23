@@ -26,6 +26,7 @@ public class ModBlocks
     public static Block blockLead;
     public static Block blockBronze;
     public static Block blockPlatinum;
+
     public static Material m;
 
     public static void init()

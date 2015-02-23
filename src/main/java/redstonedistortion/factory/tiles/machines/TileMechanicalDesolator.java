@@ -101,9 +101,9 @@ public class TileMechanicalDesolator extends TileMachine implements ISidedInvent
     }
 
     public void output() {
-        if (getStackInSlot(1) == null)
-            return;
-        setInventorySlotContents(1, ModUtils.outputStack(new Location(this), getStackInSlot(1), configuration));
+        if (getStackInSlot(1) != null) {
+            setInventorySlotContents(1, ModUtils.outputStack(new Location(this), getStackInSlot(1), configuration));
+        }
     }
 
     public void doBlockUpdate() {

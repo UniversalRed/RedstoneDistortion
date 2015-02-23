@@ -76,7 +76,19 @@ public class ModRecipes
                 "CRC",
                 "PFP",
                 "PPP",
-                'P', ModItems.plateIron,'C', ModItems.plateCopper,'R', Blocks.iron_block,'R', Blocks.furnace);
+                'P', ModItems.plateIron,'C', ModItems.plateCopper,'R', Blocks.iron_block,'F', Blocks.furnace);
+
+        GameRegistry.addRecipe(new ItemStack(ModFactory.mechanicalTransfuser, 1),
+                "CCC",
+                "PRP",
+                "PPP",
+                'P', ModItems.plateIron,'C', ModItems.plateTin,'R', Blocks.redstone_block);
+
+        GameRegistry.addRecipe(new ItemStack(ModFactory.mechanicalDesolator, 1),
+                "CRC",
+                "PFP",
+                "PPP",
+                'P', ModItems.plateIron,'C', ModItems.plateCopper,'R', Blocks.piston,'F', Blocks.iron_block);
 
         //Other
         GameRegistry.addRecipe(new ItemStack(ModItems.ingotBronze, 1), "ISX",
