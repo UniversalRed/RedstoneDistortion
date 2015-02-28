@@ -1,8 +1,6 @@
 package redstonedistortion.factory.tiles.cells;
 
 
-import buildcraftAdditions.api.configurableOutput.EnumPriority;
-import cofh.api.energy.IEnergyReceiver;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
@@ -11,10 +9,8 @@ import net.minecraftforge.common.util.ForgeDirection;
 import redstonedistortion.bases.tiles.TileCell;
 
 import redstonedistortion.core.inventories.CustomInventory;
-import redstonedistortion.factory.ModFactory;
 import redstonedistortion.libs.ModLibs;
 import redstonedistortion.utils.ModUtils;
-import redstonedistortion.utils.helpers.Location;
 
 /**
  * Created by UniversalRed on 15-02-17.
@@ -44,13 +40,13 @@ public class TileCellIron extends TileCell implements ISidedInventory {
 
     @Override
     public void updateEntity() {
+        super.updateEntity();
+
         if (worldObj.isRemote)
             return;
 
-        super.updateEntity();
-        if (energy > 0) {
+        if (capacity == 0)
             return;
-        }
     }
 
     @Override

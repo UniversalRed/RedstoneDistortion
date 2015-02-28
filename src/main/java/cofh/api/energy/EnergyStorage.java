@@ -10,10 +10,10 @@ import net.minecraft.nbt.NBTTagCompound;
  */
 public class EnergyStorage implements IEnergyStorage {
 
-	public static int energy;
-    public static int capacity;
-    public static int maxReceive;
-    public static int maxExtract;
+	public int energy;
+    public int capacity;
+    public int maxReceive;
+    public int maxExtract;
 
 	public EnergyStorage(int capacity) {
 
@@ -27,9 +27,9 @@ public class EnergyStorage implements IEnergyStorage {
 
 	public EnergyStorage(int capacity, int maxReceive, int maxExtract) {
 
-		EnergyStorage.capacity = capacity;
-		EnergyStorage.maxReceive = maxReceive;
-		EnergyStorage.maxExtract = maxExtract;
+		this.capacity = capacity;
+        this.maxReceive = maxReceive;
+        this.maxExtract = maxExtract;
 	}
 
 	public EnergyStorage readFromNBT(NBTTagCompound nbt) {
@@ -53,7 +53,7 @@ public class EnergyStorage implements IEnergyStorage {
 
 	public void setCapacity(int capacity) {
 
-		EnergyStorage.capacity = capacity;
+		this.capacity = capacity;
 
 		if (energy > capacity) {
 			energy = capacity;
@@ -68,12 +68,12 @@ public class EnergyStorage implements IEnergyStorage {
 
 	public void setMaxReceive(int maxReceive) {
 
-		EnergyStorage.maxReceive = maxReceive;
+        this.maxReceive = maxReceive;
 	}
 
 	public void setMaxExtract(int maxExtract) {
 
-		EnergyStorage.maxExtract = maxExtract;
+        this.maxExtract = maxExtract;
 	}
 
 	public int getMaxReceive() {
@@ -94,12 +94,12 @@ public class EnergyStorage implements IEnergyStorage {
 	 */
 	public void setEnergyStored(int energy) {
 
-		EnergyStorage.energy = energy;
+        this.energy = energy;
 
-		if (EnergyStorage.energy > capacity) {
-			EnergyStorage.energy = capacity;
-		} else if (EnergyStorage.energy < 0) {
-			EnergyStorage.energy = 0;
+		if (this.energy > capacity) {
+            this.energy = capacity;
+		} else if (this.energy < 0) {
+            this.energy = 0;
 		}
 	}
 
@@ -111,12 +111,12 @@ public class EnergyStorage implements IEnergyStorage {
 	 */
 	public void modifyEnergyStored(int energy) {
 
-		EnergyStorage.energy += energy;
+        this.energy += energy;
 
-		if (EnergyStorage.energy > capacity) {
-			EnergyStorage.energy = capacity;
-		} else if (EnergyStorage.energy < 0) {
-			EnergyStorage.energy = 0;
+		if (this.energy > capacity) {
+            this.energy = capacity;
+		} else if (this.energy < 0) {
+            this.energy = 0;
 		}
 	}
 
@@ -124,7 +124,7 @@ public class EnergyStorage implements IEnergyStorage {
 	@Override
 	public int receiveEnergy(int maxReceive, boolean simulate) {
 
-		int energyReceived = Math.min(capacity - energy, Math.min(EnergyStorage.maxReceive, maxReceive));
+		int energyReceived = Math.min(capacity - energy, Math.min(this.maxReceive, maxReceive));
 
 		if (!simulate) {
 			energy += energyReceived;
@@ -135,7 +135,7 @@ public class EnergyStorage implements IEnergyStorage {
 	@Override
 	public int extractEnergy(int maxExtract, boolean simulate) {
 
-		int energyExtracted = Math.min(energy, Math.min(EnergyStorage.maxExtract, maxExtract));
+		int energyExtracted = Math.min(energy, Math.min(this.maxExtract, maxExtract));
 
 		if (!simulate) {
 			energy -= energyExtracted;
