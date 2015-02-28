@@ -44,7 +44,6 @@ public class ModItems
     public static Item powerAxe;
     public static Item powerShovel;
     public static Item powerSword;
-    public static Item powerWrench;
 
     public static final Item.ToolMaterial TOOL_RD_MATERIAL = EnumHelper.addToolMaterial("RD_Tool", 3, 100, 8.0F, 0, 25);
     public static final ItemArmor.ArmorMaterial ARMOUR_RD_MATERIAL = EnumHelper.addArmorMaterial("RD_Armour", 10, new int[] { 3, 8, 6, 3 }, 20);

@@ -14,6 +14,7 @@ public class ConfigHandler
         config = new Configuration(file);
         loadConfig(config);
         POWER_USAGE = 30;
+        toggleHardModeRecipes = false;
     }
 
     public static void loadConfig(Configuration config)

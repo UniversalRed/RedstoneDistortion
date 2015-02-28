@@ -17,10 +17,10 @@ import redstonedistortion.recipes.RecipeRemover;
 public class BuildCraftIntegration
 {
     buildcraft.api.blueprints.ISchematicRegistry schemes = buildcraft.api.blueprints.BuilderAPI.schematicRegistry;
-    public static Block quarryBlock = GameRegistry.findBlock("BuildCraftFactory", "quarryBlock");
-    public static Block floodGateBlock = GameRegistry.findBlock("BuildCraftFactory", "floodGateBlock");
-    public static Item ironGearItem = GameRegistry.findItem("BuildCraftCore", "ironGearItem");
-    public static Item pipeFluidsGold = GameRegistry.findItem("BuildCraftTransport", "pipeFluidsGold");
+    public static Block quarryBlock = GameRegistry.findBlock("BuildCraft|Factory", "quarryBlock");
+    public static Block floodGateBlock = GameRegistry.findBlock("BuildCraft|Factory", "floodGateBlock");
+    public static Item ironGearItem = GameRegistry.findItem("BuildCraft|Core", "ironGearItem");
+    public static Item pipeFluidsGold = GameRegistry.findItem("BuildCraft|Transport", "pipeFluidsGold");
 
 
     public static void integrateMod()
@@ -60,7 +60,11 @@ public class BuildCraftIntegration
         schemes.registerSchematicBlock(ModBlocks.oreTin, SchematicBlock.class);
         schemes.registerSchematicBlock(ModBlocks.oreSilver, SchematicBlock.class);
         schemes.registerSchematicBlock(ModBlocks.oreLead, SchematicBlock.class);
-        schemes.registerSchematicBlock(ModBlocks.oreBronze, SchematicBlock.class);
-        schemes.registerSchematicBlock(ModBlocks.orePlatinum, SchematicBlock.class);
+
+        schemes.registerSchematicBlock(ModBlocks.blockCopper, SchematicBlock.class);
+        schemes.registerSchematicBlock(ModBlocks.blockTin, SchematicBlock.class);
+        schemes.registerSchematicBlock(ModBlocks.blockSilver, SchematicBlock.class);
+        schemes.registerSchematicBlock(ModBlocks.blockLead, SchematicBlock.class);
+        schemes.registerSchematicBlock(ModBlocks.blockBronze, SchematicBlock.class);
     }
 }

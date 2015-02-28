@@ -9,10 +9,8 @@ import redstonedistortion.factory.ModFactory;
 import redstonedistortion.item.ModItems;
 import redstonedistortion.recipes.factory.DesolatorRecipes;
 
-public class ModRecipes
-{
-    public static void addRecipes()
-    {
+public class ModRecipes {
+    public static void addRecipes() {
         GameRegistry.addSmelting(ModBlocks.oreBronze, new ItemStack(ModItems.ingotBronze), 1.0F);
         GameRegistry.addSmelting(ModBlocks.oreCopper, new ItemStack(ModItems.ingotCopper), 1.0F);
         GameRegistry.addSmelting(ModBlocks.oreLead, new ItemStack(ModItems.ingotLead), 1.0F);
@@ -28,93 +26,117 @@ public class ModRecipes
         GameRegistry.addSmelting(ModItems.dustSilver, new ItemStack(ModItems.ingotSilver), 1.0F);
         GameRegistry.addSmelting(ModItems.dustTin, new ItemStack(ModItems.ingotTin), 1.0F);
 
+        //Shapeless Recipes
+
+        GameRegistry.addShapelessRecipe(new ItemStack(ModItems.plateIron, 1),
+                new ItemStack(Items.iron_ingot), Items.iron_ingot, Items.iron_ingot, Items.iron_ingot);
+
+        GameRegistry.addShapelessRecipe(new ItemStack(ModItems.plateGold, 1),
+                new ItemStack(Items.gold_ingot), Items.gold_ingot, Items.gold_ingot, Items.gold_ingot);
+
+        GameRegistry.addShapelessRecipe(new ItemStack(ModItems.plateBronze),
+                new ItemStack(ModItems.ingotBronze), ModItems.ingotBronze, ModItems.ingotBronze, ModItems.ingotBronze);
+
+        GameRegistry.addShapelessRecipe(new ItemStack(ModItems.plateTin, 1),
+                new ItemStack(ModItems.ingotTin), ModItems.ingotTin, ModItems.ingotTin, ModItems.ingotTin);
+
+        GameRegistry.addShapelessRecipe(new ItemStack(ModItems.plateCopper),
+                new ItemStack(ModItems.ingotCopper), ModItems.ingotCopper, ModItems.ingotCopper, ModItems.ingotCopper);
+
+        GameRegistry.addShapelessRecipe(new ItemStack(ModItems.plateSilver),
+                new ItemStack(ModItems.ingotSilver), ModItems.ingotSilver, ModItems.ingotSilver, ModItems.ingotSilver);
+
+        GameRegistry.addShapelessRecipe(new ItemStack(ModItems.plateLead),
+                new ItemStack(ModItems.ingotLead), ModItems.ingotLead, ModItems.ingotLead, ModItems.ingotLead);
+
         //Plates
-        GameRegistry.addRecipe(new ItemStack(ModItems.plateCopper, 1), "SSX",
+        GameRegistry.addShapedRecipe(new ItemStack(ModItems.plateCopper, 1), "SSX",
                 "SSX",
                 "XXX",
                 'S', ModItems.ingotCopper);
 
-        GameRegistry.addRecipe(new ItemStack(ModItems.plateBronze, 1), "SSX",
+        GameRegistry.addShapedRecipe(new ItemStack(ModItems.plateBronze, 1), "SSX",
                 "SSX",
                 "XXX",
                 'S', ModItems.ingotBronze);
 
-        GameRegistry.addRecipe(new ItemStack(ModItems.plateLead, 1), "SSX",
+        GameRegistry.addShapedRecipe(new ItemStack(ModItems.plateLead, 1), "SSX",
                 "SSX",
                 "XXX",
                 'S', ModItems.ingotLead);
 
-        GameRegistry.addRecipe(new ItemStack(ModItems.plateSilver, 1), "SSX",
+        GameRegistry.addShapedRecipe(new ItemStack(ModItems.plateSilver, 1), "SSX",
                 "SSX",
                 "XXX",
                 'S', ModItems.ingotSilver);
 
-        GameRegistry.addRecipe(new ItemStack(ModItems.plateTin, 1), "SSX",
+        GameRegistry.addShapedRecipe(new ItemStack(ModItems.plateTin, 1), "SSX",
                 "SSX",
                 "XXX",
                 'S', ModItems.ingotTin);
 
-        GameRegistry.addRecipe(new ItemStack(ModItems.plateIron, 1), "SSX",
+        GameRegistry.addShapedRecipe(new ItemStack(ModItems.plateIron, 1),
+                "SSX",
                 "SSX",
                 "XXX",
                 'S', Items.iron_ingot);
 
-        GameRegistry.addRecipe(new ItemStack(ModItems.plateGold, 1), "SSX",
+        GameRegistry.addShapedRecipe(new ItemStack(ModItems.plateGold, 1), "SSX",
                 "SSX",
                 "XXX",
                 'S', Items.gold_ingot);
 
         //Machines
-        GameRegistry.addRecipe(new ItemStack(ModFactory.mechanicalFurnace, 1),
+        GameRegistry.addShapedRecipe(new ItemStack(ModFactory.mechanicalFurnace, 1),
                 "CRC",
                 "PFP",
                 "PPP",
-                'P', ModItems.plateIron,'C', ModItems.plateCopper,'R', Blocks.iron_block,'F', Blocks.furnace);
+                'P', ModItems.plateIron, 'C', ModItems.plateCopper, 'R', Blocks.iron_block, 'F', Blocks.furnace);
 
-        GameRegistry.addRecipe(new ItemStack(ModFactory.mechanicalTransfuser, 1),
+        GameRegistry.addShapedRecipe(new ItemStack(ModFactory.mechanicalTransfuser, 1),
                 "CCC",
                 "PRP",
                 "PPP",
-                'P', ModItems.plateIron,'C', ModItems.plateTin,'R', Blocks.redstone_block);
+                'P', ModItems.plateIron, 'C', ModItems.plateTin, 'R', Blocks.redstone_block);
 
-        GameRegistry.addRecipe(new ItemStack(ModFactory.mechanicalDesolator, 1),
+        GameRegistry.addShapedRecipe(new ItemStack(ModFactory.mechanicalDesolator, 1),
                 "CRC",
                 "PFP",
                 "PPP",
-                'P', ModItems.plateIron,'C', ModItems.plateCopper,'R', Blocks.piston,'F', Blocks.iron_block);
+                'P', ModItems.plateIron, 'C', ModItems.plateCopper, 'R', Blocks.piston, 'F', Blocks.iron_block);
 
         //Other
-        GameRegistry.addRecipe(new ItemStack(ModItems.ingotBronze, 1), "ISX",
+        GameRegistry.addShapedRecipe(new ItemStack(ModItems.ingotBronze, 1), "ISX",
                 "SSX",
                 "XXX",
-                'S', ModItems.ingotCopper,'I', ModItems.ingotTin);
+                'S', ModItems.ingotCopper, 'I', ModItems.ingotTin);
 
         //Blocks
-        GameRegistry.addRecipe(new ItemStack(ModBlocks.blockCopper, 1),
+        GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.blockCopper, 1),
                 "XXX",
                 "XXX",
                 "XXX",
                 'X', ModItems.ingotCopper);
 
-        GameRegistry.addRecipe(new ItemStack(ModBlocks.blockTin, 1),
+        GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.blockTin, 1),
                 "XXX",
                 "XXX",
                 "XXX",
                 'X', ModItems.ingotTin);
 
-        GameRegistry.addRecipe(new ItemStack(ModBlocks.blockBronze, 1),
+        GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.blockBronze, 1),
                 "XXX",
                 "XXX",
                 "XXX",
                 'X', ModItems.ingotBronze);
 
-        GameRegistry.addRecipe(new ItemStack(ModBlocks.blockLead, 1),
+        GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.blockLead, 1),
                 "XXX",
                 "XXX",
                 "XXX",
                 'X', ModItems.ingotLead);
 
-        GameRegistry.addRecipe(new ItemStack(ModBlocks.blockSilver, 1),
+        GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.blockSilver, 1),
                 "XXX",
                 "XXX",
                 "XXX",
