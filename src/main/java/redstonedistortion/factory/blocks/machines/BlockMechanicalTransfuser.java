@@ -31,7 +31,7 @@ public class BlockMechanicalTransfuser extends BlockContainerBase
     IIcon textureBottom;
 
     public BlockMechanicalTransfuser(Material material, String name) {
-        super(material.iron, "mechanicalTransfuser");
+        super(Material.iron, "mechanicalTransfuser");
         setCreativeTab(CreativeTabRedstoneDistortion.RDBlockTab);
         setHardness(3.0F);
         setBlockName(name);

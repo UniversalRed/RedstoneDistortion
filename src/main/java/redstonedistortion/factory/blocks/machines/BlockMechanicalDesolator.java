@@ -1,5 +1,6 @@
 package redstonedistortion.factory.blocks.machines;
 
+import buildcraft.api.tools.IToolWrench;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
@@ -7,6 +8,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
@@ -31,16 +33,24 @@ public class BlockMechanicalDesolator extends BlockContainerBase
     IIcon textureBottom;
 
     public BlockMechanicalDesolator(Material material, String name) {
-        super(material.iron, "mechanicalDesolator");
+        super(Material.iron, "mechanicalDesolator");
         setCreativeTab(CreativeTabRedstoneDistortion.RDBlockTab);
         setHardness(3.0F);
         setBlockName(name);
     }
 
     @Override
-    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityplayer, int par6, float par7, float par8, float par9) {
+    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
         if (!world.isRemote)
-            entityplayer.openGui(ModRedstoneDistortion.instance, ModLibs.guiMechanicalTransfuser, world, x, y, z);
+            player.openGui(ModRedstoneDistortion.instance, ModLibs.guiMechanicalTransfuser, world, x, y, z);
+
+        Item equipped = player.getCurrentEquippedItem() != null ? player.getCurrentEquippedItem().getItem() : null;
+        if (equipped instanceof IToolWrench && ((IToolWrench) equipped).canWrench(player, x, y, z)) {
+
+            ((IToolWrench) equipped).wrenchUsed(player, x, y, z);
+            return true;
+        }
+
         return true;
     }
 

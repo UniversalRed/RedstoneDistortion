@@ -4,6 +4,8 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.item.*;
 import net.minecraftforge.common.util.EnumHelper;
 import redstonedistortion.bases.items.*;
+import redstonedistortion.core.configurations.ConfigHandler;
+import redstonedistortion.integration.thermalexpansion.ThermalExpansionIntegration;
 import redstonedistortion.item.items.*;
 
 public class ModItems
@@ -13,14 +15,12 @@ public class ModItems
     public static Item ingotSilver;
     public static Item ingotLead;
     public static Item ingotBronze;
-    public static Item ingotPlatinum;
 
     public static Item dustCopper;
     public static Item dustTin;
     public static Item dustSilver;
     public static Item dustLead;
     public static Item dustBronze;
-    public static Item dustPlatinum;
     public static Item dustIron;
     public static Item dustGold;
 
@@ -30,7 +30,6 @@ public class ModItems
     public static Item plateSilver;
     public static Item plateLead;
     public static Item plateBronze;
-    public static Item platePlatinum;
     public static Item plateIron;
     public static Item plateGold;
 
@@ -53,32 +52,31 @@ public class ModItems
 
     public static void init()
     {
-        //Ingots
-        ingotCopper = new ModIngots("ingotCopper").setTextureName("ingotCopper");
-        ingotTin = new ModIngots("ingotTin").setTextureName("ingotTin");
-        ingotSilver = new ModIngots("ingotSilver").setTextureName("ingotSilver");
-        ingotLead = new ModIngots("ingotLead").setTextureName("ingotLead");
-        ingotBronze = new ModIngots("ingotBronze").setTextureName("ingotBronze");
-        ingotPlatinum = new ModIngots("ingotPlatinum").setTextureName("ingotPlatinum");
+        if(!ThermalExpansionIntegration.toggleOres) {
+            //Ingots
+            ingotCopper = new ModIngots("ingotCopper");
+            ingotTin = new ModIngots("ingotTin");
+            ingotSilver = new ModIngots("ingotSilver");
+            ingotLead = new ModIngots("ingotLead");
+            ingotBronze = new ModIngots("ingotBronze");
 
-        //Dusts
-        dustCopper = new ModIngots("dustCopper").setTextureName("dustCopper");
-        dustTin = new ModIngots("dustTin").setTextureName("dustTin");
-        dustSilver = new ModIngots("dustSilver").setTextureName("dustSilver");
-        dustLead = new ModIngots("dustLead").setTextureName("dustLead");
-        dustBronze = new ModIngots("dustBronze").setTextureName("dustBronze");
-        dustPlatinum = new ModIngots("dustPlatinum").setTextureName("dustPlatinum");
-        dustIron = new ModIngots("dustIron").setTextureName("dustIron");
-        dustGold = new ModIngots("dustGold").setTextureName("dustGold");
+            //Dusts
+            dustCopper = new ModIngots("dustCopper");
+            dustTin = new ModIngots("dustTin");
+            dustSilver = new ModIngots("dustSilver");
+            dustLead = new ModIngots("dustLead");
+            dustBronze = new ModIngots("dustBronze");
+            dustIron = new ModIngots("dustIron");
+            dustGold = new ModIngots("dustGold");
+        }
 
-        plateCopper = new BaseItems("plateCopper").setTextureName("plateCopper");
-        plateTin = new BaseItems("plateTin").setTextureName("plateTin");
-        plateSilver = new BaseItems("plateSilver").setTextureName("plateSilver");
-        plateLead = new BaseItems("plateLead").setTextureName("plateLead");
-        plateBronze = new BaseItems("plateBronze").setTextureName("plateBronze");
-        platePlatinum = new BaseItems("platePlatinum").setTextureName("platePlatinum");
-        plateIron = new BaseItems("plateIron").setTextureName("plateIron");
-        plateGold = new BaseItems("plateGold").setTextureName("plateGold");
+        plateCopper = new BaseItems("plateCopper");
+        plateTin = new BaseItems("plateTin");
+        plateSilver = new BaseItems("plateSilver");
+        plateLead = new BaseItems("plateLead");
+        plateBronze = new BaseItems("plateBronze");
+        plateIron = new BaseItems("plateIron");
+        plateGold = new BaseItems("plateGold");
 
         //Armour
 
@@ -88,28 +86,27 @@ public class ModItems
 
     public static void registry()
     {
-        GameRegistry.registerItem(ingotCopper, "ingotCopper");
-        GameRegistry.registerItem(ingotTin, "ingotTin");
-        GameRegistry.registerItem(ingotSilver, "ingotSilver");
-        GameRegistry.registerItem(ingotLead, "ingotLead");
-        GameRegistry.registerItem(ingotBronze, "ingotBronze");
-        GameRegistry.registerItem(ingotPlatinum, "ingotPlatinum");
+        if (!ThermalExpansionIntegration.toggleOres) {
+            GameRegistry.registerItem(ingotCopper, "ingotCopper");
+            GameRegistry.registerItem(ingotTin, "ingotTin");
+            GameRegistry.registerItem(ingotSilver, "ingotSilver");
+            GameRegistry.registerItem(ingotLead, "ingotLead");
+            GameRegistry.registerItem(ingotBronze, "ingotBronze");
 
-        GameRegistry.registerItem(dustCopper, "dustCopper");
-        GameRegistry.registerItem(dustTin, "dustTin");
-        GameRegistry.registerItem(dustSilver, "dustSilver");
-        GameRegistry.registerItem(dustLead, "dustLead");
-        GameRegistry.registerItem(dustBronze, "dustBronze");
-        GameRegistry.registerItem(dustPlatinum, "dustPlatinum");
-        GameRegistry.registerItem(dustIron, "dustIron");
-        GameRegistry.registerItem(dustGold, "dustGold");
+            GameRegistry.registerItem(dustCopper, "dustCopper");
+            GameRegistry.registerItem(dustTin, "dustTin");
+            GameRegistry.registerItem(dustSilver, "dustSilver");
+            GameRegistry.registerItem(dustLead, "dustLead");
+            GameRegistry.registerItem(dustBronze, "dustBronze");
+            GameRegistry.registerItem(dustIron, "dustIron");
+            GameRegistry.registerItem(dustGold, "dustGold");
+        }
 
         GameRegistry.registerItem(plateCopper, "plateCopper");
         GameRegistry.registerItem(plateTin, "plateTin");
         GameRegistry.registerItem(plateSilver, "plateSilver");
         GameRegistry.registerItem(plateLead, "plateLead");
         GameRegistry.registerItem(plateBronze, "plateBronze");
-        GameRegistry.registerItem(platePlatinum, "platePlatinum");
         GameRegistry.registerItem(plateIron, "plateIron");
         GameRegistry.registerItem(plateGold, "plateGold");
 

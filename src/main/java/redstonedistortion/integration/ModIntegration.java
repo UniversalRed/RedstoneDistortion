@@ -1,6 +1,7 @@
 package redstonedistortion.integration;
 
 import cpw.mods.fml.common.Loader;
+import redstonedistortion.core.configurations.ConfigHandler;
 import redstonedistortion.integration.buildcraft.BuildCraftIntegration;
 import redstonedistortion.integration.thermalexpansion.ThermalExpansionIntegration;
 
@@ -12,19 +13,23 @@ public class ModIntegration
         {
             ThermalExpansionIntegration.integrateMod();
         }
-        else if(Loader.isModLoaded("Buildcraft|Core"))
+
+        if(Loader.isModLoaded("Buildcraft|Core"))
         {
             BuildCraftIntegration.integrateMod();
         }
-        else if(Loader.isModLoaded(""))
+
+        if(Loader.isModLoaded(""))
         {
 
         }
-        else if(Loader.isModLoaded(""))
+
+        if(Loader.isModLoaded(""))
         {
 
         }
-        else if(Loader.isModLoaded(""))
+
+        if(Loader.isModLoaded(""))
         {
 
         }

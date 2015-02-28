@@ -1,5 +1,6 @@
 package redstonedistortion.factory.tiles.machines;
 
+import buildcraftAdditions.api.configurableOutput.IConfigurableOutput;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
@@ -14,7 +15,7 @@ import redstonedistortion.utils.ModUtils;
 import redstonedistortion.utils.helpers.Location;
 import redstonedistortion.utils.helpers.SideConfiguration;
 
-public class TileMechanicalFurnace extends TileMachine implements ISidedInventory {
+public class TileMechanicalFurnace extends TileMachine implements ISidedInventory, IConfigurableOutput {
     private final CustomInventory inventory = new CustomInventory("MechanicalFurnace", 2, 64, this);
 
     public int progress;

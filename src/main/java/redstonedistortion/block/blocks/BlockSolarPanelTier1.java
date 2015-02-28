@@ -13,7 +13,7 @@ public class BlockSolarPanelTier1 extends BlockContainerBase
 {
     public BlockSolarPanelTier1(Material material, String name)
     {
-        super(material.iron, name);
+        super(Material.iron, name);
         this.setHardness(10f);
         this.setResistance(20f);
         this.setCreativeTab(CreativeTabRedstoneDistortion.RDBlockTab);

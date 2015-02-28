@@ -7,15 +7,12 @@ tile.oreCopper.name=Copper Ore
 tile.oreTin.name=Tin Ore
 tile.oreSilver.name=Silver Ore
 tile.oreLead.name=Lead Ore
-tile.oreBronze.name=Bronze Ore
-tile.orePlatinum.name=Platinum Ore
 
 tile.blockCopper.name=Copper Block
 tile.blockTin.name=Tin Block
 tile.blockSilver.name=Silver Block
 tile.blockLead.name=Lead Block
 tile.blockBronze.name=Bronze Block
-tile.blockPlatinum.name=Platinum Block
 
 tile.mechanicalFurnace.name=Mechanical Furnace
 tile.mechanicalTransfuser.name=Mechanical Transfuser
@@ -28,14 +25,12 @@ item.ingotTin.name=Tin Ingot
 item.ingotSilver.name=Silver Ingot
 item.ingotLead.name=Lead Ingot
 item.ingotBronze.name=Bronze Ingot
-item.ingotPlatinum.name=Platinum Ingot
 
 item.dustCopper.name=Copper Dust
 item.dustTin.name=Tin Dust
 item.dustSilver.name=Silver Dust
 item.dustLead.name=Lead Dust
 item.dustBronze.name=Bronze Dust
-item.dustPlatinum.name=Platinum Dust
 item.dustIron.name=Iron Dust
 item.dustGold.name=Gold Dust
 
@@ -44,7 +39,6 @@ item.plateTin.name=Tin Plate
 item.plateSilver.name=Silver Plate
 item.plateLead.name=Lead Plate
 item.plateBronze.name=Bronze Plate
-item.platePlatinum.name=Platinum Plate
 item.plateIron.name=Iron Plate
 item.plateGold.name=Gold Plate
 

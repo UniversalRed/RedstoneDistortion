@@ -41,21 +41,15 @@ public class BuildCraftIntegration
             RecipeRemover.removeRecipes(new ItemStack(quarryBlock));
             RecipeRemover.removeRecipes(new ItemStack(floodGateBlock));
 
-            GameRegistry.addRecipe(new ItemStack(quarryBlock,1), new Object[]
-                    {
-                            "SIS",
-                            "IRI",
-                            "SSS",
-                            'I',ironGearItem, 'S', ModItems.plateIron,'R', Blocks.redstone_block
-                    });
+            GameRegistry.addRecipe(new ItemStack(quarryBlock,1), "SIS",
+                    "IRI",
+                    "SSS",
+                    'I',ironGearItem, 'S', ModItems.plateIron,'R', Blocks.redstone_block);
 
-            GameRegistry.addRecipe(new ItemStack(floodGateBlock, 1), new Object[]
-                    {
-                            "SBS",
-                            "GRG",
-                            "SGS",
-                            'G', pipeFluidsGold, 'S', ModItems.plateIron, 'R', Blocks.redstone_block, 'B', Blocks.iron_block
-                    });
+            GameRegistry.addRecipe(new ItemStack(floodGateBlock, 1), "SBS",
+                    "GRG",
+                    "SGS",
+                    'G', pipeFluidsGold, 'S', ModItems.plateIron, 'R', Blocks.redstone_block, 'B', Blocks.iron_block);
         }
     }
 

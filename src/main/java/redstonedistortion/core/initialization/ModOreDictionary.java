@@ -13,15 +13,12 @@ public class ModOreDictionary
         OreDictionary.registerOre("oreTin", ModBlocks.oreTin);
         OreDictionary.registerOre("oreSilver", ModBlocks.oreSilver);
         OreDictionary.registerOre("oreLead", ModBlocks.oreLead);
-        OreDictionary.registerOre("oreBronze", ModBlocks.oreBronze);
-        OreDictionary.registerOre("orePlatinum", ModBlocks.orePlatinum);
 
         OreDictionary.registerOre("blockCopper", ModBlocks.blockCopper);
         OreDictionary.registerOre("blockTin", ModBlocks.blockTin);
         OreDictionary.registerOre("blockSilver", ModBlocks.blockSilver);
         OreDictionary.registerOre("blockLead", ModBlocks.blockLead);
         OreDictionary.registerOre("blockBronze", ModBlocks.blockBronze);
-        OreDictionary.registerOre("blockPlatinum", ModBlocks.blockPlatinum);
 
         //Ingots
         OreDictionary.registerOre("ingotCopper", ModItems.ingotCopper);
@@ -29,7 +26,6 @@ public class ModOreDictionary
         OreDictionary.registerOre("ingotSilver", ModItems.ingotSilver);
         OreDictionary.registerOre("ingotLead", ModItems.ingotLead);
         OreDictionary.registerOre("ingotBronze", ModItems.ingotBronze);
-        OreDictionary.registerOre("ingotPlatinum", ModItems.ingotPlatinum);
 
         //Dusts
         OreDictionary.registerOre("dustCopper", ModItems.dustCopper);
@@ -37,6 +33,5 @@ public class ModOreDictionary
         OreDictionary.registerOre("dustSilver", ModItems.dustSilver);
         OreDictionary.registerOre("dustLead", ModItems.dustLead);
         OreDictionary.registerOre("dustBronze", ModItems.dustBronze);
-        OreDictionary.registerOre("dustPlatinum", ModItems.dustPlatinum);
     }
 }

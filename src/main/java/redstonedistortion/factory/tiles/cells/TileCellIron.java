@@ -21,6 +21,7 @@ import redstonedistortion.utils.helpers.Location;
  */
 public class TileCellIron extends TileCell implements ISidedInventory {
     private final CustomInventory inventory = new CustomInventory("Iron Cell", 2, 64, this);
+    public EntityPlayer player;
 
     public int capacity = ModLibs.cellIronCapacity;
     public int energy;
@@ -43,15 +44,13 @@ public class TileCellIron extends TileCell implements ISidedInventory {
 
     @Override
     public void updateEntity() {
+        if (worldObj.isRemote)
+            return;
 
-        if(!worldObj.isRemote)
-        {
+        super.updateEntity();
+        if (energy > 0) {
             return;
         }
-
-        if (capacity == 0)
-            return;
-        sendEnergy();
     }
 
     @Override

@@ -1,6 +1,7 @@
 package redstonedistortion.bases.tiles;
 
 import buildcraftAdditions.api.networking.ISyncronizedTile;
+import buildcraftAdditions.api.networking.MessageByteBuff;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.nbt.NBTTagCompound;
@@ -32,6 +33,7 @@ public class TileBase extends TileEntity implements ISyncronizedTile
             PacketHandler.INSTANCE.sendToAllAround(new MessageTileMachine(), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, getX(), getY(), getZ(), 20));
             PacketHandler.INSTANCE.sendToAllAround(new MessageTileCell(), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, getX(), getY(), getZ(), 20));
             PacketHandler.INSTANCE.sendToAllAround(new MessageTileSolar(), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, getX(), getY(), getZ(), 20));
+            PacketHandler.INSTANCE.sendToAllAround(new MessageByteBuff(this), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, getX(), getY(), getZ(), 20));
         }
     }
 

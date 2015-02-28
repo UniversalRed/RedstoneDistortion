@@ -44,7 +44,7 @@ public class ModFactory {
         mechanicalDesolator = new BlockMechanicalDesolator(Material.iron, "mechanicalDesolator");
 
         //Containers/capsules
-        //cellIron = new BlockCellIron(Material.iron, "cellIron");
+        cellIron = new BlockCellIron(Material.iron, "cellIron");
 
         //Other
     }
@@ -57,8 +57,8 @@ public class ModFactory {
         GameRegistry.registerBlock(mechanicalDesolator, "mechanicalDesolator");
         GameRegistry.registerTileEntity(TileMechanicalDesolator.class, "mechanicalDesolator");
 
-        //GameRegistry.registerBlock(cellIron, "cellIron");
-        //GameRegistry.registerTileEntity(TileCellIron.class, "cellIron");
+        GameRegistry.registerBlock(cellIron, "cellIron");
+        GameRegistry.registerTileEntity(TileCellIron.class, "cellIron");
 
         //Other
     }

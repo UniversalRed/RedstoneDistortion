@@ -1,5 +1,6 @@
 package redstonedistortion.factory.tiles.machines;
 
+import buildcraftAdditions.api.configurableOutput.IConfigurableOutput;
 import cofh.api.energy.IEnergyContainerItem;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,7 +17,7 @@ import redstonedistortion.utils.helpers.SideConfiguration;
 /**
  * Created by UniversalRed on 15-02-20.
  */
-public class TileMechanicalTransfuser extends TileMachine implements ISidedInventory
+public class TileMechanicalTransfuser extends TileMachine implements ISidedInventory, IConfigurableOutput
 {
     public SideConfiguration configuration = new SideConfiguration();
     private final CustomInventory inventory = new CustomInventory("mechanicalTransfuser", 2, 64, this);

@@ -16,7 +16,6 @@ public class ModRecipes
         GameRegistry.addSmelting(ModBlocks.oreBronze, new ItemStack(ModItems.ingotBronze), 1.0F);
         GameRegistry.addSmelting(ModBlocks.oreCopper, new ItemStack(ModItems.ingotCopper), 1.0F);
         GameRegistry.addSmelting(ModBlocks.oreLead, new ItemStack(ModItems.ingotLead), 1.0F);
-        GameRegistry.addSmelting(ModBlocks.orePlatinum, new ItemStack(ModItems.ingotPlatinum), 1.0F);
         GameRegistry.addSmelting(ModBlocks.oreSilver, new ItemStack(ModItems.ingotSilver), 1.0F);
         GameRegistry.addSmelting(ModBlocks.oreTin, new ItemStack(ModItems.ingotTin), 1.0F);
 
@@ -26,7 +25,6 @@ public class ModRecipes
         GameRegistry.addSmelting(ModItems.dustBronze, new ItemStack(ModItems.ingotBronze), 1.0F);
         GameRegistry.addSmelting(ModItems.dustCopper, new ItemStack(ModItems.ingotCopper), 1.0F);
         GameRegistry.addSmelting(ModItems.dustLead, new ItemStack(ModItems.ingotLead), 1.0F);
-        GameRegistry.addSmelting(ModItems.dustPlatinum, new ItemStack(ModItems.ingotPlatinum), 1.0F);
         GameRegistry.addSmelting(ModItems.dustSilver, new ItemStack(ModItems.ingotSilver), 1.0F);
         GameRegistry.addSmelting(ModItems.dustTin, new ItemStack(ModItems.ingotTin), 1.0F);
 
@@ -45,11 +43,6 @@ public class ModRecipes
                 "SSX",
                 "XXX",
                 'S', ModItems.ingotLead);
-
-        GameRegistry.addRecipe(new ItemStack(ModItems.platePlatinum, 1), "SSX",
-                "SSX",
-                "XXX",
-                'S', ModItems.ingotPlatinum);
 
         GameRegistry.addRecipe(new ItemStack(ModItems.plateSilver, 1), "SSX",
                 "SSX",
@@ -127,18 +120,11 @@ public class ModRecipes
                 "XXX",
                 'X', ModItems.ingotSilver);
 
-        GameRegistry.addRecipe(new ItemStack(ModBlocks.blockPlatinum, 1),
-                "XXX",
-                "XXX",
-                "XXX",
-                'X', ModItems.ingotPlatinum);
-
         DesolatorRecipes.desolating().recipe(Blocks.iron_ore, new ItemStack(ModItems.dustIron, 2));
         DesolatorRecipes.desolating().recipe(Blocks.gold_ore, new ItemStack(ModItems.dustGold, 2));
         DesolatorRecipes.desolating().recipe(ModBlocks.oreCopper, new ItemStack(ModItems.dustCopper, 2));
         DesolatorRecipes.desolating().recipe(ModBlocks.oreTin, new ItemStack(ModItems.dustTin, 2));
         DesolatorRecipes.desolating().recipe(ModBlocks.oreBronze, new ItemStack(ModItems.dustBronze, 2));
-        DesolatorRecipes.desolating().recipe(ModBlocks.orePlatinum, new ItemStack(ModItems.dustPlatinum, 2));
         DesolatorRecipes.desolating().recipe(ModBlocks.oreLead, new ItemStack(ModItems.dustLead, 2));
         DesolatorRecipes.desolating().recipe(ModBlocks.oreSilver, new ItemStack(ModItems.dustSilver, 2));
 

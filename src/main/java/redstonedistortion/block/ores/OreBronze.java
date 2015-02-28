@@ -14,8 +14,7 @@ public class OreBronze extends Block
         setHardness(20.0F);
         setHarvestLevel("pickaxe", 2);
     }
-
-
+    
     public Block idDropped(int par1, int par2)
     {
         return ModBlocks.oreBronze;
