@@ -8,12 +8,9 @@ import net.minecraft.item.ItemArmor;
 import net.minecraftforge.common.util.EnumHelper;
 import redstonedistortion.factory.blocks.machines.BlockMechanicalDesolator;
 import redstonedistortion.factory.blocks.machines.BlockMechanicalFurnace;
-import redstonedistortion.factory.blocks.cells.BlockCellIron;
 import redstonedistortion.factory.blocks.machines.BlockMechanicalTransfuser;
-import redstonedistortion.factory.items.ItemDebugger;
 import redstonedistortion.factory.tiles.machines.TileMechanicalDesolator;
 import redstonedistortion.factory.tiles.machines.TileMechanicalFurnace;
-import redstonedistortion.factory.tiles.cells.TileCellIron;
 import redstonedistortion.factory.tiles.machines.TileMechanicalTransfuser;
 
 public class ModFactory {

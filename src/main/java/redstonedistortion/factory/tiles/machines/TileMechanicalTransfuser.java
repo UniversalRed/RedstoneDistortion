@@ -23,12 +23,14 @@ public class TileMechanicalTransfuser extends TileMachine implements ISidedInven
     private final CustomInventory inventory = new CustomInventory("mechanicalTransfuser", 2, 64, this);
 
     public int capacity, maxExtract, maxReceive;
+    public boolean isCharging;
 
     public TileMechanicalTransfuser(int capacity, int maxExtract, int maxReceive) {
         super(ModLibs.machineCapacity, ModLibs.machineExtract, ModLibs.machineRecieve);
         this.capacity = capacity;
         this.maxReceive = maxReceive;
         this.maxExtract = maxExtract;
+        isCharging = false;
     }
 
     public TileMechanicalTransfuser()
@@ -44,7 +46,7 @@ public class TileMechanicalTransfuser extends TileMachine implements ISidedInven
             return;
         }
 
-        int charge = 5000;
+        int charge = 2000;
 
         if(charge > energy)
         {
@@ -59,15 +61,7 @@ public class TileMechanicalTransfuser extends TileMachine implements ISidedInven
                 IEnergyContainerItem containerItem = (IEnergyContainerItem) stack.getItem();
                 energy -= containerItem.receiveEnergy(stack, charge, true);
             }
-        } else if(charge < 0) {
-            if(requiredEnergy() < 0)
-            {
-                ItemStack stack = getStackInSlot(1);
-                IEnergyContainerItem containerItem = (IEnergyContainerItem) stack.getItem();
-                energy += containerItem.extractEnergy(stack, charge, true);
-            }
         }
-
     }
 
     public int requiredEnergy()
@@ -85,12 +79,14 @@ public class TileMechanicalTransfuser extends TileMachine implements ISidedInven
     public void readFromNBT(NBTTagCompound tag) {
         super.readFromNBT(tag);
         inventory.readNBT(tag);
+        tag.getBoolean("isCharging");
     }
 
     @Override
     public void writeToNBT(NBTTagCompound tag) {
         super.writeToNBT(tag);
         inventory.writeNBT(tag);
+        tag.setBoolean("isCharging", isCharging);
     }
 
     @Override

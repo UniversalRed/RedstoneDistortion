@@ -152,7 +152,7 @@ public class ModRecipes {
 
         DesolatorRecipes.desolating().recipe(Blocks.coal_ore, new ItemStack(Items.coal, 2));
         DesolatorRecipes.desolating().recipe(Blocks.redstone_ore, new ItemStack(Items.redstone, 6));
-        DesolatorRecipes.desolating().recipe(Blocks.lapis_ore, new ItemStack(Items.dye, 1, 6));
+        DesolatorRecipes.desolating().recipe(Blocks.lapis_ore, new ItemStack(Items.dye, 6, 4));
         DesolatorRecipes.desolating().recipe(Blocks.quartz_ore, new ItemStack(Items.quartz, 4));
     }
 }

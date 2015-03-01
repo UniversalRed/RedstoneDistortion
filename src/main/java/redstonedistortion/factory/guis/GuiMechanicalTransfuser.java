@@ -15,7 +15,7 @@ import redstonedistortion.factory.tiles.machines.TileMechanicalTransfuser;
  */
 @SideOnly(Side.CLIENT)
 public class GuiMechanicalTransfuser extends GuiContainer {
-    private static final ResourceLocation textureBackground = new ResourceLocation("reddistortion", "textures/gui/guiMechanicalTransfuser.png");
+    private static final ResourceLocation textureBackground = new ResourceLocation("reddistortion", "textures/gui/guiMechanicalFurnace.png");
     private TileMechanicalTransfuser te;
 
     public GuiMechanicalTransfuser(InventoryPlayer invPlayer, TileMechanicalTransfuser tile) {
@@ -37,13 +37,12 @@ public class GuiMechanicalTransfuser extends GuiContainer {
         int k = (this.width - this.xSize) / 2;
         int l = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize);
-        int i1;
 
         this.drawTexturedModalRect(k + 79, l + 34, 176, 14, 1, 16);
     }
 
     @Override
     protected void drawGuiContainerForegroundLayer(int x, int y) {
-        fontRendererObj.drawString("Mechanical Furnace", 8, 6, 0x404040);
+        fontRendererObj.drawString("Mechanical Infuser", 8, 6, 0x404040);
     }
 }

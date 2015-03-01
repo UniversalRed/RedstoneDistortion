@@ -26,7 +26,7 @@ import redstonedistortion.utils.ModUtils;
  */
 public class BlockMechanicalDesolator extends BlockContainerBase
 {
-    IIcon textureFront;
+    IIcon textureFrontOff, textureFrontOn;
     IIcon textureTop;
     IIcon textureSide;
     IIcon textureBack;
@@ -98,10 +98,16 @@ public class BlockMechanicalDesolator extends BlockContainerBase
     @Override
     public IIcon getIcon(int i, int j) {
         if (j == 0 && i == 3)
-            return textureFront;
+            return textureFrontOff;
 
-        if (i == j && i > 1)
-            return textureFront;
+        if (i == j && i > 1) {
+            TileMechanicalDesolator tile = new TileMechanicalDesolator();
+            if(tile.isCooking)
+            {
+                return textureFrontOn;
+            }
+            return textureFrontOff;
+        }
 
         switch (i) {
             case 0:
@@ -116,11 +122,13 @@ public class BlockMechanicalDesolator extends BlockContainerBase
     @Override
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister par1IconRegister) {
-        textureFront = par1IconRegister.registerIcon(ModLibs.texturesPath + "macerator_front");
-        textureSide = par1IconRegister.registerIcon(ModLibs.texturesPath + "gearmachine_sides");
-        textureTop = par1IconRegister.registerIcon(ModLibs.texturesPath + "gearmachine_bottom");
-        textureBack = par1IconRegister.registerIcon(ModLibs.texturesPath + "gearmachine_back");
-        textureBottom = par1IconRegister.registerIcon(ModLibs.texturesPath + "gearmachine_bottom");
+        textureFrontOn = par1IconRegister.registerIcon(ModLibs.texturesPath + "grinder_on");
+
+        textureFrontOff = par1IconRegister.registerIcon(ModLibs.texturesPath + "grinder_off");
+        textureSide = par1IconRegister.registerIcon(ModLibs.texturesPath + "machineSide");
+        textureTop = par1IconRegister.registerIcon(ModLibs.texturesPath + "machineTop");
+        textureBack = par1IconRegister.registerIcon(ModLibs.texturesPath + "machineSide");
+        textureBottom = par1IconRegister.registerIcon(ModLibs.texturesPath + "machineTop");
     }
 
     @Override

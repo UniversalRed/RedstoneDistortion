@@ -9,6 +9,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import cofh.api.energy.IEnergyReceiver;
+import redstonedistortion.core.configurations.ConfigHandler;
 import redstonedistortion.utils.helpers.SideConfiguration;
 
 public class TileMachine extends TileBase implements IEnergyReceiver, IConfigurableOutput
@@ -23,10 +24,10 @@ public class TileMachine extends TileBase implements IEnergyReceiver, IConfigura
     public int maxExtract;
     public static int progress;
 
-    protected static int POWER_USAGE = 30; //Make this a power configurator option
+    protected static int POWER_USAGE = ConfigHandler.POWER_USAGE;
 
     protected int currentWorkTime;
-    public static int MAX_WORK_TICKS = 15;
+    public static int MAX_WORK_TICKS = 20;
 
     public TileMachine()
     {

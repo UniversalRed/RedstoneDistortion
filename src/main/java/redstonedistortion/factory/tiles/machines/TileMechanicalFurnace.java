@@ -58,9 +58,6 @@ public class TileMechanicalFurnace extends TileMachine implements ISidedInventor
             return;
 
         if (canCook()) {
-            if (!isCooking) {
-
-            }
 
             if (energy > POWER_USAGE) {
                 energy -= POWER_USAGE;
@@ -98,10 +95,11 @@ public class TileMechanicalFurnace extends TileMachine implements ISidedInventor
         progress = 0;
     }
 
-    public void output() {
-        if (getStackInSlot(1) != null) {
-            setInventorySlotContents(1, ModUtils.outputStack(new Location(this), getStackInSlot(1), configuration));
+    private void output() {
+        if (getStackInSlot(1) == null) {
+            return;
         }
+        setInventorySlotContents(1, ModUtils.outputStack(new Location(this), getStackInSlot(1), configuration));
     }
 
     public void doBlockUpdate() {

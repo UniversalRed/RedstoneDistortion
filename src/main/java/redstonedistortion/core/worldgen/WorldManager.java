@@ -35,10 +35,8 @@ public class WorldManager implements IWorldGenerator
 
         this.addOreSpawn(ModBlocks.oreCopper, world, random, x, z, 16, 16, 4 + random.nextInt(5), 7, 5, height);
         this.addOreSpawn(ModBlocks.oreTin, world, random, x, z, 16, 16, 4 + random.nextInt(5), 7, 5, height);
-        this.addOreSpawn(ModBlocks.oreBronze, world, random, x, z, 16, 16, 4 + random.nextInt(5), 7, 5, height);
         this.addOreSpawn(ModBlocks.oreLead, world, random, x, z, 16, 16, 4 + random.nextInt(5), 7, 5, height);
         this.addOreSpawn(ModBlocks.oreSilver, world, random, x, z, 16, 16, 4 + random.nextInt(5), 7, 5, height);
-        this.addOreSpawn(ModBlocks.orePlatinum, world, random, x, z, 16, 16, 4 + random.nextInt(5), 7, 5, height);
     }
 
     private void generateNether(World world, Random random, int x, int z)

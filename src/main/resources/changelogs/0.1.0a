@@ -1,0 +1,7 @@
+- Mechanical Furnace, Desolator, and Infuser
+- added Hard Mode Recipes(didn't add the gear recipes) for BC with a config option(DEFAULT IS OFF)
+- added an automatic switch that disables ores if a mod that already has them is installed along with RD (i.e. Thermal Expansion)
+- added mechanical wrench(implements RC and BC wrenching functions)
+- added a power configurator for machines(base power configuration is 30 RF/t, Mine value is 10 RF/t and max Value is 110RF/t for the hardcore players)
+- added ores, plates, dusts and ingots
+- other neat features!

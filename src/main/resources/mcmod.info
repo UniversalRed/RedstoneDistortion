@@ -2,13 +2,13 @@
 {
   "modid": "reddistortion",
   "name": "Redstone Distortion",
-  "description": "Bringing mechanisms and tech stuff into Minecraft",
+  "description": "Bringing in more equipment revolving around the enrgy API!",
   "version": "@VERSION@",
   "mcversion": "1.7.10",
   "url": "",
   "updateUrl": "",
   "authorList": ["UniversalRed"],
-  "credits": "UniversalRed : coding, Unity Resource Pack : textures",
+  "credits": "UniversalRed, Unity R.P., VapourDrive",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []

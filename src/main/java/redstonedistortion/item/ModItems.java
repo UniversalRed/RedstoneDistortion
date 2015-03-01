@@ -7,6 +7,7 @@ import redstonedistortion.bases.items.*;
 import redstonedistortion.core.configurations.ConfigHandler;
 import redstonedistortion.integration.thermalexpansion.ThermalExpansionIntegration;
 import redstonedistortion.item.items.*;
+import redstonedistortion.libs.ModLibs;
 
 public class ModItems
 {
@@ -70,7 +71,7 @@ public class ModItems
         }
 
         plateCopper = new BaseItems("plateCopper");
-        plateTin = new BaseItems("plateTin");
+        plateTin = new BaseItems("plateTin").setTextureName(ModLibs.texturesPath + "plateTin"); //Get a silver plate texture
         plateSilver = new BaseItems("plateSilver");
         plateLead = new BaseItems("plateLead");
         plateBronze = new BaseItems("plateBronze");

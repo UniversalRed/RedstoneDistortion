@@ -27,7 +27,7 @@ buildProps.withReader {
 
 version = "@VERSION@"
 group= "redstonedistortion"
-archivesBaseName = "redstonedistortion"
+archivesBaseName = "${config.version.mod}-RedstoneDistortion-${config.version.minecraft}"
 
 minecraft {
     version = "${config.version.forge}"
@@ -54,7 +54,6 @@ dependencies {
     compile "codechicken:CodeChickenLib:${config.version.minecraft}-${config.version.ccl}:dev"
     compile "codechicken:CodeChickenCore:${config.version.minecraft}-${config.version.ccc}:dev"
     compile "codechicken:NotEnoughItems:${config.version.minecraft}-${config.version.nei}:dev"
-
 }
 
 processResources

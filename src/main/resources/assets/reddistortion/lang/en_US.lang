@@ -15,7 +15,7 @@ tile.blockLead.name=Lead Block
 tile.blockBronze.name=Bronze Block
 
 tile.mechanicalFurnace.name=Mechanical Furnace
-tile.mechanicalTransfuser.name=Mechanical Transfuser
+tile.mechanicalTransfuser.name=Mechanical Infuser
 tile.mechanicalDesolator.name=Mechanical Desolator
 
 tile.cellIron.name=Iron Energy Cell

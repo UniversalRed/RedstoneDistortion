@@ -1,5 +1,6 @@
 package redstonedistortion.factory.blocks.machines;
 
+import cofh.api.energy.IEnergyReceiver;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
@@ -20,11 +21,9 @@ import redstonedistortion.libs.ModLibs;
 import redstonedistortion.utils.ModUtils;
 
 public class BlockMechanicalFurnace extends BlockContainer {
-    IIcon textureFront;
-    IIcon textureTop;
-    IIcon textureSide;
-    IIcon textureBack;
-    IIcon textureBottom;
+
+    @SideOnly(Side.CLIENT)
+    IIcon textureFrontOn, textureFrontOff, textureTop, textureSide, textureBack, textureBottom;
 
     public BlockMechanicalFurnace(Material m, String name) {
         super(Material.iron);
@@ -84,10 +83,15 @@ public class BlockMechanicalFurnace extends BlockContainer {
     @Override
     public IIcon getIcon(int i, int j) {
         if (j == 0 && i == 3)
-            return textureFront;
+            return textureFrontOff;
 
-        if (i == j && i > 1)
-            return textureFront;
+        if (i == j && i > 1) {
+            TileMechanicalFurnace tile = new TileMechanicalFurnace();
+            if(tile.isCooking) {
+                return textureFrontOn;
+            }
+            return textureFrontOff;
+        }
 
         switch (i) {
             case 0:
@@ -102,11 +106,13 @@ public class BlockMechanicalFurnace extends BlockContainer {
     @Override
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister par1IconRegister) {
-        textureFront = par1IconRegister.registerIcon(ModLibs.texturesPath + "metallurgicinfuser_front");
-        textureSide = par1IconRegister.registerIcon(ModLibs.texturesPath + "gearmachine_sides");
-        textureTop = par1IconRegister.registerIcon(ModLibs.texturesPath + "gearmachine_bottom");
-        textureBack = par1IconRegister.registerIcon(ModLibs.texturesPath + "gearmachine_bottom");
-        textureBottom = par1IconRegister.registerIcon(ModLibs.texturesPath + "gearmachine_bottom");
+        textureFrontOn = par1IconRegister.registerIcon(ModLibs.texturesPath + "poweredfurnace_on");
+
+        textureFrontOff = par1IconRegister.registerIcon(ModLibs.texturesPath + "poweredfurnace_off");
+        textureSide = par1IconRegister.registerIcon(ModLibs.texturesPath + "machineSide");
+        textureTop = par1IconRegister.registerIcon(ModLibs.texturesPath + "machineTop");
+        textureBack = par1IconRegister.registerIcon(ModLibs.texturesPath + "machineSide");
+        textureBottom = par1IconRegister.registerIcon(ModLibs.texturesPath + "machineTop");
     }
 
     @Override
