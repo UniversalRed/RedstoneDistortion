@@ -22,10 +22,10 @@ public class TileMachine extends TileBase implements IEnergyReceiver, IConfigura
     public int energy;
     public int maxReceive;
     public int maxExtract;
+
+    //Progress for machines
     public static int progress;
-
     protected static int POWER_USAGE = ConfigHandler.POWER_USAGE;
-
     protected int currentWorkTime;
     public static int MAX_WORK_TICKS = 20;
 
@@ -158,5 +158,13 @@ public class TileMachine extends TileBase implements IEnergyReceiver, IConfigura
     {
         energy = buf.readInt();
         return buf;
+    }
+
+    @Override
+    public int energyLoss() {
+        if(!worldObj.isRemote) {
+            return energy--;
+        }
+        return energy;
     }
 }

@@ -1,16 +1,20 @@
 package redstonedistortion.block.blocks;
 
-import redstonedistortion.bases.tiles.TileSolarPanel;
+
+import redstonedistortion.bases.tiles.TileBase;
 import redstonedistortion.libs.ModLibs;
 
 /**
  * Created by UniversalRed on 15-02-21.
  */
-public class TileSolarPanelTier1 extends TileSolarPanel
+public class TileSolarPanelTier1 extends TileBase
 {
+
     public int capacity = ModLibs.tier1SolarPanelCapacity;
     public int maxExtract = ModLibs.machineExtract;
+    public int energy;
 
+    /*
     public TileSolarPanelTier1(int capacity, int maxExtract) {
         super(capacity, maxExtract);
         this.capacity = capacity;
@@ -25,5 +29,10 @@ public class TileSolarPanelTier1 extends TileSolarPanel
     @Override
     public void updateEntity() {
         super.updateEntity();
+    }
+    */
+    @Override
+    public int energyLoss() {
+        return energy = 0;
     }
 }

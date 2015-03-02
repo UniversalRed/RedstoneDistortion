@@ -1,0 +1,3 @@
+- add a energy loss system for the machines when it rained TODO: fix the block so that if there is a block on top of the machines, then it won't have a constant loss of energy
+- add a system where when the machines are used repetitively,
+it would get the input -> output done faster until a certain point where it would overheat and/or break down

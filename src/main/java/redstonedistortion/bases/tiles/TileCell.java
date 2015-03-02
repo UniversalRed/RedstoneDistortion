@@ -7,59 +7,49 @@ import buildcraftAdditions.api.networking.ISyncronizedTile;
 import cofh.api.energy.*;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
+import redstonedistortion.utils.helpers.Location;
 import redstonedistortion.utils.helpers.SideConfiguration;
 
-public class TileCell extends TileBase implements IEnergyReceiver, IEnergyProvider, IConfigurableOutput, ISyncronizedTile, IEnergyStorage {
+public class TileCell extends TileBase implements IEnergyStorage, IEnergyHandler, IConfigurableOutput, ISyncronizedTile {
 
-    public int energy, capacity, maxRecieve, maxExtract;
-    protected boolean[] blocked = new boolean[6];
+    public int energy, maxEnergy, maxInput, maxOutput;
     protected final SideConfiguration configuration = new SideConfiguration();
 
-    public TileCell cell;
-
-    public TileCell()
-    {
+    public TileCell() {
 
     }
 
-    public TileCell(int capacity, int maxRecieve, int maxExtract) {
-        super();
-        this.capacity = capacity;
-        this.maxRecieve = maxRecieve;
-        this.maxExtract = maxExtract;
+    public TileCell(int maxEnergy, int maxInput, int maxOutput) {
+        this.maxEnergy = maxEnergy;
+        this.maxInput = maxInput;
+        this.maxOutput = maxOutput;
     }
 
     @Override
     public int receiveEnergy(ForgeDirection from, int maxReceive, boolean simulate) {
-        this.maxRecieve = maxReceive;
-
         if (!configuration.canReceive(from))
             return 0;
         int recieved = maxReceive;
-        if (recieved > capacity - energy)
-            recieved = capacity - energy;
-        if (recieved > maxReceive)
-            recieved = maxReceive;
+        if (recieved > maxEnergy - energy)
+            recieved = maxEnergy - energy;
+        if (recieved > maxInput)
+            recieved = maxInput;
         if (!simulate) {
             energy += recieved;
-            blocked[from.ordinal()] = true;
         }
         return recieved;
     }
 
     @Override
     public int extractEnergy(ForgeDirection from, int maxExtract, boolean simulate) {
-        this.maxExtract = maxExtract;
-
         if (!configuration.canSend(from))
             return 0;
         int extracted = maxExtract;
         if (extracted > energy)
             extracted = energy;
-        if (extracted > maxExtract)
-            extracted = maxExtract;
+        if (extracted > maxOutput)
+            extracted = maxOutput;
         if (!simulate)
             energy -= extracted;
         return extracted;
@@ -67,69 +57,69 @@ public class TileCell extends TileBase implements IEnergyReceiver, IEnergyProvid
 
     @Override
     public int getEnergyStored(ForgeDirection from) {
-        return this.getEnergyStored();
+        return energy;
     }
 
     @Override
     public int getMaxEnergyStored(ForgeDirection from) {
-        return this.getMaxEnergyStored();
+        return maxEnergy;
     }
 
     @Override
     public void readFromNBT(NBTTagCompound tag) {
         super.readFromNBT(tag);
         energy = tag.getInteger("energy");
-        capacity = tag.getInteger("capacity");
-        maxRecieve = tag.getInteger("maxRecieve");
-        maxExtract = tag.getInteger("maxExtract");
-        configuration.readFromNBT(tag);
+        maxEnergy = tag.getInteger("maxEnergy");
+        maxInput = tag.getInteger("maxInput");
+        maxOutput = tag.getInteger("maxOutput");
     }
 
     @Override
     public void writeToNBT(NBTTagCompound tag) {
         super.writeToNBT(tag);
         tag.setInteger("energy", energy);
-        tag.setInteger("capacity", capacity);
-        tag.setInteger("maxRecieve", maxRecieve);
-        tag.setInteger("maxExtract", maxExtract);
+        tag.setInteger("maxEnergy", maxEnergy);
+        tag.setInteger("maxInput", maxInput);
+        tag.setInteger("maxOutput", maxOutput);
     }
 
     @Override
     public void updateEntity() {
         super.updateEntity();
 
-        if(worldObj.isRemote) {
-            return;
-        }
         if (energy < 0)
             energy = 0;
-
-        if(energy > maxExtract)
-        {
-            energy = maxExtract;
-        } else {
-            return;
-        }
         sendEnergy();
     }
 
-    protected void sendEnergy()
-    {
+    protected void sendEnergy() {
+        for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
+            for (EnumPriority priority : EnumPriority.values()) {
+                if (configuration.getPriority(direction) != priority)
+                    continue;
+                if (!configuration.canSend(direction))
+                    continue;
+                Location location = new Location(worldObj, xCoord, yCoord, zCoord);
+                location.move(direction);
+                IEnergyReceiver energyHandler = null;
+                if (location.getTileEntity() != null && location.getTileEntity() instanceof IEnergyReceiver)
+                    energyHandler = (IEnergyReceiver) location.getTileEntity();
+                if (energyHandler != null) {
+                    int sendEnergy = energy;
+                    if (sendEnergy < 0)
+                        sendEnergy = 0;
+                    if (sendEnergy > maxOutput)
+                        sendEnergy = maxOutput;
 
-        for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS)
-        {
-            TileEntity tile = worldObj.getTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
-            if (tile instanceof IEnergyHandler)
-            {
-                IEnergyHandler reciever = (IEnergyHandler) tile;
-                cell.extractEnergy(reciever.receiveEnergy(dir.getOpposite(), cell.extractEnergy(dir.getOpposite(), maxExtract, false), false), false);
+                    int output = energyHandler.receiveEnergy(direction.getOpposite(), sendEnergy, false);
+                        energy -= output;
+                }
             }
         }
-
     }
 
     @Override
-    public boolean canConnectEnergy(ForgeDirection from) {
+    public boolean canConnectEnergy (ForgeDirection from){
         return configuration.canReceive(from) || configuration.canSend(from);
     }
 
@@ -147,22 +137,6 @@ public class TileCell extends TileBase implements IEnergyReceiver, IEnergyProvid
     public void setSideConfiguration(SideConfiguration configuration) {
         this.configuration.load(configuration);
     }
-
-    @Override
-    public EnumPriority getPriority(ForgeDirection side) {
-        return configuration.getPriority(side);
-    }
-
-    @Override
-    public void changePriority(ForgeDirection side) {
-        configuration.changePriority(side);
-    }
-
-    @Override
-    public SideConfiguration getSideConfiguration() {
-        return configuration;
-    }
-
 
     @Override
     public ByteBuf writeToByteBuff(ByteBuf buf) {
@@ -194,9 +168,24 @@ public class TileCell extends TileBase implements IEnergyReceiver, IEnergyProvid
     }
 
     @Override
+    public EnumPriority getPriority(ForgeDirection side) {
+        return configuration.getPriority(side);
+    }
+
+    @Override
+    public void changePriority(ForgeDirection side) {
+        configuration.changePriority(side);
+    }
+
+    @Override
+    public SideConfiguration getSideConfiguration() {
+        return configuration;
+    }
+
+    @Override
     public int receiveEnergy(int maxReceive, boolean simulate) {
 
-        int energyReceived = Math.min(capacity - energy, Math.min(this.maxRecieve, maxReceive));
+        int energyReceived = Math.min(maxEnergy - energy, Math.min(maxInput, maxReceive));
 
         if (!simulate) {
             energy += energyReceived;
@@ -207,7 +196,7 @@ public class TileCell extends TileBase implements IEnergyReceiver, IEnergyProvid
     @Override
     public int extractEnergy(int maxExtract, boolean simulate) {
 
-        int energyExtracted = Math.min(energy, Math.min(this.maxExtract, maxExtract));
+        int energyExtracted = Math.min(energy, Math.min(this.maxOutput, maxExtract));
 
         if (!simulate) {
             energy -= energyExtracted;
@@ -224,6 +213,11 @@ public class TileCell extends TileBase implements IEnergyReceiver, IEnergyProvid
     @Override
     public int getMaxEnergyStored() {
 
-        return capacity;
+        return maxEnergy;
+    }
+
+    @Override
+    public int energyLoss() {
+        return energy;
     }
 }

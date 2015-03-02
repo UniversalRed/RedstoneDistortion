@@ -40,8 +40,6 @@ public class BlockCellIron extends BlockContainer {
 
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityplayer, int par6, float par7, float par8, float par9) {
-        if (!world.isRemote)
-            entityplayer.openGui(ModRedstoneDistortion.instance, ModLibs.guiCell, world, x, y, z);
         return true;
     }
 
@@ -75,13 +73,6 @@ public class BlockCellIron extends BlockContainer {
     @Override
     public void breakBlock(World world, int x, int y, int z, Block block, int meta) {
         TileCellIron cell = (TileCellIron) world.getTileEntity(x, y, z);
-        for (int t = 0; t < 2; t++) {
-            ItemStack stack = cell.getStackInSlot(t);
-            if (stack != null) {
-                cell.setInventorySlotContents(t, null);
-                ModUtils.dropItemstack(world, x, y, z, stack);
-            }
-        }
         super.breakBlock(world, x, y, z, block, meta);
 
     }

@@ -15,18 +15,19 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import redstonedistortion.ModRedstoneDistortion;
+import redstonedistortion.bases.blocks.BlockContainerBase;
 import redstonedistortion.core.creativetabs.CreativeTabRedstoneDistortion;
 import redstonedistortion.factory.tiles.machines.TileMechanicalFurnace;
 import redstonedistortion.libs.ModLibs;
 import redstonedistortion.utils.ModUtils;
 
-public class BlockMechanicalFurnace extends BlockContainer {
+public class BlockMechanicalFurnace extends BlockContainerBase {
 
     @SideOnly(Side.CLIENT)
     IIcon textureFrontOn, textureFrontOff, textureTop, textureSide, textureBack, textureBottom;
 
     public BlockMechanicalFurnace(Material m, String name) {
-        super(Material.iron);
+        super(Material.iron, name);
         setCreativeTab(CreativeTabRedstoneDistortion.RDBlockTab);
         setHardness(3.0F);
         setBlockName(name);

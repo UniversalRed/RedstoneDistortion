@@ -20,14 +20,14 @@ public class ItemPoweredBase extends ItemSword implements IEnergyContainerItem {
 
     public void readFromNBT(NBTTagCompound tag) {
         tag.setInteger("capacity", capacity);
-        tag.setInteger("maxRecieve", maxRecieve);
+        tag.setInteger("maxReceive", maxRecieve);
         tag.setInteger("maxExtract", maxExtract);
 
     }
 
     public void writeToNBT(NBTTagCompound tag) {
         capacity = tag.getInteger("capacity");
-        maxRecieve = tag.getInteger("maxRecieve");
+        maxRecieve = tag.getInteger("maxReceive");
         maxExtract = tag.getInteger("maxExtract");
     }
 
