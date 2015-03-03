@@ -5,12 +5,9 @@ import buildcraftAdditions.api.networking.MessageByteBuff;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.effect.EntityWeatherEffect;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import redstonedistortion.bases.blocks.BlockContainerBase;
 import redstonedistortion.packets.MessageTileCell;
 import redstonedistortion.packets.MessageTileMachine;
 import redstonedistortion.packets.MessageTileSolar;
@@ -21,9 +18,11 @@ import redstonedistortion.packets.PacketHandler;
  */
 public abstract class TileBase extends TileEntity implements ISyncronizedTile
 {
+    public Block block;
     public World world;
     public int timer;
     public int x, y, z;
+    public TileEntity tile;
 
     public TileBase() {
 
@@ -31,16 +30,16 @@ public abstract class TileBase extends TileEntity implements ISyncronizedTile
 
     @Override
     public void updateEntity() {
-        Block block = worldObj.getBlock(getX(), getY(), getZ());
         if (timer <= 0) {
             sync();
             timer = 20;
         } else
             timer--;
 
-        if(worldObj.isRaining() && block instanceof BlockContainerBase) {
+        if(!(!worldObj.canBlockSeeTheSky(getX(), getY() + 1, getZ()) && worldObj.isRaining())) {
             getDefunctionTicker();
         }
+        machineProcessing();
     }
 
     public void sync() {
@@ -90,7 +89,7 @@ public abstract class TileBase extends TileEntity implements ISyncronizedTile
     }
 
     protected void getDefunctionTicker() {
-        if(timer <= 0) {
+        if (timer <= 0) {
             energyLoss();
             timer = 5;
         } else {
@@ -99,4 +98,8 @@ public abstract class TileBase extends TileEntity implements ISyncronizedTile
     }
 
     public abstract int energyLoss();
+
+    public void machineProcessing(){
+
+    }
 }

@@ -4,6 +4,7 @@ import buildcraftAdditions.api.configurableOutput.EnumPriority;
 import buildcraftAdditions.api.configurableOutput.EnumSideStatus;
 import buildcraftAdditions.api.configurableOutput.IConfigurableOutput;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
 import net.minecraftforge.common.util.ForgeDirection;
@@ -24,10 +25,20 @@ public class TileMachine extends TileBase implements IEnergyReceiver, IConfigura
     public int maxExtract;
 
     //Progress for machines
-    public static int progress;
-    protected static int POWER_USAGE = ConfigHandler.POWER_USAGE;
+    protected float progress = 0f;
+    protected int POWER_USAGE = ConfigHandler.POWER_USAGE;
     protected int currentWorkTime;
-    public static int MAX_WORK_TICKS = 20;
+    protected float MAX_WORK_TICKS = 20f;
+
+    public ItemStack itemStack;
+
+    public float machineStartup() {
+        return MAX_WORK_TICKS;
+    }
+
+    public float machineRunTime() {
+        return MAX_WORK_TICKS - 0.10f;
+    }
 
     public TileMachine()
     {
@@ -44,8 +55,8 @@ public class TileMachine extends TileBase implements IEnergyReceiver, IConfigura
     public int getCookProgressScaled(int i) {
         double deling = (double) currentWorkTime / (double) MAX_WORK_TICKS;
         double vermenigvuldiging = deling * i;
-        int totaal = (int) vermenigvuldiging;
-        return totaal;
+        int total = (int) vermenigvuldiging;
+        return total;
     }
 
     @Override
@@ -165,6 +176,16 @@ public class TileMachine extends TileBase implements IEnergyReceiver, IConfigura
         if(!worldObj.isRemote) {
             return energy--;
         }
+        if(energy < 0) {
+            energy = 0;
+        }
         return energy;
+    }
+
+    @Override
+    public void machineProcessing() {
+        if(worldObj.isRaining()) {
+            MAX_WORK_TICKS = 30f;
+        }
     }
 }

@@ -54,7 +54,7 @@ public class ModFactory {
 
     public static void init() {
         //Machines
-        mechanicalFurnace = new BlockMechanicalFurnace(Material.iron, "mechanicalFurnace");
+        mechanicalFurnace = new BlockMechanicalFurnace("mechanicalFurnace");
         mechanicalTransfuser = new BlockMechanicalTransfuser(Material.iron, "mechanicalTransfuser");
         mechanicalDesolator = new BlockMechanicalDesolator(Material.iron, "mechanicalDesolator");
 

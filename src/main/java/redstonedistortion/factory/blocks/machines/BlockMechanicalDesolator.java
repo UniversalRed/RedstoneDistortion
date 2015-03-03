@@ -102,7 +102,7 @@ public class BlockMechanicalDesolator extends BlockContainerBase
 
         if (i == j && i > 1) {
             TileMechanicalDesolator tile = new TileMechanicalDesolator();
-            if(tile.isCooking)
+            if(!tile.isCooking)
             {
                 return textureFrontOn;
             }

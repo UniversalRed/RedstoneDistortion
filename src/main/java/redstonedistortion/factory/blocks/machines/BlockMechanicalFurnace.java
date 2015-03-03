@@ -1,10 +1,8 @@
 package redstonedistortion.factory.blocks.machines;
 
-import cofh.api.energy.IEnergyReceiver;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
@@ -12,6 +10,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import redstonedistortion.ModRedstoneDistortion;
@@ -26,7 +25,9 @@ public class BlockMechanicalFurnace extends BlockContainerBase {
     @SideOnly(Side.CLIENT)
     IIcon textureFrontOn, textureFrontOff, textureTop, textureSide, textureBack, textureBottom;
 
-    public BlockMechanicalFurnace(Material m, String name) {
+    public TileMechanicalFurnace tile;
+
+    public BlockMechanicalFurnace(String name) {
         super(Material.iron, name);
         setCreativeTab(CreativeTabRedstoneDistortion.RDBlockTab);
         setHardness(3.0F);
@@ -82,26 +83,50 @@ public class BlockMechanicalFurnace extends BlockContainerBase {
     }
 
     @Override
-    public IIcon getIcon(int i, int j) {
-        if (j == 0 && i == 3)
+    @SideOnly(Side.CLIENT)
+    public IIcon getIcon(IBlockAccess access, int x, int y, int z, int side) {
+        int meta = access.getBlockMetadata(x, y, z);
+        if (meta == 0 && side == 3)
             return textureFrontOff;
 
-        if (i == j && i > 1) {
-            TileMechanicalFurnace tile = new TileMechanicalFurnace();
-            if(tile.isCooking) {
+        if (side == meta && meta > 1) {
+            TileMechanicalFurnace tile = (TileMechanicalFurnace) access.getTileEntity(x, y, z);
+            if (!tile.isCooking) {
                 return textureFrontOn;
             }
             return textureFrontOff;
         }
 
-        switch (i) {
+        switch (side) {
             case 0:
                 return textureBottom;
             case 1:
                 return textureTop;
+            case 5:
+                return textureBack;
             default:
                 return textureSide;
         }
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public IIcon getIcon(int side, int meta) {
+
+        if (meta == 0 && side == 3)
+            return textureFrontOff;
+
+        if (side == meta && meta > 1) {
+            return textureFrontOff;
+        }
+
+            switch (side) {
+                case 0:
+                    return textureBottom;
+                case 1:
+                    return textureTop;
+            }
+        return textureSide;
     }
 
     @Override

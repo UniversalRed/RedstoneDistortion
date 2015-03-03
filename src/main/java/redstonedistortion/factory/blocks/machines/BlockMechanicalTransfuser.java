@@ -93,7 +93,7 @@ public class BlockMechanicalTransfuser extends BlockContainerBase
 
         if (i == j && i > 1) {
             TileMechanicalTransfuser tile = new TileMechanicalTransfuser();
-            if(tile.isCharging)
+            if(!tile.isCharging)
             {
                 return textureFrontOn;
             }
