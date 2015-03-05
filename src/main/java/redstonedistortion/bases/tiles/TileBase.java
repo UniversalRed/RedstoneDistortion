@@ -32,7 +32,7 @@ public abstract class TileBase extends TileEntity implements ISyncronizedTile
         if(!(!worldObj.canBlockSeeTheSky(getX(), getY() + 1, getZ()) && worldObj.isRaining())) {
             getDefunctionTicker();
         }
-        //machineProcessing();
+        machineProcessing();
     }
 
     public void sync() {

@@ -2,7 +2,7 @@
 {
   "modid": "reddistortion",
   "name": "Redstone Distortion",
-  "description": "Bringing in more equipment revolving around the enrgy API!",
+  "description": "A mod that adds more equipment to BuildCraft",
   "version": "@VERSION@",
   "mcversion": "1.7.10",
   "url": "",

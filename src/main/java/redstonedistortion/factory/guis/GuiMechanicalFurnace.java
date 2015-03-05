@@ -24,6 +24,10 @@ public class GuiMechanicalFurnace extends GuiContainer {
         ySize = 185;
     }
 
+    public void draw() {
+
+    }
+
     @Override
     protected void drawGuiContainerBackgroundLayer(float var1, int var2, int var3) {
         GL11.glColor4f(1, 1, 1, 1);
@@ -43,5 +47,9 @@ public class GuiMechanicalFurnace extends GuiContainer {
     @Override
     protected void drawGuiContainerForegroundLayer(int x, int y) {
         fontRendererObj.drawString("Mechanical Furnace", 8, 6, 0x404040);
+    }
+
+    public void draw(int x, int y) {
+
     }
 }

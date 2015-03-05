@@ -16,9 +16,10 @@ import redstonedistortion.core.configurations.ConfigHandler;
 import redstonedistortion.factory.tiles.machines.TileMechanicalDesolator;
 import redstonedistortion.factory.tiles.machines.TileMechanicalFurnace;
 import redstonedistortion.recipes.ModRecipes;
+import redstonedistortion.utils.ModUtils;
 import redstonedistortion.utils.helpers.SideConfiguration;
 
-public class TileMachine extends TileBase implements IEnergyReceiver, IConfigurableOutput, ISyncronizedTile, IInventory
+public abstract class TileMachine extends TileBase implements IEnergyReceiver, IConfigurableOutput, ISyncronizedTile, IInventory
 {
 
     private SideConfiguration configuration = new SideConfiguration();
@@ -33,8 +34,8 @@ public class TileMachine extends TileBase implements IEnergyReceiver, IConfigura
     protected int progress = 0;
     protected int POWER_USAGE = ConfigHandler.POWER_USAGE;
     protected int currentWorkTime;
-    protected int MAX_WORK_TICKS = 50;
-    protected int MAX_WORK_TICKS_TOTAL = 50;
+    protected float MAX_WORK_TICKS = 50f;
+    protected float MAX_WORK_TICKS_TOTAL = 50;
 
     protected boolean hasMalfunctioned;
 
@@ -98,7 +99,7 @@ public class TileMachine extends TileBase implements IEnergyReceiver, IConfigura
         capacity = tag.getInteger("capacity");
         maxReceive = tag.getInteger("maxReceive");
         maxExtract = tag.getInteger("maxExtract");
-        MAX_WORK_TICKS = tag.getInteger("MAX_WORK_TICKS");
+        MAX_WORK_TICKS = tag.getFloat("MAX_WORK_TICKS");
         hasMalfunctioned = tag.getBoolean("hasMalfunctioned");
         configuration.readFromNBT(tag);
     }
@@ -110,7 +111,7 @@ public class TileMachine extends TileBase implements IEnergyReceiver, IConfigura
         tag.setInteger("capacity", capacity);
         tag.setInteger("maxReceive", maxReceive);
         tag.setInteger("maxExtract", maxExtract);
-        tag.setInteger("MAX_WORK_TICKS", MAX_WORK_TICKS);
+        tag.setFloat("MAX_WORK_TICKS", MAX_WORK_TICKS);
         tag.setBoolean("hasMalfunctioned", hasMalfunctioned);
         configuration.writeToNBT(tag);
     }
@@ -193,38 +194,43 @@ public class TileMachine extends TileBase implements IEnergyReceiver, IConfigura
         }
     }
 
-    //This is the energy repetition system
-    public int machineContinuation() {
-        System.out.println(MAX_WORK_TICKS);
+    public float machineContinuation() {
         if(getStackInSlot(0) != null) {
-            for (int x = 0; x < getStackInSlot(0).stackSize; x++) {
-                if (MAX_WORK_TICKS == 1) {
-                    machineMalfunction(0);
+            for (float x = 0; x < getStackInSlot(0).stackSize; x++) {
+                if(MAX_WORK_TICKS == 1f) {
+                    System.out.println("Booooooooooooooooooooooooooooooo!");
                     hasMalfunctioned = true;
-                    break;
+                    machineStopped(0);
                 }
+                System.out.println(MAX_WORK_TICKS);
                 return MAX_WORK_TICKS--;
             }
+            return MAX_WORK_TICKS;
         }
         return MAX_WORK_TICKS;
     }
 
-    public void machineMalfunction(int timer) {
+    public float machineStopped(int timer) {
+        timer = 20;
+
         if(hasMalfunctioned == true) {
-            if (timer <= 0) {
-                machinePenalties();
-                timer = 6000;
-            } else {
-                if(MAX_WORK_TICKS == MAX_WORK_TICKS_TOTAL) {
-                    return;
+            System.out.println("BOOOOOOOOOO TWO");
+            for (int x = timer; x > 0; x--) {
+                if (timer > 0) {
+                    timer--;
+                } else if (timer <= 0) {
+                    getBadModifiers();
                 }
-                MAX_WORK_TICKS++;
-                timer--;
+                System.out.println(x);
+                return x;
             }
         }
+        return timer;
     }
 
-    public void machinePenalties() {
+    public void getBadModifiers() {
+        hasMalfunctioned = false;
+
         TileEntity tile = worldObj.getTileEntity(getX(), getY(), getZ());
         if(tile instanceof TileMechanicalDesolator) {
             ModRecipes.desolatorOutput = 1;
@@ -233,9 +239,26 @@ public class TileMachine extends TileBase implements IEnergyReceiver, IConfigura
 
         if(tile instanceof TileMechanicalFurnace) {
             POWER_USAGE = POWER_USAGE + 30;
-            MAX_WORK_TICKS = MAX_WORK_TICKS + 10;
+        }
+
+        if(hasMalfunctioned == false) {
+            MAX_WORK_TICKS = 50;
         }
     }
+
+    /*
+            if (timer <= 0) {
+                if (MAX_WORK_TICKS == MAX_WORK_TICKS_TOTAL) {
+                    return;
+                }
+
+                timer = 300;
+                MAX_WORK_TICKS++;
+                System.out.println(MAX_WORK_TICKS);
+            } else {
+                timer--;
+            }
+            */
 
     @Override
     public int getSizeInventory() {

@@ -70,8 +70,10 @@ public class TileMechanicalDesolator extends TileMachine implements ISidedInvent
                     }
                     if (getStackInSlot(0).stackSize <= 1)
                         setInventorySlotContents(0, null);
-                    else
+                    else {
                         getStackInSlot(0).stackSize--;
+                        machineContinuation();
+                    }
                     progress = 0;
                 }
             }

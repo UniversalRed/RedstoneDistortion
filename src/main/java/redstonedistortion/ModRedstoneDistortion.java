@@ -21,7 +21,12 @@ import redstonedistortion.packets.*;
 
 import java.io.File;
 
-@Mod(modid = ModLibs.modId, name = ModLibs.modName, version = ModLibs.modVersion, acceptedMinecraftVersions = ModLibs.aceptedMinecraftVersions, guiFactory = "redstonedistortion.core.configurations.GuiFactory")
+    @Mod(modid = ModLibs.modId,
+        name = ModLibs.modName,
+        version = ModLibs.modVersion,
+        acceptedMinecraftVersions = ModLibs.aceptedMinecraftVersions,
+        guiFactory = "redstonedistortion.core.configurations.GuiFactory",
+        dependencies = "required-after:BuildCraft|Core")
 public class ModRedstoneDistortion
 {
     //Declaring Proxies
