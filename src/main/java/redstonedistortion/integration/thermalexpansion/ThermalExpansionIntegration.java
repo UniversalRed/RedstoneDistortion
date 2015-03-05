@@ -11,6 +11,10 @@ public class ThermalExpansionIntegration
 {
     public static boolean toggleOres;
 
+    public  ThermalExpansionIntegration () {
+        toggleOres = true;
+    }
+
     public static void integrateMod()
     {
         addModRecipes();
@@ -27,20 +31,5 @@ public class ThermalExpansionIntegration
         ThermalExpansionHelper.addPulverizerRecipe(1000, new ItemStack(ModBlocks.oreSilver), new ItemStack(ModItems.dustSilver, 2));
         ThermalExpansionHelper.addPulverizerRecipe(1000, new ItemStack(ModBlocks.oreLead), new ItemStack(ModItems.dustLead, 2));
         ThermalExpansionHelper.addPulverizerRecipe(1000, new ItemStack(ModBlocks.oreBronze), new ItemStack(ModItems.dustBronze, 2));
-
-        //Smelter:
-            //Ores
-            ThermalExpansionHelper.addSmelterRecipe(1000, new ItemStack(ModBlocks.oreCopper), new ItemStack(Items.coal), new ItemStack(ModItems.ingotCopper));
-            ThermalExpansionHelper.addSmelterRecipe(1000, new ItemStack(ModBlocks.oreTin), new ItemStack(Items.coal), new ItemStack(ModItems.ingotTin));
-            ThermalExpansionHelper.addSmelterRecipe(1000, new ItemStack(ModBlocks.oreSilver), new ItemStack(Items.coal), new ItemStack(ModItems.ingotSilver));
-            ThermalExpansionHelper.addSmelterRecipe(1000, new ItemStack(ModBlocks.oreLead), new ItemStack(Items.coal), new ItemStack(ModItems.ingotLead));
-            ThermalExpansionHelper.addSmelterRecipe(1000, new ItemStack(ModBlocks.oreBronze), new ItemStack(Items.coal), new ItemStack(ModItems.ingotBronze));
-
-            //Dusts
-            ThermalExpansionHelper.addSmelterRecipe(1000, new ItemStack(ModItems.dustCopper), new ItemStack(Items.coal), new ItemStack(ModItems.ingotCopper));
-            ThermalExpansionHelper.addSmelterRecipe(1000, new ItemStack(ModItems.dustTin), new ItemStack(Items.coal), new ItemStack(ModItems.ingotTin));
-            ThermalExpansionHelper.addSmelterRecipe(1000, new ItemStack(ModItems.dustSilver), new ItemStack(Items.coal), new ItemStack(ModItems.ingotSilver));
-            ThermalExpansionHelper.addSmelterRecipe(1000, new ItemStack(ModItems.dustLead), new ItemStack(Items.coal), new ItemStack(ModItems.ingotLead));
-            ThermalExpansionHelper.addSmelterRecipe(1000, new ItemStack(ModItems.dustBronze), new ItemStack(Items.coal), new ItemStack(ModItems.ingotBronze));
     }
 }

@@ -21,9 +21,6 @@ import redstonedistortion.packets.*;
 
 import java.io.File;
 
-/**
- * TODO: fix the cell's extraction of energy(somewhere around the TileCell file)
- */
 @Mod(modid = ModLibs.modId, name = ModLibs.modName, version = ModLibs.modVersion, acceptedMinecraftVersions = ModLibs.aceptedMinecraftVersions, guiFactory = "redstonedistortion.core.configurations.GuiFactory")
 public class ModRedstoneDistortion
 {

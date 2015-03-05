@@ -1,19 +1,24 @@
 package redstonedistortion.bases.tiles;
 
-import buildcraftAdditions.api.configurableOutput.EnumPriority;
-import buildcraftAdditions.api.configurableOutput.EnumSideStatus;
-import buildcraftAdditions.api.configurableOutput.IConfigurableOutput;
+import buildcraftAdditions.api.configurableOutput.*;
+import buildcraftAdditions.api.networking.ISyncronizedTile;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
+import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import cofh.api.energy.IEnergyReceiver;
 import redstonedistortion.core.configurations.ConfigHandler;
+import redstonedistortion.factory.tiles.machines.TileMechanicalDesolator;
+import redstonedistortion.factory.tiles.machines.TileMechanicalFurnace;
+import redstonedistortion.recipes.ModRecipes;
 import redstonedistortion.utils.helpers.SideConfiguration;
 
-public class TileMachine extends TileBase implements IEnergyReceiver, IConfigurableOutput
+public class TileMachine extends TileBase implements IEnergyReceiver, IConfigurableOutput, ISyncronizedTile, IInventory
 {
 
     private SideConfiguration configuration = new SideConfiguration();
@@ -25,24 +30,19 @@ public class TileMachine extends TileBase implements IEnergyReceiver, IConfigura
     public int maxExtract;
 
     //Progress for machines
-    protected float progress = 0f;
+    protected int progress = 0;
     protected int POWER_USAGE = ConfigHandler.POWER_USAGE;
     protected int currentWorkTime;
-    protected float MAX_WORK_TICKS = 20f;
+    protected int MAX_WORK_TICKS = 50;
+    protected int MAX_WORK_TICKS_TOTAL = 50;
 
-    public ItemStack itemStack;
+    protected boolean hasMalfunctioned;
 
-    public float machineStartup() {
-        return MAX_WORK_TICKS;
-    }
-
-    public float machineRunTime() {
-        return MAX_WORK_TICKS - 0.10f;
-    }
 
     public TileMachine()
     {
         super();
+        hasMalfunctioned = false;
     }
 
     public TileMachine(int capacity, int maxExtract, int maxReceive)
@@ -98,6 +98,8 @@ public class TileMachine extends TileBase implements IEnergyReceiver, IConfigura
         capacity = tag.getInteger("capacity");
         maxReceive = tag.getInteger("maxReceive");
         maxExtract = tag.getInteger("maxExtract");
+        MAX_WORK_TICKS = tag.getInteger("MAX_WORK_TICKS");
+        hasMalfunctioned = tag.getBoolean("hasMalfunctioned");
         configuration.readFromNBT(tag);
     }
 
@@ -108,6 +110,8 @@ public class TileMachine extends TileBase implements IEnergyReceiver, IConfigura
         tag.setInteger("capacity", capacity);
         tag.setInteger("maxReceive", maxReceive);
         tag.setInteger("maxExtract", maxExtract);
+        tag.setInteger("MAX_WORK_TICKS", MAX_WORK_TICKS);
+        tag.setBoolean("hasMalfunctioned", hasMalfunctioned);
         configuration.writeToNBT(tag);
     }
 
@@ -184,8 +188,112 @@ public class TileMachine extends TileBase implements IEnergyReceiver, IConfigura
 
     @Override
     public void machineProcessing() {
-        if(worldObj.isRaining()) {
-            MAX_WORK_TICKS = 30f;
+        if(worldObj.isRaining() && !worldObj.canBlockSeeTheSky(getX(), getY() + 1, getZ())) {
+            POWER_USAGE = POWER_USAGE + 20;
         }
+    }
+
+    //This is the energy repetition system
+    public int machineContinuation() {
+        System.out.println(MAX_WORK_TICKS);
+        if(getStackInSlot(0) != null) {
+            for (int x = 0; x < getStackInSlot(0).stackSize; x++) {
+                if (MAX_WORK_TICKS == 1) {
+                    machineMalfunction(0);
+                    hasMalfunctioned = true;
+                    break;
+                }
+                return MAX_WORK_TICKS--;
+            }
+        }
+        return MAX_WORK_TICKS;
+    }
+
+    public void machineMalfunction(int timer) {
+        if(hasMalfunctioned == true) {
+            if (timer <= 0) {
+                machinePenalties();
+                timer = 6000;
+            } else {
+                if(MAX_WORK_TICKS == MAX_WORK_TICKS_TOTAL) {
+                    return;
+                }
+                MAX_WORK_TICKS++;
+                timer--;
+            }
+        }
+    }
+
+    public void machinePenalties() {
+        TileEntity tile = worldObj.getTileEntity(getX(), getY(), getZ());
+        if(tile instanceof TileMechanicalDesolator) {
+            ModRecipes.desolatorOutput = 1;
+            POWER_USAGE = POWER_USAGE + 20;
+        }
+
+        if(tile instanceof TileMechanicalFurnace) {
+            POWER_USAGE = POWER_USAGE + 30;
+            MAX_WORK_TICKS = MAX_WORK_TICKS + 10;
+        }
+    }
+
+    @Override
+    public int getSizeInventory() {
+        return 0;
+    }
+
+    @Override
+    public ItemStack getStackInSlot(int p_70301_1_) {
+        return getStackInSlot(0);
+    }
+
+    @Override
+    public ItemStack decrStackSize(int p_70298_1_, int p_70298_2_) {
+        return null;
+    }
+
+    @Override
+    public ItemStack getStackInSlotOnClosing(int p_70304_1_) {
+        return null;
+    }
+
+    @Override
+    public void setInventorySlotContents(int p_70299_1_, ItemStack p_70299_2_) {
+
+    }
+
+    @Override
+    public String getInventoryName() {
+        return null;
+    }
+
+    @Override
+    public boolean hasCustomInventoryName() {
+        return true;
+    }
+
+    @Override
+    public int getInventoryStackLimit() {
+        return 0;
+    }
+
+    @Override
+    public boolean isUseableByPlayer(EntityPlayer p_70300_1_) {
+        return true;
+    }
+
+    @Override
+    public void openInventory() {
+
+    }
+
+    @Override
+    public void closeInventory() {
+
+    }
+
+    @Override
+    public boolean isItemValidForSlot(int p_94041_1_, ItemStack p_94041_2_) {
+        return true;
     }
 }

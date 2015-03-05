@@ -10,6 +10,9 @@ import redstonedistortion.item.ModItems;
 import redstonedistortion.recipes.factory.DesolatorRecipes;
 
 public class ModRecipes {
+
+    public static int desolatorOutput = 2;
+
     public static void addRecipes() {
         GameRegistry.addSmelting(ModBlocks.oreBronze, new ItemStack(ModItems.ingotBronze), 1.0F);
         GameRegistry.addSmelting(ModBlocks.oreCopper, new ItemStack(ModItems.ingotCopper), 1.0F);
@@ -142,13 +145,13 @@ public class ModRecipes {
                 "XXX",
                 'X', ModItems.ingotSilver);
 
-        DesolatorRecipes.desolating().recipe(Blocks.iron_ore, new ItemStack(ModItems.dustIron, 2));
-        DesolatorRecipes.desolating().recipe(Blocks.gold_ore, new ItemStack(ModItems.dustGold, 2));
-        DesolatorRecipes.desolating().recipe(ModBlocks.oreCopper, new ItemStack(ModItems.dustCopper, 2));
-        DesolatorRecipes.desolating().recipe(ModBlocks.oreTin, new ItemStack(ModItems.dustTin, 2));
-        DesolatorRecipes.desolating().recipe(ModBlocks.oreBronze, new ItemStack(ModItems.dustBronze, 2));
-        DesolatorRecipes.desolating().recipe(ModBlocks.oreLead, new ItemStack(ModItems.dustLead, 2));
-        DesolatorRecipes.desolating().recipe(ModBlocks.oreSilver, new ItemStack(ModItems.dustSilver, 2));
+        DesolatorRecipes.desolating().recipe(Blocks.iron_ore, new ItemStack(ModItems.dustIron, desolatorOutput));
+        DesolatorRecipes.desolating().recipe(Blocks.gold_ore, new ItemStack(ModItems.dustGold, desolatorOutput));
+        DesolatorRecipes.desolating().recipe(ModBlocks.oreCopper, new ItemStack(ModItems.dustCopper, desolatorOutput));
+        DesolatorRecipes.desolating().recipe(ModBlocks.oreTin, new ItemStack(ModItems.dustTin, desolatorOutput));
+        DesolatorRecipes.desolating().recipe(ModBlocks.oreBronze, new ItemStack(ModItems.dustBronze, desolatorOutput));
+        DesolatorRecipes.desolating().recipe(ModBlocks.oreLead, new ItemStack(ModItems.dustLead, desolatorOutput));
+        DesolatorRecipes.desolating().recipe(ModBlocks.oreSilver, new ItemStack(ModItems.dustSilver, desolatorOutput));
 
         DesolatorRecipes.desolating().recipe(Blocks.coal_ore, new ItemStack(Items.coal, 2));
         DesolatorRecipes.desolating().recipe(Blocks.redstone_ore, new ItemStack(Items.redstone, 6));

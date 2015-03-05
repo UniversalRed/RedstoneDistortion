@@ -26,6 +26,8 @@ public class ModLibs
     public static final int guiMechanicalTransfuser = 102;
     public static final int guiMechanicalDesolator = 103;
 
+    public static final int guiCombustionGenerator = 110;
+
     public static final int guiCell = 120;
 
     //Energy Cell/Capsule Storage

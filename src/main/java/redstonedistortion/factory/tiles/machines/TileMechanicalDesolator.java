@@ -27,11 +27,6 @@ public class TileMechanicalDesolator extends TileMachine implements ISidedInvent
     public boolean isCooking;
     public int capacity, maxExtract, maxReceive;
 
-    @Override
-    public float machineRunTime() {
-        return 0;
-    }
-
     public TileMechanicalDesolator()
     {
 

@@ -27,7 +27,6 @@ public class ModBlocks {
     public static Material m;
 
     public static void init() {
-        if (!ThermalExpansionIntegration.toggleOres) {
             //Ores
             oreCopper = new OreCopper(Material.rock).setBlockName("oreCopper").setBlockTextureName(ModLibs.texturesPath + "oreCopper");
             oreTin = new OreTin(Material.rock).setBlockName("oreTin").setBlockTextureName(ModLibs.texturesPath + "oreTin");
@@ -39,7 +38,6 @@ public class ModBlocks {
             blockSilver = new BaseBlock(Material.rock, "blockSilver");
             blockLead = new BaseBlock(Material.rock, "blockLead");
             blockBronze = new BaseBlock(Material.rock, "blockBronze");
-        }
 
         //Other
         //solarPanelTier1 = new BlockSolarPanelTier1(m.iron, "solarPanelTier1").setBlockName("solarPanelTier1").setBlockTextureName("solarPanelTier1");
@@ -47,7 +45,6 @@ public class ModBlocks {
     }
 
     public static void registry() {
-        if (!ThermalExpansionIntegration.toggleOres) {
 
             GameRegistry.registerBlock(oreCopper, "oreCopper");
             GameRegistry.registerBlock(oreTin, "oreTin");
@@ -59,7 +56,6 @@ public class ModBlocks {
             GameRegistry.registerBlock(blockSilver, "blockSilver");
             GameRegistry.registerBlock(blockLead, "blockLead");
             GameRegistry.registerBlock(blockBronze, "blockBronze");
-        }
 
         //GameRegistry.registerBlock(solarPanelTier1, "solarPanelTier1");
         //GameRegistry.registerTileEntity(TileSolarPanelTier1.class, "solarPanelTier1");

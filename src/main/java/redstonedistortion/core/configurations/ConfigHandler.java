@@ -24,7 +24,7 @@ public class ConfigHandler
         {
             config.addCustomCategoryComment("misc", "Misc. Section");
             toggleHardModeRecipes = config.get("Toggle to Enable Hard Mode BC Recipes", "misc", false).getBoolean(false);
-            POWER_USAGE = config.getInt("Power Usage Option for machines (RF/t)", "misc", 30, 20, 110, "Base Usage = 30, minValue = 20, maxValue = 110");
+            POWER_USAGE = config.getInt("Power Usage Option for machines (RF/t)", "misc", 60, 20, 110, "Base Usage = 60, minValue = 20, maxValue = 110");
 
             config.addCustomCategoryComment("IDS'", "IDS' Section");
 

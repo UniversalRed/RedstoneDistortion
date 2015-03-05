@@ -32,10 +32,10 @@ public class BlockMechanicalDesolator extends BlockContainerBase
     IIcon textureBack;
     IIcon textureBottom;
 
-    public BlockMechanicalDesolator(Material material, String name) {
+    public BlockMechanicalDesolator(String name) {
         super(Material.iron, "mechanicalDesolator");
         setCreativeTab(CreativeTabRedstoneDistortion.RDBlockTab);
-        setHardness(3.0F);
+        setHardness(5.0F);
         setBlockName(name);
     }
 

@@ -30,7 +30,7 @@ public class BlockMechanicalFurnace extends BlockContainerBase {
     public BlockMechanicalFurnace(String name) {
         super(Material.iron, name);
         setCreativeTab(CreativeTabRedstoneDistortion.RDBlockTab);
-        setHardness(3.0F);
+        setHardness(5.0F);
         setBlockName(name);
     }
 

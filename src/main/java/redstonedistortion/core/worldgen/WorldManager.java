@@ -8,6 +8,7 @@ import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 import cpw.mods.fml.common.IWorldGenerator;
 import redstonedistortion.block.ModBlocks;
+import redstonedistortion.integration.thermalexpansion.ThermalExpansionIntegration;
 
 public class WorldManager implements IWorldGenerator
 {
@@ -33,10 +34,12 @@ public class WorldManager implements IWorldGenerator
     {
         int height = 60;
 
-        this.addOreSpawn(ModBlocks.oreCopper, world, random, x, z, 16, 16, 4 + random.nextInt(5), 7, 5, height);
-        this.addOreSpawn(ModBlocks.oreTin, world, random, x, z, 16, 16, 4 + random.nextInt(5), 7, 5, height);
-        this.addOreSpawn(ModBlocks.oreLead, world, random, x, z, 16, 16, 4 + random.nextInt(5), 7, 5, height);
-        this.addOreSpawn(ModBlocks.oreSilver, world, random, x, z, 16, 16, 4 + random.nextInt(5), 7, 5, height);
+        if(ThermalExpansionIntegration.toggleOres == true) {
+            this.addOreSpawn(ModBlocks.oreCopper, world, random, x, z, 16, 16, 4 + random.nextInt(5), 7, 5, height);
+            this.addOreSpawn(ModBlocks.oreTin, world, random, x, z, 16, 16, 4 + random.nextInt(5), 7, 5, height);
+            this.addOreSpawn(ModBlocks.oreLead, world, random, x, z, 16, 16, 4 + random.nextInt(5), 7, 5, height);
+            this.addOreSpawn(ModBlocks.oreSilver, world, random, x, z, 16, 16, 4 + random.nextInt(5), 7, 5, height);
+        }
     }
 
     private void generateNether(World world, Random random, int x, int z)

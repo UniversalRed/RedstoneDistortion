@@ -6,7 +6,6 @@ import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.tileentity.TileEntity;
-import redstonedistortion.bases.tiles.TileCell;
 
 /**
  * Created by UniversalRed on 15-02-16.
@@ -50,8 +49,8 @@ public class MessageTileCell implements IMessage, IMessageHandler<MessageTileCel
     public IMessage onMessage(MessageTileCell message, MessageContext ctx) {
         if (FMLClientHandler.instance().getClient().theWorld != null) {
             TileEntity entity = FMLClientHandler.instance().getClient().theWorld.getTileEntity(message.x, message.y, message.z);
-            if (entity instanceof TileCell)
-                this.energy = message.energy;
+            //if (entity instanceof TileCell)
+            //    this.energy = message.energy;
         }
         return null;
     }

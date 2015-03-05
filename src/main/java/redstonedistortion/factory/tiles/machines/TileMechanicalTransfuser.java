@@ -33,11 +33,6 @@ public class TileMechanicalTransfuser extends TileMachine implements ISidedInven
         isCharging = false;
     }
 
-    @Override
-    public float machineRunTime() {
-        return 0;
-    }
-
     public TileMechanicalTransfuser()
     {
 
