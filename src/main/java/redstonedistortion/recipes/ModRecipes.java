@@ -153,6 +153,14 @@ public class ModRecipes {
         DesolatorRecipes.desolating().recipe(ModBlocks.oreLead, new ItemStack(ModItems.dustLead, desolatorOutput));
         DesolatorRecipes.desolating().recipe(ModBlocks.oreSilver, new ItemStack(ModItems.dustSilver, desolatorOutput));
 
+        DesolatorRecipes.desolating().recipe(Items.iron_ingot, new ItemStack(ModItems.dustIron, 1));
+        DesolatorRecipes.desolating().recipe(Items.gold_ingot, new ItemStack(ModItems.dustGold, 1));
+        DesolatorRecipes.desolating().recipe(ModItems.ingotBronze, new ItemStack(ModItems.dustBronze, 1));
+        DesolatorRecipes.desolating().recipe(ModItems.ingotCopper, new ItemStack(ModItems.dustCopper, 1));
+        DesolatorRecipes.desolating().recipe(ModItems.ingotLead, new ItemStack(ModItems.dustLead, 1));
+        DesolatorRecipes.desolating().recipe(ModItems.ingotSilver, new ItemStack(ModItems.dustSilver, 1));
+        DesolatorRecipes.desolating().recipe(ModItems.ingotTin, new ItemStack(ModItems.dustTin, 1));
+
         DesolatorRecipes.desolating().recipe(Blocks.coal_ore, new ItemStack(Items.coal, 2));
         DesolatorRecipes.desolating().recipe(Blocks.redstone_ore, new ItemStack(Items.redstone, 6));
         DesolatorRecipes.desolating().recipe(Blocks.lapis_ore, new ItemStack(Items.dye, 6, 4));

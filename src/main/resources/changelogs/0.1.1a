@@ -1,1 +1,3 @@
 - made it so that machines lost 20 RF/s when it rained for a certain period of time, physically on the machine
+- added a system where if the machines were in contact with rain, it would require more power to smelt ores
+- Redstone Distortion is now dependant on Buildcraft as of 0.1.1a

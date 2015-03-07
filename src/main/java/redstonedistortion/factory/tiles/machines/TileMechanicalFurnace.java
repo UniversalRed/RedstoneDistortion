@@ -75,16 +75,37 @@ public class TileMechanicalFurnace extends TileMachine implements ISidedInventor
                         setInventorySlotContents(0, null);
                     } else {
                         getStackInSlot(0).stackSize--;
-                        machineContinuation();
+                        //machineContinuation();
                     }
                     progress = 0;
                 }
+                //regainTicks();
             }
             progress++;
         } else {
             stop();
         }
         output();
+    }
+
+    public void regainTicks() {
+        int timer = 300;
+
+        if (isCooking == true) {
+            if (MAX_WORK_TICKS < MAX_WORK_TICKS_TOTAL) {
+                while (MAX_WORK_TICKS < 30 && MAX_WORK_TICKS != 1) {
+                    if (MAX_WORK_TICKS == MAX_WORK_TICKS_TOTAL) {
+                        break;
+                    }
+                    // Stupid timer doesn't work ;(
+                    if (timer <= 0) {
+                        timer = 300;
+                        MAX_WORK_TICKS++;
+                    }
+                    timer--;
+                }
+            }
+        }
     }
 
     public void stop() {

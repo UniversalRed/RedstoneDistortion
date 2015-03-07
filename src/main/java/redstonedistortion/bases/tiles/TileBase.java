@@ -26,8 +26,9 @@ public abstract class TileBase extends TileEntity implements ISyncronizedTile
         if (timer <= 0) {
             sync();
             timer = 20;
-        } else
+        } else {
             timer--;
+        }
 
         if(!(!worldObj.canBlockSeeTheSky(getX(), getY() + 1, getZ()) && worldObj.isRaining())) {
             getDefunctionTicker();

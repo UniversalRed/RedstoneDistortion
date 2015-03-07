@@ -1,26 +1,24 @@
 package redstonedistortion.bases.tiles;
 
-import buildcraftAdditions.api.configurableOutput.*;
+import buildcraftAdditions.api.configurableOutput.EnumPriority;
+import buildcraftAdditions.api.configurableOutput.EnumSideStatus;
+import buildcraftAdditions.api.configurableOutput.IConfigurableOutput;
 import buildcraftAdditions.api.networking.ISyncronizedTile;
+import cofh.api.energy.IEnergyReceiver;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
-
-import cofh.api.energy.IEnergyReceiver;
 import redstonedistortion.core.configurations.ConfigHandler;
 import redstonedistortion.factory.tiles.machines.TileMechanicalDesolator;
 import redstonedistortion.factory.tiles.machines.TileMechanicalFurnace;
 import redstonedistortion.recipes.ModRecipes;
-import redstonedistortion.utils.ModUtils;
 import redstonedistortion.utils.helpers.SideConfiguration;
 
-public abstract class TileMachine extends TileBase implements IEnergyReceiver, IConfigurableOutput, ISyncronizedTile, IInventory
-{
+public class TileMachine extends TileBase implements IEnergyReceiver, IConfigurableOutput, ISyncronizedTile, IInventory {
 
     private SideConfiguration configuration = new SideConfiguration();
 
@@ -34,20 +32,18 @@ public abstract class TileMachine extends TileBase implements IEnergyReceiver, I
     protected int progress = 0;
     protected int POWER_USAGE = ConfigHandler.POWER_USAGE;
     protected int currentWorkTime;
-    protected float MAX_WORK_TICKS = 50f;
-    protected float MAX_WORK_TICKS_TOTAL = 50;
+    protected int MAX_WORK_TICKS = 50;
+    protected int MAX_WORK_TICKS_TOTAL = 50;
 
     protected boolean hasMalfunctioned;
 
 
-    public TileMachine()
-    {
+    public TileMachine() {
         super();
         hasMalfunctioned = false;
     }
 
-    public TileMachine(int capacity, int maxExtract, int maxReceive)
-    {
+    public TileMachine(int capacity, int maxExtract, int maxReceive) {
         this.capacity = capacity;
         this.maxExtract = maxExtract;
         this.maxReceive = maxReceive;
@@ -99,7 +95,7 @@ public abstract class TileMachine extends TileBase implements IEnergyReceiver, I
         capacity = tag.getInteger("capacity");
         maxReceive = tag.getInteger("maxReceive");
         maxExtract = tag.getInteger("maxExtract");
-        MAX_WORK_TICKS = tag.getFloat("MAX_WORK_TICKS");
+        MAX_WORK_TICKS = tag.getInteger("MAX_WORK_TICKS");
         hasMalfunctioned = tag.getBoolean("hasMalfunctioned");
         configuration.readFromNBT(tag);
     }
@@ -111,7 +107,7 @@ public abstract class TileMachine extends TileBase implements IEnergyReceiver, I
         tag.setInteger("capacity", capacity);
         tag.setInteger("maxReceive", maxReceive);
         tag.setInteger("maxExtract", maxExtract);
-        tag.setFloat("MAX_WORK_TICKS", MAX_WORK_TICKS);
+        tag.setInteger("MAX_WORK_TICKS", MAX_WORK_TICKS);
         tag.setBoolean("hasMalfunctioned", hasMalfunctioned);
         configuration.writeToNBT(tag);
     }
@@ -163,25 +159,23 @@ public abstract class TileMachine extends TileBase implements IEnergyReceiver, I
     }
 
     @Override
-    public ByteBuf writeToByteBuff(ByteBuf buf)
-    {
+    public ByteBuf writeToByteBuff(ByteBuf buf) {
         buf.writeInt(energy);
         return buf;
     }
 
     @Override
-    public ByteBuf readFromByteBuff(ByteBuf buf)
-    {
+    public ByteBuf readFromByteBuff(ByteBuf buf) {
         energy = buf.readInt();
         return buf;
     }
 
     @Override
     public int energyLoss() {
-        if(!worldObj.isRemote) {
+        if (!worldObj.isRemote) {
             return energy--;
         }
-        if(energy < 0) {
+        if (energy < 0) {
             energy = 0;
         }
         return energy;
@@ -189,15 +183,17 @@ public abstract class TileMachine extends TileBase implements IEnergyReceiver, I
 
     @Override
     public void machineProcessing() {
-        if(worldObj.isRaining() && !worldObj.canBlockSeeTheSky(getX(), getY() + 1, getZ())) {
+        if (worldObj.isRaining() && !worldObj.canBlockSeeTheSky(getX(), getY() + 1, getZ())) {
             POWER_USAGE = POWER_USAGE + 20;
         }
     }
 
-    public float machineContinuation() {
-        if(getStackInSlot(0) != null) {
-            for (float x = 0; x < getStackInSlot(0).stackSize; x++) {
-                if(MAX_WORK_TICKS == 1f) {
+    /*
+    public int machineContinuation() {
+        timer = 0;
+        if (getStackInSlot(0) != null) {
+            for (int x = 0; x < getStackInSlot(0).stackSize; x++) {
+                if (MAX_WORK_TICKS == 1) {
                     System.out.println("Booooooooooooooooooooooooooooooo!");
                     hasMalfunctioned = true;
                     machineStopped(0);
@@ -205,25 +201,40 @@ public abstract class TileMachine extends TileBase implements IEnergyReceiver, I
                 System.out.println(MAX_WORK_TICKS);
                 return MAX_WORK_TICKS--;
             }
-            return MAX_WORK_TICKS;
         }
         return MAX_WORK_TICKS;
     }
 
-    public float machineStopped(int timer) {
+    public void addWorkTicks() {
+        if(hasMalfunctioned == false) {
+            while (MAX_WORK_TICKS < 40) {
+                if (MAX_WORK_TICKS == MAX_WORK_TICKS_TOTAL) {
+                    return;
+                }
+                // This system allows for the machine to regain work ticks whilst burning ores/whatever
+                System.out.println(MAX_WORK_TICKS);
+                MAX_WORK_TICKS++;
+            }
+        } else {
+            return;
+        }
+    }
+
+    public int machineStopped(int timer) {
         timer = 20;
 
-        if(hasMalfunctioned == true) {
+        if (hasMalfunctioned == true) {
             System.out.println("BOOOOOOOOOO TWO");
-            for (int x = timer; x > 0; x--) {
-                if (timer > 0) {
-                    timer--;
-                } else if (timer <= 0) {
+            if(timer <= 0) {
+                if(timer == 1) {
                     getBadModifiers();
                 }
-                System.out.println(x);
-                return x;
+                timer = 6000;
+            } else {
+                timer--;
             }
+            System.out.println(timer);
+            return timer;
         }
         return timer;
     }
@@ -232,34 +243,20 @@ public abstract class TileMachine extends TileBase implements IEnergyReceiver, I
         hasMalfunctioned = false;
 
         TileEntity tile = worldObj.getTileEntity(getX(), getY(), getZ());
-        if(tile instanceof TileMechanicalDesolator) {
+        if (tile instanceof TileMechanicalDesolator) {
             ModRecipes.desolatorOutput = 1;
             POWER_USAGE = POWER_USAGE + 20;
         }
 
-        if(tile instanceof TileMechanicalFurnace) {
+        if (tile instanceof TileMechanicalFurnace) {
             POWER_USAGE = POWER_USAGE + 30;
         }
 
-        if(hasMalfunctioned == false) {
+        if (hasMalfunctioned == false) {
             MAX_WORK_TICKS = 50;
         }
     }
-
-    /*
-            if (timer <= 0) {
-                if (MAX_WORK_TICKS == MAX_WORK_TICKS_TOTAL) {
-                    return;
-                }
-
-                timer = 300;
-                MAX_WORK_TICKS++;
-                System.out.println(MAX_WORK_TICKS);
-            } else {
-                timer--;
-            }
-            */
-
+*/
     @Override
     public int getSizeInventory() {
         return 0;
@@ -307,12 +304,10 @@ public abstract class TileMachine extends TileBase implements IEnergyReceiver, I
 
     @Override
     public void openInventory() {
-
     }
 
     @Override
     public void closeInventory() {
-
     }
 
     @Override
