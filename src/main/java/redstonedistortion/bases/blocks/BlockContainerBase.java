@@ -4,7 +4,6 @@ import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import redstonedistortion.libs.ModLibs;
 
 /**
  * Created by UniversalRed on 15-02-20.

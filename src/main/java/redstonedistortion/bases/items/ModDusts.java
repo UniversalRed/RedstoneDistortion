@@ -1,8 +1,8 @@
 package redstonedistortion.bases.items;
 
 import net.minecraft.item.Item;
-import redstonedistortion.core.creativetabs.CreativeTabRedstoneDistortion;
-import redstonedistortion.libs.ModLibs;
+import redstonedistortion.client.creativetabs.CreativeTabRedstoneDistortion;
+import redstonedistortion.bases.libs.ModLibs;
 
 public class ModDusts extends Item
 {
@@ -13,5 +13,6 @@ public class ModDusts extends Item
         setCreativeTab(CreativeTabRedstoneDistortion.RDItemTab);
         setUnlocalizedName(name);
         setTextureName(ModLibs.texturesPath + name);
+        setFull3D();
     }
 }

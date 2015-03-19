@@ -3,22 +3,18 @@ package redstonedistortion.bases.tiles;
 import buildcraftAdditions.api.configurableOutput.EnumPriority;
 import buildcraftAdditions.api.configurableOutput.EnumSideStatus;
 import buildcraftAdditions.api.configurableOutput.IConfigurableOutput;
-import buildcraftAdditions.api.networking.ISyncronizedTile;
+import buildcraftAdditions.api.configurableOutput.SideConfiguration;
+import buildcraftAdditions.api.networking.ISynchronizedTile;
 import cofh.api.energy.IEnergyReceiver;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
-import redstonedistortion.core.configurations.ConfigHandler;
-import redstonedistortion.factory.tiles.machines.TileMechanicalDesolator;
-import redstonedistortion.factory.tiles.machines.TileMechanicalFurnace;
-import redstonedistortion.recipes.ModRecipes;
-import redstonedistortion.utils.helpers.SideConfiguration;
+import redstonedistortion.client.configurations.ConfigHandler;
 
-public class TileMachine extends TileBase implements IEnergyReceiver, IConfigurableOutput, ISyncronizedTile, IInventory {
+public class TileMachine extends TileBase implements IEnergyReceiver, IConfigurableOutput, ISynchronizedTile, IInventory {
 
     private SideConfiguration configuration = new SideConfiguration();
 
@@ -159,15 +155,13 @@ public class TileMachine extends TileBase implements IEnergyReceiver, IConfigura
     }
 
     @Override
-    public ByteBuf writeToByteBuff(ByteBuf buf) {
+    public void writeToByteBuff(ByteBuf buf) {
         buf.writeInt(energy);
-        return buf;
     }
 
     @Override
-    public ByteBuf readFromByteBuff(ByteBuf buf) {
+    public void readFromByteBuff(ByteBuf buf) {
         energy = buf.readInt();
-        return buf;
     }
 
     @Override
@@ -178,6 +172,10 @@ public class TileMachine extends TileBase implements IEnergyReceiver, IConfigura
         if (energy < 0) {
             energy = 0;
         }
+
+        if(energy > capacity) {
+            energy = capacity;
+        }
         return energy;
     }
 
@@ -187,6 +185,7 @@ public class TileMachine extends TileBase implements IEnergyReceiver, IConfigura
             POWER_USAGE = POWER_USAGE + 20;
         }
     }
+
 
     /*
     public int machineContinuation() {
@@ -204,7 +203,6 @@ public class TileMachine extends TileBase implements IEnergyReceiver, IConfigura
         }
         return MAX_WORK_TICKS;
     }
-
     public void addWorkTicks() {
         if(hasMalfunctioned == false) {
             while (MAX_WORK_TICKS < 40) {
@@ -219,10 +217,8 @@ public class TileMachine extends TileBase implements IEnergyReceiver, IConfigura
             return;
         }
     }
-
     public int machineStopped(int timer) {
         timer = 20;
-
         if (hasMalfunctioned == true) {
             System.out.println("BOOOOOOOOOO TWO");
             if(timer <= 0) {
@@ -238,25 +234,22 @@ public class TileMachine extends TileBase implements IEnergyReceiver, IConfigura
         }
         return timer;
     }
-
     public void getBadModifiers() {
         hasMalfunctioned = false;
-
         TileEntity tile = worldObj.getTileEntity(getX(), getY(), getZ());
         if (tile instanceof TileMechanicalDesolator) {
             ModRecipes.desolatorOutput = 1;
             POWER_USAGE = POWER_USAGE + 20;
         }
-
         if (tile instanceof TileMechanicalFurnace) {
             POWER_USAGE = POWER_USAGE + 30;
         }
-
         if (hasMalfunctioned == false) {
             MAX_WORK_TICKS = 50;
         }
     }
-*/
+    */
+
     @Override
     public int getSizeInventory() {
         return 0;

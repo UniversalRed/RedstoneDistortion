@@ -6,12 +6,12 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import redstonedistortion.packets.*;
+import redstonedistortion.common.packets.*;
 
 /**
  * Created by UniversalRed on 15-02-16.
  */
-public abstract class TileBase extends TileEntity implements ISyncronizedTile
+public abstract class TileBase extends TileEntity implements ISynchronizedTile
 {
     public World world;
     public int timer;
@@ -58,13 +58,13 @@ public abstract class TileBase extends TileEntity implements ISyncronizedTile
     }
 
     @Override
-    public ByteBuf writeToByteBuff(ByteBuf buf) {
-        return null;
+    public void writeToByteBuff(ByteBuf buf) {
+
     }
 
     @Override
-    public ByteBuf readFromByteBuff(ByteBuf buf) {
-        return null;
+    public void readFromByteBuff(ByteBuf buf) {
+
     }
 
     @Override
@@ -83,12 +83,10 @@ public abstract class TileBase extends TileEntity implements ISyncronizedTile
     }
 
     protected void getDefunctionTicker() {
-        if (timer <= 0)
-        {
+        if (timer <= 0) {
             energyLoss();
             timer = 5;
-        } else
-        {
+        } else {
             timer--;
         }
     }

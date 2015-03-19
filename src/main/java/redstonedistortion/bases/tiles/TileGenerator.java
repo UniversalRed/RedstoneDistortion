@@ -3,17 +3,17 @@ package redstonedistortion.bases.tiles;
 import buildcraftAdditions.api.configurableOutput.EnumPriority;
 import buildcraftAdditions.api.configurableOutput.EnumSideStatus;
 import buildcraftAdditions.api.configurableOutput.IConfigurableOutput;
-import buildcraftAdditions.api.networking.ISyncronizedTile;
+import buildcraftAdditions.api.configurableOutput.SideConfiguration;
+import buildcraftAdditions.api.networking.ISynchronizedTile;
 import cofh.api.energy.IEnergyProvider;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.ForgeDirection;
-import redstonedistortion.utils.helpers.SideConfiguration;
 
 /**
  * Created by UniversalRed on 15-03-03.
  */
-public class TileGenerator extends TileBase implements IEnergyProvider, IConfigurableOutput, ISyncronizedTile {
+public class TileGenerator extends TileBase implements IEnergyProvider, IConfigurableOutput, ISynchronizedTile {
 
     private SideConfiguration configuration = new SideConfiguration();
 
@@ -127,17 +127,15 @@ public class TileGenerator extends TileBase implements IEnergyProvider, IConfigu
     }
 
     @Override
-    public ByteBuf writeToByteBuff(ByteBuf buf)
+    public void writeToByteBuff(ByteBuf buf)
     {
         buf.writeInt(energy);
-        return buf;
     }
 
     @Override
-    public ByteBuf readFromByteBuff(ByteBuf buf)
+    public void readFromByteBuff(ByteBuf buf)
     {
         energy = buf.readInt();
-        return buf;
     }
 
     @Override

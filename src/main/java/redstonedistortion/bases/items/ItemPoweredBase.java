@@ -22,7 +22,6 @@ public class ItemPoweredBase extends ItemSword implements IEnergyContainerItem {
         tag.setInteger("capacity", capacity);
         tag.setInteger("maxReceive", maxRecieve);
         tag.setInteger("maxExtract", maxExtract);
-
     }
 
     public void writeToNBT(NBTTagCompound tag) {
@@ -33,7 +32,6 @@ public class ItemPoweredBase extends ItemSword implements IEnergyContainerItem {
 
     @Override
     public int receiveEnergy(ItemStack container, int maxReceive, boolean simulate) {
-        this.maxRecieve = maxReceive;
 
         if (energy < 0) {
             return 0;
@@ -51,7 +49,6 @@ public class ItemPoweredBase extends ItemSword implements IEnergyContainerItem {
 
     @Override
     public int extractEnergy(ItemStack container, int maxExtract, boolean simulate) {
-        this.maxExtract = maxExtract;
 
         if (energy < 0) {
             return 0;

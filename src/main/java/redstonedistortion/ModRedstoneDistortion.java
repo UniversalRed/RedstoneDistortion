@@ -8,20 +8,20 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraftforge.common.config.Configuration;
-import redstonedistortion.block.ModBlocks;
-import redstonedistortion.core.configurations.ConfigHandler;
-import redstonedistortion.core.initialization.ModOreDictionary;
-import redstonedistortion.core.worldgen.WorldManager;
-import redstonedistortion.energy.ModEnergy;
-import redstonedistortion.factory.ModFactory;
-import redstonedistortion.factory.guis.GuiHandler;
-import redstonedistortion.integration.ModIntegration;
-import redstonedistortion.item.ModItems;
-import redstonedistortion.libs.ModLibs;
-import redstonedistortion.packets.PacketHandler;
+import redstonedistortion.common.block.ModBlocks;
+import redstonedistortion.client.configurations.ConfigHandler;
+import redstonedistortion.common.initialization.ModOreDictionary;
+import redstonedistortion.common.worldgen.WorldManager;
+import redstonedistortion.common.energy.ModEnergy;
+import redstonedistortion.common.factory.ModFactory;
+import redstonedistortion.common.factory.guis.GuiHandler;
+import redstonedistortion.common.integration.ModIntegration;
+import redstonedistortion.common.item.ModItems;
+import redstonedistortion.bases.libs.ModLibs;
+import redstonedistortion.common.packets.PacketHandler;
 import redstonedistortion.proxies.CommonProxy;
-import redstonedistortion.recipes.ModRecipes;
-import redstonedistortion.utils.ModLogger;
+import redstonedistortion.common.recipes.ModRecipes;
+import redstonedistortion.bases.utils.ModLogger;
 
 import java.io.File;
 
@@ -33,9 +33,10 @@ import java.io.File;
         name = ModLibs.modName,
         version = ModLibs.modVersion,
         acceptedMinecraftVersions = ModLibs.aceptedMinecraftVersions,
-        guiFactory = "redstonedistortion.core.configurations.GuiFactory",
+        guiFactory = "redstonedistortion.client.configurations.GuiFactory",
         dependencies = "required-after:BuildCraft|Core")
 public class ModRedstoneDistortion {
+
     //Declaring Proxies
     @SidedProxy(clientSide = ModLibs.clientSide, serverSide = ModLibs.serverSide)
     public static CommonProxy proxy;
@@ -70,11 +71,11 @@ public class ModRedstoneDistortion {
         ModFactory.registry();
 
         ModEnergy.init();
-        ModEnergy.regsitry();
+        ModEnergy.registry();
 
         ModRecipes.addRecipes();
 
-        CommonProxy.renderObjects();
+        proxy.renderObjects();
 
         ModOreDictionary.initOreDictionary();
 

@@ -1,10 +1,8 @@
 package redstonedistortion.bases.items;
 
 import net.minecraft.item.Item;
-import redstonedistortion.core.creativetabs.CreativeTabRedstoneDistortion;
-import redstonedistortion.libs.ModLibs;
-
-import java.util.List;
+import redstonedistortion.client.creativetabs.CreativeTabRedstoneDistortion;
+import redstonedistortion.bases.libs.ModLibs;
 
 public class ModIngots extends Item
 {

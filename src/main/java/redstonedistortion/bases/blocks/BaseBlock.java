@@ -2,8 +2,8 @@ package redstonedistortion.bases.blocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import redstonedistortion.core.creativetabs.CreativeTabRedstoneDistortion;
-import redstonedistortion.libs.ModLibs;
+import redstonedistortion.client.creativetabs.CreativeTabRedstoneDistortion;
+import redstonedistortion.bases.libs.ModLibs;
 
 /**
  * Created by UniversalRed on 15-02-20.

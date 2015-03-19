@@ -1,9 +1,9 @@
 package buildcraftAdditions.api.configurableOutput;
 
-import redstonedistortion.utils.ModUtils;
+import net.minecraft.util.StatCollector;
 
 /**
- * Copyright (c) 2014, AEnterprise
+ * Copyright (c) 2014-2015, AEnterprise
  * http://buildcraftadditions.wordpress.com/
  * Buildcraft Additions is distributed under the terms of GNU GPL v3.0
  * Please check the contents of the license located in
@@ -11,25 +11,25 @@ import redstonedistortion.utils.ModUtils;
  */
 public enum EnumSideStatus {
 
-	DISABLED("Disabled", 0xA6A6A6, false, false, false),
-	BOTH("Both", 0xFFA500, true, true, true),
-	OUTPUT("Output", 0x850000, true, false, true),
-	INPUT("Input", 0x002B87, false, true, false);
+	DISABLED("disabled", 0xA6A6A6, false, false, false),
+	BOTH("both", 0xFFA500, true, true, true),
+	OUTPUT("output", 0x850000, true, false, true),
+	INPUT("input", 0x002B87, false, true, false);
 
-	private final String text;
+	private final String name;
 	private final int color;
 	private final boolean hasPriority, canReceive, canSend;
 
-	EnumSideStatus(String text, int color, boolean hasPriority, boolean canReceive, boolean canSend) {
-		this.text = text;
+	EnumSideStatus(String name, int color, boolean hasPriority, boolean canReceive, boolean canSend) {
+		this.name = name;
 		this.color = color;
 		this.hasPriority = hasPriority;
 		this.canReceive = canReceive;
 		this.canSend = canSend;
 	}
 
-	public String getText() {
-		return ModUtils.localize(text);
+	public String getName() {
+		return ("" + StatCollector.translateToLocal("status." + name)).trim();
 	}
 
 	public int getColor() {

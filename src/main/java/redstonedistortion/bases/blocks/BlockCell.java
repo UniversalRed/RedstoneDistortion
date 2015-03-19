@@ -4,12 +4,12 @@ import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import redstonedistortion.core.creativetabs.CreativeTabRedstoneDistortion;
-import redstonedistortion.libs.ModLibs;
+import redstonedistortion.client.creativetabs.CreativeTabRedstoneDistortion;
+import redstonedistortion.bases.libs.ModLibs;
 
-public class BlockCell extends BlockContainer
+public abstract class BlockCell extends BlockContainer
 {
-    public BlockCell(Material m, String name) {
+    public BlockCell(String name) {
         super(Material.iron);
         this.setBlockTextureName(ModLibs.texturesPath + name);
         this.setBlockName(name);
@@ -17,7 +17,5 @@ public class BlockCell extends BlockContainer
     }
 
     @Override
-    public TileEntity createNewTileEntity(World p_149915_1_, int p_149915_2_) {
-        return null;
-    }
+    public abstract TileEntity createNewTileEntity(World p_149915_1_, int p_149915_2_);
 }
