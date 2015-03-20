@@ -12,9 +12,7 @@ import redstonedistortion.common.block.ModBlocks;
 import redstonedistortion.client.configurations.ConfigHandler;
 import redstonedistortion.common.initialization.ModOreDictionary;
 import redstonedistortion.common.worldgen.WorldManager;
-import redstonedistortion.common.energy.ModEnergy;
-import redstonedistortion.common.factory.ModFactory;
-import redstonedistortion.common.factory.guis.GuiHandler;
+import redstonedistortion.client.GuiHandler;
 import redstonedistortion.common.integration.ModIntegration;
 import redstonedistortion.common.item.ModItems;
 import redstonedistortion.bases.libs.ModLibs;
@@ -66,12 +64,6 @@ public class ModRedstoneDistortion {
 
         ModItems.init();
         ModItems.registry();
-
-        ModFactory.init();
-        ModFactory.registry();
-
-        ModEnergy.init();
-        ModEnergy.registry();
 
         ModRecipes.addRecipes();
 

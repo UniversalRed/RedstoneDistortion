@@ -4,6 +4,8 @@ import buildcraftAdditions.api.configurableOutput.EnumPriority;
 import buildcraftAdditions.api.configurableOutput.EnumSideStatus;
 import buildcraftAdditions.api.configurableOutput.IConfigurableOutput;
 import buildcraftAdditions.api.configurableOutput.SideConfiguration;
+import buildcraftAdditions.api.nbt.INBTSaveable;
+import buildcraftAdditions.api.networking.ISynchronizedTile;
 import cofh.api.energy.IEnergyHandler;
 import cofh.api.energy.IEnergyReceiver;
 import io.netty.buffer.ByteBuf;
@@ -14,46 +16,114 @@ import redstonedistortion.bases.utils.helpers.Location;
 /**
  * Created by UniversalRed on 15-03-17.
  */
-public abstract class TileCell extends TileBase implements IEnergyHandler, IConfigurableOutput {
+public abstract class TileCell extends TileBase implements ISynchronizedTile, IEnergyHandler, INBTSaveable, IConfigurableOutput {
 
-    protected final SideConfiguration configuration = new SideConfiguration();
-    public int energy, capacity, maxTransfer;
+    public int capacity, maxExtract, maxInput, energy;
+    public SideConfiguration configurations = new SideConfiguration();
 
     public TileCell(int capacity, int maxTransfer) {
         this.capacity = capacity;
-        this.maxTransfer = maxTransfer;
+        this.maxInput = maxTransfer;
+        this.maxExtract = maxTransfer;
+    }
+
+    @Override
+    public void updateEntity() {
+        super.updateEntity();
+        if(worldObj.isRemote) {
+            return;
+        }
+
+        if(energy < 0) {
+            energy = 0;
+        }
+
+        outputEnergy();
+    }
+
+    @Override
+    public void readFromNBT(NBTTagCompound tag) {
+        super.readFromNBT(tag);
+        configurations.readFromNBT(tag);
+        tag.setInteger("energy", energy);
+        tag.setInteger("capacity", capacity);
+        tag.setInteger("maxInput", maxInput);
+        tag.setInteger("maxExtract", maxExtract);
+
+    }
+
+    @Override
+    public void writeToNBT(NBTTagCompound tag) {
+        super.writeToNBT(tag);
+        configurations.writeToNBT(tag);
+        energy = tag.getInteger("energy");
+        maxInput = tag.getInteger("maxInput");
+        maxExtract = tag.getInteger("maxExtract");
+        capacity = tag.getInteger("capacity");
+    }
+
+    @Override
+    public void writeToByteBuff(ByteBuf buf) {
+        buf.writeInt(energy);
+        configurations.writeToByteBuff(buf);
+    }
+
+    @Override
+    public void readFromByteBuff(ByteBuf buf) {
+        energy = buf.readInt();
+        configurations.readFromByteBuff(buf);
     }
 
     @Override
     public int receiveEnergy(ForgeDirection from, int maxReceive, boolean simulate) {
-        if (!configuration.canReceive(from))
-            return 0;
-        int recieved = maxReceive;
-        if (recieved > capacity - energy)
-            recieved = capacity - energy;
-        if (recieved > maxReceive)
-            recieved = maxReceive;
-        if (!simulate) {
-            energy += recieved;
-        }
-        return recieved;
-    }
 
+        if (!configurations.canReceive(from)) {
+            return 0;
+        }
+        int energyReceived = Math.min(capacity - energy, Math.min(maxInput, maxReceive));
+        if (!simulate) {
+            energy += energyReceived;
+        }
+        return energyReceived;
+    }
 
     @Override
     public int extractEnergy(ForgeDirection from, int maxExtract, boolean simulate) {
-        if (!configuration.canSend(from))
+
+        if (!configurations.canSend(from)) {
             return 0;
-        int extracted = maxExtract;
-        if (extracted > energy)
-            extracted = energy;
-        if (extracted > this.maxTransfer)
-            extracted = this.maxTransfer;
+        }
+        int energyExtracted = Math.min(energy, Math.min(maxExtract, maxExtract));
         if (!simulate)
-            energy -= extracted;
-        return extracted;
+            energy -= energyExtracted;
+        return energyExtracted;
     }
 
+    protected void outputEnergy() {
+        for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
+            for (EnumPriority priority : EnumPriority.values()) {
+                if (configurations.getPriority(direction) != priority)
+                    continue;
+                if (!configurations.canSend(direction))
+                    continue;
+                Location location = new Location(worldObj, xCoord, yCoord, zCoord);
+                location.move(direction);
+                IEnergyReceiver energyHandler = null;
+                if (location.getTileEntity() != null && location.getTileEntity() instanceof IEnergyReceiver)
+                    energyHandler = (IEnergyReceiver) location.getTileEntity();
+                if (energyHandler != null) {
+                    int sendEnergy = energy;
+                    if (sendEnergy < 0)
+                        sendEnergy = 0;
+                    if (sendEnergy > maxExtract)
+                        sendEnergy = maxExtract;
+
+                    int output = energyHandler.receiveEnergy(direction.getOpposite(), sendEnergy, false);
+                    energy -= output;
+                }
+            }
+        }
+    }
     @Override
     public int getEnergyStored(ForgeDirection from) {
         return energy;
@@ -65,113 +135,38 @@ public abstract class TileCell extends TileBase implements IEnergyHandler, IConf
     }
 
     @Override
-    public void readFromNBT(NBTTagCompound tag) {
-        super.readFromNBT(tag);
-        energy = tag.getInteger("energy");
-        capacity = tag.getInteger("maxEnergy");
-        maxTransfer = tag.getInteger("maxExtract");
-        maxTransfer = tag.getInteger("maxInput");
-        configuration.readFromNBT(tag);
-    }
-
-    @Override
-    public void writeToNBT(NBTTagCompound tag) {
-        super.writeToNBT(tag);
-        tag.setInteger("energy", energy);
-        tag.setInteger("maxEnergy", capacity);
-        tag.setInteger("maxTransfer", maxTransfer);
-        configuration.writeToNBT(tag);
-    }
-
-    @Override
-    public void updateEntity() {
-        super.updateEntity();
-        if(worldObj.isRemote) {
-            return;
-        }
-
-        if (energy < 0) {
-            energy = 0;
-        }
-        outputEnergy();
-    }
-
-    protected void outputEnergy() {
-        for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
-            for (EnumPriority priority : EnumPriority.values()) {
-                if (configuration.getPriority(direction) != priority)
-                    continue;
-                if (!configuration.canSend(direction))
-                    continue;
-                Location location = new Location(worldObj, xCoord, yCoord, zCoord);
-                location.move(direction);
-                IEnergyReceiver energyHandler = null;
-                if (location.getTileEntity() != null && location.getTileEntity() instanceof IEnergyReceiver)
-                    energyHandler = (IEnergyReceiver) location.getTileEntity();
-                if (energyHandler != null) {
-                    int sendEnergy = energy;
-                    if (sendEnergy < 0)
-                        sendEnergy = 0;
-                    if (sendEnergy > maxTransfer)
-                        sendEnergy = maxTransfer;
-
-                    int output = energyHandler.receiveEnergy(direction.getOpposite(), sendEnergy, true);
-                        energy -= output;
-                }
-            }
-        }
-    }
-
-    @Override
     public boolean canConnectEnergy(ForgeDirection from) {
-        return configuration.canReceive(from) || configuration.canSend(from);
-    }
-
-    @Override
-    public EnumSideStatus getStatus(ForgeDirection side) {
-        return configuration.getStatus(side);
-    }
-
-    @Override
-    public void changeStatus(ForgeDirection side) {
-        configuration.changeStatus(side);
-        worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-    }
-
-    @Override
-    public void writeToByteBuff(ByteBuf buf) {
-        buf.writeInt(energy);
-        configuration.writeToByteBuff(buf);
-    }
-
-    @Override
-    public void readFromByteBuff(ByteBuf buf) {
-        energy = buf.readInt();
-        configuration.readFromByteBuff(buf);
-    }
-
-    @Override
-    public int energyLoss() {
-        return 0;
+        return configurations.canReceive(from) || configurations.canSend(from);
     }
 
     @Override
     public EnumPriority getPriority(ForgeDirection side) {
-        return configuration.getPriority(side);
+        return configurations.getPriority(side);
     }
 
     @Override
     public void changePriority(ForgeDirection side) {
-        configuration.changePriority(side);
+        configurations.changePriority(side);
     }
 
     @Override
     public SideConfiguration getSideConfiguration() {
-        return configuration;
+        return configurations;
     }
 
     @Override
     public void setSideConfiguration(SideConfiguration configuration) {
-        this.configuration.load(configuration);
+        this.configurations.load(configuration);
     }
+    @Override
+    public EnumSideStatus getStatus(ForgeDirection side) {
+        return configurations.getStatus(side);
+    }
+
+    @Override
+    public void changeStatus(ForgeDirection side) {
+        configurations.changeStatus(side);
+        worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+    }
+
 }

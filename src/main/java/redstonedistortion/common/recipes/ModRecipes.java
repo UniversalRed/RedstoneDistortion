@@ -5,7 +5,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import redstonedistortion.common.block.ModBlocks;
-import redstonedistortion.common.factory.ModFactory;
 import redstonedistortion.common.item.ModItems;
 import redstonedistortion.common.recipes.factory.DesolatorRecipes;
 
@@ -90,19 +89,19 @@ public class ModRecipes {
                 'S', Items.gold_ingot);
 
         //Machines
-        GameRegistry.addShapedRecipe(new ItemStack(ModFactory.mechanicalFurnace, 1),
+        GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.mechanicalFurnace, 1),
                 "CRC",
                 "PFP",
                 "PPP",
                 'P', ModItems.plateIron, 'C', ModItems.plateCopper, 'R', Blocks.iron_block, 'F', Blocks.furnace);
 
-        GameRegistry.addShapedRecipe(new ItemStack(ModFactory.mechanicalTransfuser, 1),
+        GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.mechanicalTransfuser, 1),
                 "CCC",
                 "PRP",
                 "PPP",
                 'P', ModItems.plateIron, 'C', ModItems.plateTin, 'R', Blocks.redstone_block);
 
-        GameRegistry.addShapedRecipe(new ItemStack(ModFactory.mechanicalDesolator, 1),
+        GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.mechanicalDesolator, 1),
                 "CRC",
                 "PFP",
                 "PPP",
