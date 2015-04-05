@@ -12,7 +12,7 @@ import redstonedistortion.common.tiles.energy.TileSolarPanelTier1;
  */
 public class BlockSolarPanelTier1 extends BlockContainerBase
 {
-    public BlockSolarPanelTier1(Material material, String name)
+    public BlockSolarPanelTier1(String name)
     {
         super(Material.iron, name);
         this.setHardness(10f);
@@ -24,22 +24,5 @@ public class BlockSolarPanelTier1 extends BlockContainerBase
     public TileEntity createNewTileEntity(World world, int par2)
     {
         return new TileSolarPanelTier1();
-    }
-
-    @Override
-    public int getRenderType()
-    {
-        return -1;
-    }
-
-    @Override
-    public boolean renderAsNormalBlock() {
-        return false;
-    }
-
-    @Override
-    public boolean isOpaqueCube()
-    {
-        return false;
     }
 }

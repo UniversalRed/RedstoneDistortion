@@ -12,7 +12,6 @@ import redstonedistortion.bases.libs.ModLibs;
 public class TileIronCell extends TileCell implements ISynchronizedTile {
 
     public int capacity = 100000;
-    public int maxTransfer = 100000 / 10;
 
     public TileIronCell() {
         super(100000, 10000);
@@ -29,11 +28,11 @@ public class TileIronCell extends TileCell implements ISynchronizedTile {
         if(energy < 0) {
             energy = 0;
         }
-/*
+
         if(energy > capacity) {
             energy = capacity;
         }
-        */
+
         outputEnergy();
     }
 

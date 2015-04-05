@@ -1,0 +1,5 @@
+- added a experimental iron cell, which stores 100K of red flux (again, experimental cell, RF storage will change later if need be)
+- added a experimental Solar Panel Tier 1, stores 40K of red flux, generates 2RF/t in sunlight and 1RF/t if raining and is sunny
+- cleaned some code within the mod setup(Don't know if this will help server/client sided performance)
+- deprecated old gui textures for new ones for a unified look
+- fixed the energy loss of machines when it wasn't raining

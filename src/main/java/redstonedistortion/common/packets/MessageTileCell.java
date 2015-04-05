@@ -23,6 +23,7 @@ public class MessageTileCell implements IMessage, IMessageHandler<MessageTileCel
 
     }
 
+    //This constructor will be used for the syncing of stuff.
     public MessageTileCell(int x, int y, int z, int energy) {
         this.x = x;
         this.y = y;
@@ -30,6 +31,8 @@ public class MessageTileCell implements IMessage, IMessageHandler<MessageTileCel
         this.energy = energy;
     }
 
+
+    //Note that the order in these methods are important.
     @Override
     public void fromBytes(ByteBuf buf) {
         x = buf.readInt();
@@ -46,15 +49,15 @@ public class MessageTileCell implements IMessage, IMessageHandler<MessageTileCel
         buf.writeInt(energy);
     }
 
+	/* IMESSAGEHANDLER METHODS */
+
     @Override
     public IMessage onMessage(MessageTileCell message, MessageContext ctx) {
         if (FMLClientHandler.instance().getClient().theWorld != null) {
             TileEntity entity = FMLClientHandler.instance().getClient().theWorld.getTileEntity(message.x, message.y, message.z);
-            if (entity instanceof TileCell) {
+            if (entity instanceof TileCell)
                 this.energy = message.energy;
-            }
         }
         return null;
     }
 }
-

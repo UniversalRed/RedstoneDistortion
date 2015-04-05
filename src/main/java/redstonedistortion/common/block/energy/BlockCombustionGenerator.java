@@ -77,6 +77,6 @@ public class BlockCombustionGenerator extends BlockContainerBase {
 
     @Override
     public TileEntity createNewTileEntity(World var1, int var2) {
-        return new TileCombustionGenerator(ModLibs.machineCapacity, ModLibs.machineExtract);
+        return new TileCombustionGenerator();
     }
 }

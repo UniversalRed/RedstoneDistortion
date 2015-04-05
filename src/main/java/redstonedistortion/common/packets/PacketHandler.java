@@ -20,6 +20,6 @@ public class PacketHandler
         INSTANCE.registerMessage(MessageTileMachine.class, MessageTileMachine.class, 1, Side.CLIENT);
         INSTANCE.registerMessage(MessageConfiguration.class, MessageConfiguration.class, 2, Side.SERVER);
         INSTANCE.registerMessage(MessageByteBuff.class, MessageByteBuff.class, 3, Side.CLIENT);
-        INSTANCE.registerMessage(MessageTileSolar.class, MessageTileSolar.class, 4, Side.CLIENT);
+        INSTANCE.registerMessage(MessageTileProvider.class, MessageTileProvider.class, 4, Side.CLIENT);
     }
 }

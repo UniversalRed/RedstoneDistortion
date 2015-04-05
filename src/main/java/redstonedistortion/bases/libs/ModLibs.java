@@ -37,8 +37,8 @@ public class ModLibs
     public static final int cellEmeraldCapacity = 1280000;
 
     public static final int machineCapacity = 32000;
-    public static final int machineExtract = 1000;
-    public static final int machineRecieve = 1000;
+    public static final int machineExtract = machineCapacity / 10;
+    public static final int machineRecieve = machineCapacity / 10;
 
     //Solar Panels
     public static final int tier1SolarPanelCapacity = 30000;

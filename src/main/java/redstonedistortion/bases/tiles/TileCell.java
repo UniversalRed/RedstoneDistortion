@@ -124,6 +124,7 @@ public abstract class TileCell extends TileBase implements ISynchronizedTile, IE
             }
         }
     }
+
     @Override
     public int getEnergyStored(ForgeDirection from) {
         return energy;

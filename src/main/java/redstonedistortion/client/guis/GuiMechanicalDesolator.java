@@ -38,14 +38,7 @@ public class GuiMechanicalDesolator extends GuiContainer
         int k = (this.width - this.xSize) / 2;
         int l = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize);
-        int i1;
 
-        i1 = this.te.getCookProgressScaled(24);
-        this.drawTexturedModalRect(k + 79, l + 34, 176, 14, i1 + 1, 16);
-    }
-
-    @Override
-    protected void drawGuiContainerForegroundLayer(int x, int y) {
-        fontRendererObj.drawString("Mechanical Desolator", 8, 6, 0x404040);
+        this.drawTexturedModalRect(k + 79, l + 34, 176, 14, te.getProgress(), 16);
     }
 }

@@ -40,9 +40,4 @@ public class GuiMechanicalTransfuser extends GuiContainer {
 
         this.drawTexturedModalRect(k + 79, l + 34, 176, 14, 1, 16);
     }
-
-    @Override
-    protected void drawGuiContainerForegroundLayer(int x, int y) {
-        fontRendererObj.drawString("Mechanical Infuser", 8, 6, 0x404040);
-    }
 }

@@ -14,19 +14,13 @@ import redstonedistortion.bases.tiles.TileProvider;
 public class TileCombustionGenerator extends TileProvider implements IInventory
 {
     public int capacity = ModLibs.machineCapacity;
-    public int maxExtract = 1000;
+    public int maxExtract = ModLibs.machineExtract;
 
     public CustomInventory inventory = new CustomInventory("combustionGenerator", 1, 64, this);
     public SideConfiguration configuration = new SideConfiguration();
 
     public TileCombustionGenerator() {
-
-    }
-
-    public TileCombustionGenerator(int capacity, int maxExtract) {
-        super(capacity, maxExtract);
-        this.capacity = capacity;
-        this.maxExtract = maxExtract;
+        super(ModLibs.machineCapacity, ModLibs.machineExtract);
     }
 
     @Override

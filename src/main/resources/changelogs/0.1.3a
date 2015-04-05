@@ -1,0 +1,4 @@
+- fixed bugs with the energy cell/machinery
+- added gold/diamond/emerald cells (80K, 640K, 1280K) storage of RF
+- added in a generator for producing RF
+- added a aqueous multi-useable block into the addon

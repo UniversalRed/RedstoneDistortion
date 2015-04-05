@@ -82,7 +82,7 @@ public class TileMechanicalFurnace extends TileMachine implements ISidedInventor
             stop();
         }
         //regainTicks();
-        output();
+        //output();
     }
 /*
     public void regainTicks() {

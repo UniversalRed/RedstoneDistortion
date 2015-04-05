@@ -6,23 +6,26 @@ import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
+import redstonedistortion.bases.tiles.TileProvider;
 
 /**
  * Created by UniversalRed on 15-02-16.
  */
-public class MessageTileSolar implements IMessage, IMessageHandler<MessageTileSolar, IMessage> {
+public class MessageTileProvider implements IMessage, IMessageHandler<MessageTileProvider, IMessage> {
 
     int x;
     int y;
     int z;
 
+    World world;
     int energy;
 
-    public MessageTileSolar() {
+    public MessageTileProvider() {
 
     }
 
-    public MessageTileSolar(int x, int y, int z, int energy) {
+    public MessageTileProvider(int x, int y, int z, int energy) {
         this.x = x;
         this.y = y;
         this.z = z;
@@ -46,11 +49,12 @@ public class MessageTileSolar implements IMessage, IMessageHandler<MessageTileSo
     }
 
     @Override
-    public IMessage onMessage(MessageTileSolar message, MessageContext ctx) {
+    public IMessage onMessage(MessageTileProvider message, MessageContext ctx) {
         if (FMLClientHandler.instance().getClient().theWorld != null) {
             TileEntity entity = FMLClientHandler.instance().getClient().theWorld.getTileEntity(message.x, message.y, message.z);
-            //if (entity instanceof TileSolarPanel)
-            //    this.energy = message.energy;
+            if (entity instanceof TileProvider) {
+                this.energy = message.energy;
+            }
         }
         return null;
     }

@@ -76,7 +76,7 @@ public class TileMechanicalDesolator extends TileMachine implements ISidedInvent
         } else {
             stop();
         }
-        output();
+        //output();
     }
 
     public boolean canCook() {

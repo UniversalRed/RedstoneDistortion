@@ -6,6 +6,7 @@ import net.minecraft.block.material.Material;
 import redstonedistortion.bases.blocks.BaseBlock;
 import redstonedistortion.bases.libs.ModLibs;
 import redstonedistortion.common.block.energy.BlockIronCell;
+import redstonedistortion.common.block.energy.BlockSolarPanelTier1;
 import redstonedistortion.common.block.factory.BlockMechanicalDesolator;
 import redstonedistortion.common.block.factory.BlockMechanicalFurnace;
 import redstonedistortion.common.block.factory.BlockMechanicalTransfuser;
@@ -14,6 +15,7 @@ import redstonedistortion.common.block.ores.OreLead;
 import redstonedistortion.common.block.ores.OreSilver;
 import redstonedistortion.common.block.ores.OreTin;
 import redstonedistortion.common.tiles.energy.TileIronCell;
+import redstonedistortion.common.tiles.energy.TileSolarPanelTier1;
 import redstonedistortion.common.tiles.factory.TileMechanicalDesolator;
 import redstonedistortion.common.tiles.factory.TileMechanicalFurnace;
 import redstonedistortion.common.tiles.factory.TileMechanicalTransfuser;
@@ -72,7 +74,7 @@ public class ModBlocks {
         mechanicalDesolator = new BlockMechanicalDesolator("mechanicalDesolator");
 
         //Other
-        //solarPanelTier1 = new BlockSolarPanelTier1(m.iron, "solarPanelTier1").setBlockName("solarPanelTier1").setBlockTextureName("solarPanelTier1");
+        solarPanelTier1 = new BlockSolarPanelTier1("solarPanelTier1").setBlockName("solarPanelTier1").setBlockTextureName("solarPanelTier1");
 
     }
 
@@ -99,9 +101,8 @@ public class ModBlocks {
         GameRegistry.registerBlock(mechanicalDesolator, "mechanicalDesolator");
         GameRegistry.registerTileEntity(TileMechanicalDesolator.class, "mechanicalDesolator");
 
-        //GameRegistry.registerBlock(solarPanelTier1, "solarPanelTier1");
+        //GameRegistry.registerBlock(solarPanelTier1, "solarPanelTier1"); NEXT VERSION
         //GameRegistry.registerTileEntity(TileSolarPanelTier1.class, "solarPanelTier1");
-
     }
 }
 

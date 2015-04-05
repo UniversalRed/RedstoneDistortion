@@ -25,7 +25,7 @@ public class TileMachine extends TileBase implements IEnergyReceiver, IConfigura
     public int maxExtract;
 
     //Progress for machines
-    protected int progress = 0;
+    public int progress = 0;
     protected int POWER_USAGE = ConfigHandler.POWER_USAGE;
     protected int currentWorkTime;
     protected int MAX_WORK_TICKS = 50;
@@ -306,5 +306,13 @@ public class TileMachine extends TileBase implements IEnergyReceiver, IConfigura
     @Override
     public boolean isItemValidForSlot(int p_94041_1_, ItemStack p_94041_2_) {
         return true;
+    }
+
+    public int getProgress() {
+        return progress;
+    }
+
+    public void setProgress(int progress) {
+        this.progress = progress;
     }
 }

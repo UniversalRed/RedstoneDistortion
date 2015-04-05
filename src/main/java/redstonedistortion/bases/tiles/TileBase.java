@@ -11,9 +11,7 @@ import redstonedistortion.common.packets.*;
 /**
  * Created by UniversalRed on 15-02-16.
  */
-public abstract class TileBase extends TileEntity implements ISynchronizedTile
-{
-    public World world;
+public abstract class TileBase extends TileEntity implements ISynchronizedTile {
     public int timer;
     public int x, y, z;
 
@@ -30,7 +28,7 @@ public abstract class TileBase extends TileEntity implements ISynchronizedTile
             timer--;
         }
 
-        if(!(!worldObj.canBlockSeeTheSky(getX(), getY() + 1, getZ()) && worldObj.isRaining())) {
+        if(worldObj.canBlockSeeTheSky(getX(), getY() + 1, getZ()) && worldObj.isRaining()) {
             getDefunctionTicker();
         }
         machineProcessing();
@@ -38,9 +36,9 @@ public abstract class TileBase extends TileEntity implements ISynchronizedTile
 
     public void sync() {
         if (!worldObj.isRemote) {
-            PacketHandler.INSTANCE.sendToAllAround(new MessageTileMachine(), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, getX(), getY(), getZ(), 20));
-            PacketHandler.INSTANCE.sendToAllAround(new MessageTileCell(), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, getX(), getY(), getZ(), 20));
-            PacketHandler.INSTANCE.sendToAllAround(new MessageTileSolar(), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, getX(), getY(), getZ(), 20));
+            //PacketHandler.INSTANCE.sendToAllAround(new MessageTileMachine(), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, getX(), getY(), getZ(), 20));
+            //PacketHandler.INSTANCE.sendToAllAround(new MessageTileCell(), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, getX(), getY(), getZ(), 20));
+            //PacketHandler.INSTANCE.sendToAllAround(new MessageTileProvider(), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, getX(), getY(), getZ(), 20));
             PacketHandler.INSTANCE.sendToAllAround(new MessageByteBuff(this), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, getX(), getY(), getZ(), 20));
         }
     }

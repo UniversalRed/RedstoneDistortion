@@ -26,6 +26,10 @@ public class ContainerBase<T> extends Container {
         this.inventory = inventory;
     }
 
+    private static boolean canStacksMerge(ItemStack stack1, ItemStack stack2) {
+        return !(stack1 == null || stack2 == null) && stack1.isItemEqual(stack2) && ItemStack.areItemStackTagsEqual(stack1, stack2);
+    }
+
     public ContainerBase setCanShift(boolean canShift) {
         this.canShift = canShift;
         return this;
@@ -52,7 +56,7 @@ public class ContainerBase<T> extends Container {
             ItemStack stackInSlot = slot.getStack();
             originalStack = stackInSlot.copy();
             if (slotIndex >= numSlots - 9 * 4 && tryShiftItem(stackInSlot, numSlots)) {
-                // NOOP
+                // NO-OP
             } else if (slotIndex >= numSlots - 9 * 4 && slotIndex < numSlots - 9) {
                 if (!shiftItemStack(stackInSlot, numSlots - 9, numSlots)) {
                     return null;
@@ -135,23 +139,9 @@ public class ContainerBase<T> extends Container {
         return changed;
     }
 
-    private static boolean canStacksMerge(ItemStack stack1, ItemStack stack2) {
-        if (stack1 == null || stack2 == null) {
-            return false;
-        }
-        if (!stack1.isItemEqual(stack2)) {
-            return false;
-        }
-        if (!ItemStack.areItemStackTagsEqual(stack1, stack2)) {
-            return false;
-        }
-        return true;
-
-    }
-
     @Override
     public boolean canInteractWith(EntityPlayer player) {
-        return inventory instanceof IInventory ? ((IInventory) inventory).isUseableByPlayer(player) : true;
+        return !(inventory instanceof IInventory) || ((IInventory) inventory).isUseableByPlayer(player);
     }
 
     @Override
@@ -164,4 +154,10 @@ public class ContainerBase<T> extends Container {
         return super.slotClick(slotNum, mouseButton, modifier, player);
     }
 
+    @Override
+    public void onContainerClosed(EntityPlayer player) {
+        super.onContainerClosed(player);
+        if (player.worldObj != null && !player.worldObj.isRemote && inventory instanceof IInventory)
+            ((IInventory) inventory).closeInventory();
+    }
 }
